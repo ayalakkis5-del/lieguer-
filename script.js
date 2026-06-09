@@ -149,7 +149,59 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
   const cdMins  = document.getElementById('cdMins');
   const cdSecs  = document.getElementById('cdSecs');
 
+  const banner          = document.getElementById('topBanner');
+  const bannerText      = document.getElementById('bannerText');
+  const bannerCountdown = document.getElementById('bannerCountdown');
+  const bannerCta       = document.getElementById('bannerCta');
+
   function pad(n) { return String(n).padStart(2, '0'); }
+
+  function fmtDiff(ms) {
+    if (ms <= 0) return '';
+    const d = Math.floor(ms / 86400000);
+    const h = Math.floor((ms % 86400000) / 3600000);
+    const m = Math.floor((ms % 3600000)  / 60000);
+    const s = Math.floor((ms % 60000)    / 1000);
+    if (d > 0) return `${d}d ${pad(h)}h ${pad(m)}m`;
+    return `${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+  }
+
+  function updateBanner(state, now) {
+    banner.className = 'top-banner';
+    if (state === 'open') {
+      // Count down to Thursday 11:59pm
+      const close = new Date(now);
+      const daysToThu = (4 - now.getDay() + 7) % 7 || 7;
+      close.setDate(now.getDate() + (now.getDay() === 4 ? 0 : daysToThu));
+      close.setHours(23, 59, 0, 0);
+      banner.classList.add('banner--open');
+      bannerText.textContent = '✦ Ordering is OPEN — closes in';
+      bannerCountdown.textContent = fmtDiff(close - now);
+      bannerCta.textContent = 'Order Now →';
+      bannerCta.href = '#order';
+    } else if (state === 'closed') {
+      // Count down to next Sunday 8pm
+      const reopen = nextSundayOpen(now);
+      banner.classList.add('banner--pickup');
+      bannerText.textContent = 'Currently in pickup — next drop opens in';
+      bannerCountdown.textContent = fmtDiff(reopen - now);
+      bannerCta.textContent = 'Get Notified →';
+      bannerCta.href = '#notify';
+    } else {
+      // countdown
+      let target;
+      if (now.getDay() === 0 && now.getHours() < 20) {
+        target = new Date(now); target.setHours(20, 0, 0, 0);
+      } else {
+        target = nextSundayOpen(now);
+      }
+      banner.classList.add('banner--countdown');
+      bannerText.textContent = 'Next drop opens in';
+      bannerCountdown.textContent = fmtDiff(target - now);
+      bannerCta.textContent = 'Get Notified →';
+      bannerCta.href = '#notify';
+    }
+  }
 
   // Returns the next Sunday at 8pm local time from a given date
   function nextSundayOpen(from) {
@@ -189,6 +241,7 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
     elCountdown.style.display = state === 'countdown' ? '' : 'none';
     elOpen.style.display      = state === 'open'      ? '' : 'none';
     elClosed.style.display    = state === 'closed'    ? '' : 'none';
+    updateBanner(state, now);
 
     if (state === 'countdown') {
       // Target: next Sunday 8pm

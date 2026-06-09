@@ -14,6 +14,64 @@
 
 html { scroll-behavior: smooth; }
 
+/* ── TOP BANNER ── */
+.top-banner {
+  width: 100%;
+  padding: 0.55rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 200;
+}
+.top-banner.banner--open {
+  background: var(--dark);
+  color: var(--cream);
+}
+.top-banner.banner--pickup {
+  background: var(--caramel);
+  color: #fff;
+}
+.top-banner.banner--countdown {
+  background: var(--cream);
+  color: var(--dark);
+  border-bottom: 1px solid var(--light-rule);
+}
+.banner-countdown {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+.banner-cta {
+  padding: 0.25rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.banner-cta:hover { opacity: 0.8; }
+.top-banner.banner--open .banner-cta {
+  background: var(--caramel);
+  color: #fff;
+}
+.top-banner.banner--pickup .banner-cta,
+.top-banner.banner--countdown .banner-cta {
+  background: var(--dark);
+  color: var(--cream);
+}
+
 body {
   font-family: 'Jost', sans-serif;
   background: var(--warm-white);
