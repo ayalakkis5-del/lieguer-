@@ -57,9 +57,11 @@ module.exports = async (req, res) => {
       receipt_email: customerEmail || undefined,
     });
 
-    // Send SMS confirmation if phone provided
+    // SMS confirmation to customer
     if (customerPhone) {
-      const msg = `LIÈGUER ✓ Your order is confirmed! Pickup: ${pickupTime}. We can't wait to see you. Questions? Reply to this message.`;
+      const firstName = (customerName || 'friend').split(' ')[0];
+      const itemSummary = (items || []).filter(i => !/test item/i.test(i.name)).map(i => `${i.qty}× ${i.name}`).join(', ');
+      const msg = `Hi ${firstName}! 🧇 Your LIÈGUER order is confirmed. ${itemSummary ? itemSummary + '. ' : ''}Pickup: ${pickupTime}. We can't wait to see you — follow along @lieguerwaffles on Instagram!`;
       sendSMS(customerPhone, msg).catch(() => {});
     }
 
@@ -69,7 +71,93 @@ module.exports = async (req, res) => {
       klaviyoProfile(firstName, customerEmail, customerPhone).catch(() => {});
     }
 
-    // Send order notification to hellolieguer@gmail.com
+    // Beautiful confirmation email to customer
+    if (customerEmail) {
+      const firstName = (customerName || 'there').split(' ')[0];
+      const customerItemRows = (items || [])
+        .filter(i => !/test item/i.test(i.name))
+        .map(i => `
+          <tr>
+            <td style="padding:10px 16px;border-bottom:1px solid #ede8df;font-size:14px;color:#1a1208;">${i.qty}× ${i.name}</td>
+            <td style="padding:10px 16px;border-bottom:1px solid #ede8df;font-size:14px;color:#1a1208;text-align:right;">$${(i.qty * i.price).toFixed(2)}</td>
+          </tr>`).join('');
+      sendEmail({
+        to: customerEmail,
+        subject: `Your LIÈGUER order is confirmed 🧇`,
+        html: `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"/></head>
+<body style="margin:0;padding:0;background:#f5f0e8;font-family:Georgia,serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f0e8;padding:40px 16px;">
+    <tr><td align="center">
+      <table width="540" cellpadding="0" cellspacing="0" style="max-width:540px;width:100%;background:#ffffff;border-radius:4px;overflow:hidden;">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#1a1208;padding:36px 40px;text-align:center;">
+            <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c8852a;">Order Confirmed</p>
+            <h1 style="margin:0;font-family:Georgia,serif;font-size:32px;font-weight:400;color:#f5f0e8;letter-spacing:0.08em;">LIÈGUER</h1>
+            <p style="margin:8px 0 0;font-size:13px;color:rgba(245,240,232,0.55);font-style:italic;letter-spacing:0.04em;">Waffles, at your leisure.</p>
+          </td>
+        </tr>
+
+        <!-- Greeting -->
+        <tr>
+          <td style="padding:36px 40px 24px;text-align:center;border-bottom:1px solid #ede8df;">
+            <p style="margin:0 0 8px;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#c8852a;">Hi ${firstName},</p>
+            <h2 style="margin:0;font-family:Georgia,serif;font-size:26px;font-weight:400;color:#1a1208;">Your order is on its way<br/><em style="color:#7a4f1e;">to your hands.</em></h2>
+            <p style="margin:16px 0 0;font-size:14px;color:#888;line-height:1.7;">72 hours of cold fermentation, caramelized Belgian pearl sugar, brown butter throughout — it's almost yours.</p>
+          </td>
+        </tr>
+
+        <!-- Pickup callout -->
+        <tr>
+          <td style="padding:24px 40px;background:#faf7f2;text-align:center;border-bottom:1px solid #ede8df;">
+            <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#c8852a;">Your Pickup Time</p>
+            <p style="margin:0;font-family:Georgia,serif;font-size:22px;color:#1a1208;font-weight:400;">${pickupTime}</p>
+          </td>
+        </tr>
+
+        <!-- Order table -->
+        <tr>
+          <td style="padding:24px 40px 0;">
+            <p style="margin:0 0 12px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#888;">Order Summary</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              ${customerItemRows}
+              <tr>
+                <td style="padding:12px 16px;font-size:15px;font-weight:bold;color:#1a1208;">Total</td>
+                <td style="padding:12px 16px;font-size:15px;font-weight:bold;color:#1a1208;text-align:right;">$${amount.toFixed(2)}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Fine print -->
+        <tr>
+          <td style="padding:20px 40px 28px;">
+            <p style="margin:0;font-size:12px;color:#aaa;line-height:1.7;text-align:center;">All sales final. No refunds or cancellations after orders close.<br/>Questions? Reply to this email or reach us at hellolieguer@gmail.com</p>
+          </td>
+        </tr>
+
+        <!-- Instagram -->
+        <tr>
+          <td style="background:#1a1208;padding:28px 40px;text-align:center;">
+            <p style="margin:0 0 10px;font-size:12px;color:rgba(245,240,232,0.5);letter-spacing:0.1em;text-transform:uppercase;">Follow the drop</p>
+            <a href="https://www.instagram.com/lieguerwaffles/" style="display:inline-block;background:#c8852a;color:#ffffff;text-decoration:none;font-family:Georgia,serif;font-size:13px;letter-spacing:0.1em;padding:10px 24px;border-radius:2px;">@lieguerwaffles</a>
+            <p style="margin:16px 0 0;font-size:12px;color:rgba(245,240,232,0.35);">We'll see you soon. 🧇</p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`,
+      }).catch(() => {});
+    }
+
+    // Internal order notification to hellolieguer@gmail.com
     const itemLines = (items || [])
       .map(i => `<tr><td style="padding:6px 12px;">${i.qty}× ${i.name}</td><td style="padding:6px 12px;text-align:right;">$${(i.qty * i.price).toFixed(2)}</td></tr>`)
       .join('');
