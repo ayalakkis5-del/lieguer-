@@ -551,6 +551,19 @@ function updateCart() {
   }
 }
 
+function getPickupDates() {
+  const today = new Date();
+  const day = today.getDay(); // 0=Sun
+  // Find the next Saturday from today
+  const daysUntilSat = (6 - day + 7) % 7 || 7;
+  const sat = new Date(today);
+  sat.setDate(today.getDate() + daysUntilSat);
+  const sun = new Date(sat);
+  sun.setDate(sat.getDate() + 1);
+  const fmt = d => d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  return { sat: fmt(sat), sun: fmt(sun) };
+}
+
 async function goToPayment() {
   document.getElementById('stepOrder').style.display   = 'none';
   document.getElementById('stepPayment').style.display = '';
@@ -558,6 +571,13 @@ async function goToPayment() {
 
   // Load slots fresh now that we're on step 2
   loadSlots();
+
+  // Show actual pickup dates
+  const { sat, sun } = getPickupDates();
+  const satLabel = document.getElementById('pickupLabelSat');
+  const sunLabel = document.getElementById('pickupLabelSun');
+  if (satLabel) satLabel.textContent = sat;
+  if (sunLabel) sunLabel.textContent = sun;
 
   // Show order summary (pickup shown after slot is chosen)
   const dipChoice   = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
@@ -689,8 +709,9 @@ async function submitPayment() {
     } else {
       document.getElementById('stepPayment').style.display = 'none';
       document.getElementById('stepSuccess').style.display = '';
-      const pickupDay = cartData.pickup.startsWith('Sunday') ? 'Sunday' : 'Saturday';
-      document.getElementById('stepSuccess').querySelector('h2').innerHTML = `See you<br /><em>${pickupDay}.</em>`;
+      const { sat, sun } = getPickupDates();
+      const pickupDate = cartData.pickup.startsWith('Sunday') ? sun : sat;
+      document.getElementById('stepSuccess').querySelector('h2').innerHTML = `See you<br /><em>${pickupDate}.</em>`;
       document.getElementById('successDetails').textContent =
         `Your order is confirmed for ${cartData.pickup}. A confirmation email is on its way to ${email}.`;
     }

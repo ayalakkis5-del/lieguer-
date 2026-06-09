@@ -440,9 +440,9 @@
           <div class="pickup-select">
             <p class="pickup-step-label">When are you picking up?</p>
             <p class="cart-section-note" style="margin-bottom:1rem;">9am–1pm · 15-min windows · Following Saturday &amp; Sunday</p>
-            <p class="pickup-day-label">Saturday</p>
+            <p class="pickup-day-label" id="pickupLabelSat">Saturday</p>
             <div class="pickup-slots" id="slotsSat"></div>
-            <p class="pickup-day-label" style="margin-top:1.25rem;">Sunday</p>
+            <p class="pickup-day-label" id="pickupLabelSun" style="margin-top:1.25rem;">Sunday</p>
             <div class="pickup-slots" id="slotsSun"></div>
             <p id="slotsLoading" class="order-fine" style="text-align:center;margin-top:0.5rem;">Loading availability…</p>
           </div>
@@ -486,7 +486,7 @@
         <div id="stepSuccess" style="display:none; text-align:center;">
           <div class="success-icon">🧇</div>
           <p class="label">Order Confirmed</p>
-          <h2>See you<br /><em>Saturday.</em></h2>
+          <h2>See you<br /><em id="successSatDate">Saturday.</em></h2>
           <p class="order-sub" id="successDetails"></p>
           <p class="order-fine">Check your email for your receipt. We can't wait to see you.</p>
         </div>
