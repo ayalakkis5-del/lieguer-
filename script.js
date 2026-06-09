@@ -445,7 +445,7 @@ async function loadCardField() {
         borderRadius: '0px',
       }
     }});
-    paymentElement = elements.create('payment', { fields: { billingDetails: 'never' } });
+    paymentElement = elements.create('payment');
     paymentElement.mount('#payment-element');
 
     // Swap buttons
@@ -475,7 +475,6 @@ async function submitPayment() {
       elements,
       redirect: 'if_required',
       confirmParams: {
-        payment_method_data: { billing_details: { name, email, phone } },
         receipt_email: email,
       },
     });
