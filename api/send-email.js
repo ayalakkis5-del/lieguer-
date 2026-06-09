@@ -2,7 +2,7 @@ const https = require('https');
 
 function sendEmail({ to, subject, html }) {
   const body = JSON.stringify({
-    from: 'LIÈGUER <onboarding@resend.dev>',
+    from: 'LIÈGUER <hello@lieguer.com>',
     to: Array.isArray(to) ? to : [to],
     subject,
     html,
