@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
 
     const body = JSON.stringify({
-      from: 'LIÈGUER <hello@lieguer.com>',
+      from: 'LIÈGUER <onboarding@resend.dev>',
       to: ['hellolieguer@gmail.com'],
       subject: `New Catering Inquiry — ${eventType || 'General'} from ${name}`,
       html: `
