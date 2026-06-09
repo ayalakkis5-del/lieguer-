@@ -383,6 +383,7 @@ function renderEspressoCustomizations(item) {
           </select>
         </div>
       </div>
+      <p class="esp-ice-note" style="display:${(prev.ice === 'Light Ice' || prev.ice === 'No Ice') ? '' : 'none'}">💧 Less ice means more milk fills the cup — your drink will taste a little lighter and less coffee-forward.</p>
       <label class="espresso-foam-label">
         <input type="checkbox" class="esp-foam"${foamOn ? ' checked' : ''} />
         <span class="espresso-foam-text">Cold Foam <span class="foam-price">+$1</span>
@@ -399,7 +400,11 @@ function renderEspressoCustomizations(item) {
       updateCart();
     });
     row.querySelector('.esp-milk').addEventListener('change', updateCart);
-    row.querySelector('.esp-ice').addEventListener('change', updateCart);
+    row.querySelector('.esp-ice').addEventListener('change', e => {
+      const lessIce = e.target.value === 'Light Ice' || e.target.value === 'No Ice';
+      row.querySelector('.esp-ice-note').style.display = lessIce ? '' : 'none';
+      updateCart();
+    });
     row.querySelector('.esp-foam').addEventListener('change', updateCart);
     row.querySelector('.esp-foam-type').addEventListener('change', updateCart);
 

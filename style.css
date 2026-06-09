@@ -1043,6 +1043,15 @@ nav {
   color: var(--caramel);
   font-weight: 500;
 }
+.esp-ice-note {
+  font-size: 0.78rem;
+  color: var(--caramel);
+  margin: 0.4rem 0 0.5rem;
+  padding: 0.45rem 0.7rem;
+  background: rgba(200,133,42,0.08);
+  border-left: 2px solid var(--caramel);
+  line-height: 1.5;
+}
 .esp-foam-type-sel {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
