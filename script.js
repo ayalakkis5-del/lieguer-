@@ -400,17 +400,25 @@ function renderEspressoCustomizations(item) {
       updateCart();
     });
     row.querySelector('.esp-milk').addEventListener('change', updateCart);
-    row.querySelector('.esp-ice').addEventListener('change', e => {
-      const lessIce = e.target.value === 'Light Ice' || e.target.value === 'No Ice';
-      row.querySelector('.esp-ice-note').style.display = lessIce ? '' : 'none';
-      updateCart();
-    });
+    row.querySelector('.esp-ice').addEventListener('change', updateCart);
     row.querySelector('.esp-foam').addEventListener('change', updateCart);
     row.querySelector('.esp-foam-type').addEventListener('change', updateCart);
 
     wrap.appendChild(row);
   }
 }
+
+// Show ice note via event delegation so it works across all dynamically rendered rows
+document.addEventListener('change', e => {
+  if (e.target.classList.contains('esp-ice')) {
+    const row  = e.target.closest('.espresso-unit-row');
+    const note = row && row.querySelector('.esp-ice-note');
+    if (note) {
+      const lessIce = e.target.value === 'Light Ice' || e.target.value === 'No Ice';
+      note.style.display = lessIce ? '' : 'none';
+    }
+  }
+});
 
 // Helper: collect all per-drink prefs as array
 function collectEspressoPrefs() {
