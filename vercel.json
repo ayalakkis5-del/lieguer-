@@ -1,6 +1,10 @@
 {
   "framework": null,
-  "buildCommand": "",
+  "buildCommand": "npm install",
   "outputDirectory": ".",
-  "cleanUrls": true
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }

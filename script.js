@@ -218,6 +218,130 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
   setInterval(tick, 1000);
 })();
 
+// ── Stripe In-Page Checkout ──────────────────────────────
+const STRIPE_PK = 'pk_test_51TgRKSBYPi4eMJXqHLGxctfF7esAXO4nO2McmpR64qhgl0xOj6PwIm2ALd4Z3FtZd7zJcSt88yQDMzX71VTVCf2S00CqrsH9YO';
+let stripe, elements, paymentElement;
+let cartData = { items: [], total: 0, pickup: '' };
+
+// Init cart qty buttons
+document.querySelectorAll('.cart-item').forEach(item => {
+  const plusBtn  = item.querySelector('[data-action="plus"]');
+  const minusBtn = item.querySelector('[data-action="minus"]');
+  const qtyEl    = item.querySelector('.qty-num');
+
+  plusBtn.addEventListener('click', () => {
+    qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
+    updateCart();
+  });
+  minusBtn.addEventListener('click', () => {
+    const v = parseInt(qtyEl.textContent);
+    if (v > 0) { qtyEl.textContent = v - 1; updateCart(); }
+  });
+});
+
+document.querySelectorAll('input[name="pickup"]').forEach(r => {
+  r.addEventListener('change', updateCart);
+});
+
+function updateCart() {
+  let total = 0;
+  const items = [];
+  document.querySelectorAll('.cart-item').forEach(item => {
+    const qty   = parseInt(item.querySelector('.qty-num').textContent);
+    const price = parseFloat(item.dataset.price);
+    const name  = item.dataset.name;
+    if (qty > 0) {
+      total += qty * price;
+      items.push({ name, qty, price });
+    }
+  });
+  const pickup = document.querySelector('input[name="pickup"]:checked')?.value || '';
+  cartData = { items, total, pickup };
+
+  document.getElementById('cartTotal').textContent = `$${total}`;
+  const btn = document.getElementById('btnToPayment');
+  btn.disabled = total === 0 || !pickup;
+}
+
+async function goToPayment() {
+  document.getElementById('stepOrder').style.display   = 'none';
+  document.getElementById('stepPayment').style.display = '';
+
+  // Show order summary
+  const summary = cartData.items.map(i => `${i.qty}× ${i.name} — $${i.qty * i.price}`).join('<br>');
+  document.getElementById('checkoutSummary').innerHTML =
+    `${summary}<br><strong style="font-size:0.9rem;color:var(--dark)">Pickup: ${cartData.pickup}</strong><br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total}</strong>`;
+
+  // Init Stripe
+  if (!stripe) stripe = Stripe(STRIPE_PK);
+
+  // Create payment intent
+  const res = await fetch('/api/create-payment-intent', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ amount: cartData.total, items: cartData.items, pickupTime: cartData.pickup }),
+  });
+  const { clientSecret, error } = await res.json();
+  if (error) { document.getElementById('payment-error').textContent = error; return; }
+
+  elements = stripe.elements({ clientSecret, appearance: {
+    theme: 'flat',
+    variables: {
+      colorPrimary: '#c8852a',
+      colorBackground: '#faf7f2',
+      colorText: '#1a1208',
+      colorDanger: '#c0392b',
+      fontFamily: 'Jost, sans-serif',
+      borderRadius: '0px',
+    }
+  }});
+
+  paymentElement = elements.create('payment');
+  paymentElement.mount('#payment-element');
+}
+
+function goBackToOrder() {
+  document.getElementById('stepPayment').style.display = 'none';
+  document.getElementById('stepOrder').style.display   = '';
+  document.getElementById('payment-element').innerHTML = '';
+  stripe = null; elements = null; paymentElement = null;
+}
+
+async function submitPayment() {
+  const btn   = document.getElementById('btnPay');
+  const errEl = document.getElementById('payment-error');
+  const name  = document.getElementById('payName').value.trim();
+  const email = document.getElementById('payEmail').value.trim();
+
+  if (!name || !email) { errEl.textContent = 'Please enter your name and email.'; return; }
+
+  btn.textContent = 'Processing…';
+  btn.disabled = true;
+  errEl.textContent = '';
+
+  const { error } = await stripe.confirmPayment({
+    elements,
+    redirect: 'if_required',
+    confirmParams: {
+      payment_method_data: { billing_details: { name, email } },
+      receipt_email: email,
+    },
+  });
+
+  if (error) {
+    errEl.textContent = error.message;
+    btn.textContent = 'Confirm & Pay';
+    btn.disabled = false;
+  } else {
+    document.getElementById('stepPayment').style.display = 'none';
+    document.getElementById('stepSuccess').style.display = '';
+    const pickupDay = cartData.pickup.startsWith('Sunday') ? 'Sunday' : 'Saturday';
+    document.getElementById('stepSuccess').querySelector('h2').innerHTML = `See you<br /><em>${pickupDay}.</em>`;
+    document.getElementById('successDetails').textContent =
+      `Your order is confirmed for ${cartData.pickup}. A receipt is on its way to ${email}.`;
+  }
+}
+
 // Notify me form
 function handleSubmit(e) {
   e.preventDefault();
