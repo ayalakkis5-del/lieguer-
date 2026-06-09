@@ -445,7 +445,11 @@
           <div class="checkout-fields">
             <input type="text" id="payName" placeholder="Your name" required />
             <input type="email" id="payEmail" placeholder="Email for receipt" required />
-            <input type="tel" id="payPhone" placeholder="Phone number — for pickup reminders" required />
+            <input type="tel" id="payPhone" placeholder="Phone number — for pickup reminder" required />
+            <label class="promo-opt">
+              <input type="checkbox" id="payPromo" checked />
+              <span>Text me when ordering opens &amp; new flavors drop 🧇</span>
+            </label>
           </div>
           <div id="payment-element" class="stripe-element"></div>
           <p id="payment-error" class="payment-error"></p>

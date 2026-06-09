@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
   try {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-    const { amount, items, pickupTime, customerName, customerEmail, customerPhone } = req.body;
+    const { amount, items, pickupTime, customerName, customerEmail, customerPhone, promoConsent } = req.body;
 
     const amountCents = Math.round(amount * 100);
     // Stripe minimum is 50 cents
@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
         customerName:  customerName  || '',
         customerEmail: customerEmail || '',
         customerPhone: customerPhone || '',
+        promoConsent:  promoConsent  || 'no',
       },
       receipt_email: customerEmail || undefined,
     });

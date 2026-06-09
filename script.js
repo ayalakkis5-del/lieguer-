@@ -291,7 +291,7 @@ async function goToPayment() {
   const res = await fetch('/api/create-payment-intent', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ amount: cartData.total, items: cartData.items, pickupTime: cartData.pickup, customerName: document.getElementById('payName')?.value || '', customerEmail: document.getElementById('payEmail')?.value || '', customerPhone: document.getElementById('payPhone')?.value || '' }),
+    body: JSON.stringify({ amount: cartData.total, items: cartData.items, pickupTime: cartData.pickup, customerName: document.getElementById('payName')?.value || '', customerEmail: document.getElementById('payEmail')?.value || '', customerPhone: document.getElementById('payPhone')?.value || '', promoConsent: document.getElementById('payPromo')?.checked ? 'yes' : 'no' }),
   });
   const { clientSecret, error } = await res.json();
   if (error) { document.getElementById('payment-error').textContent = error; return; }
@@ -308,7 +308,9 @@ async function goToPayment() {
     }
   }});
 
-  paymentElement = elements.create('payment');
+  paymentElement = elements.create('payment', {
+    fields: { billingDetails: 'never' }
+  });
   paymentElement.mount('#payment-element');
 }
 
@@ -325,6 +327,7 @@ async function submitPayment() {
   const name  = document.getElementById('payName').value.trim();
   const email = document.getElementById('payEmail').value.trim();
   const phone = document.getElementById('payPhone').value.trim();
+  const promo = document.getElementById('payPromo')?.checked ? 'yes' : 'no';
 
   if (!name || !email || !phone) { errEl.textContent = 'Please fill in your name, email, and phone number.'; return; }
 

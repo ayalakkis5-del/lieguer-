@@ -975,6 +975,29 @@ nav {
   line-height: 1.7;
 }
 
+/* Promo opt-in */
+.promo-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  background: rgba(200,133,42,0.05);
+  border: 1px solid rgba(200,133,42,0.2);
+}
+.promo-opt input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--caramel);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.promo-opt span {
+  font-size: 0.78rem;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
 /* Stripe element */
 .stripe-element {
   padding: 1rem;
