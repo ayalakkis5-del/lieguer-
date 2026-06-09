@@ -1136,6 +1136,78 @@ nav {
   letter-spacing: 0.05em;
 }
 
+/* ─── NOTIFY SECTION ─────────────────────────────────────── */
+.notify-section {
+  background: var(--dark);
+  color: var(--cream);
+  padding: 7rem 2rem;
+  text-align: center;
+}
+.notify-inner { max-width: 540px; margin: 0 auto; }
+.notify-inner .label { color: var(--caramel); }
+.notify-inner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0.5rem 0 1rem;
+  color: var(--cream);
+}
+.notify-sub {
+  color: rgba(245,240,232,0.65);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.notify-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.notify-fields input {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 0.85rem 1.25rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.95rem;
+  color: var(--cream);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.notify-fields input::placeholder { color: rgba(245,240,232,0.4); }
+.notify-fields input:focus { border-color: var(--caramel); }
+.notify-btn {
+  width: 100%;
+  background: var(--caramel);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.95rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-bottom: 0.75rem;
+}
+.notify-btn:hover { opacity: 0.85; }
+.notify-btn:disabled { opacity: 0.5; cursor: default; }
+.notify-fine {
+  font-size: 0.75rem;
+  color: rgba(245,240,232,0.35);
+  letter-spacing: 0.04em;
+}
+.notify-success {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--caramel);
+  padding: 1.5rem 0;
+}
+
 /* ─── CATERING ───────────────────────────────────────────── */
 .catering {
   background: var(--cream);

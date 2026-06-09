@@ -396,6 +396,37 @@ async function submitPayment() {
   }
 }
 
+// ── Notify me / join list ────────────────────────────────
+async function submitNotify(e) {
+  e.preventDefault();
+  const btn = document.getElementById('notifyBtn');
+  btn.textContent = 'Adding you…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/join-list', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: document.getElementById('nfName').value.trim(),
+        email:     document.getElementById('nfEmail').value.trim(),
+        phone:     document.getElementById('nfPhone').value.trim(),
+      }),
+    });
+    const data = await res.json();
+    if (data.ok || res.ok) {
+      document.getElementById('notifyForm').style.display = 'none';
+      document.getElementById('notifySuccess').style.display = 'block';
+    } else {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Try again';
+    btn.disabled = false;
+  }
+}
+
 // ── Catering inquiry form ────────────────────────────────
 async function submitInquiry(e) {
   e.preventDefault();

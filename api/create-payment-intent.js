@@ -1,5 +1,6 @@
 const Stripe = require('stripe');
 const https  = require('https');
+const { klaviyoProfile } = require('./join-list');
 
 async function sendSMS(to, body) {
   const sid   = process.env.TWILIO_ACCOUNT_SID;
@@ -59,6 +60,12 @@ module.exports = async (req, res) => {
     if (customerPhone) {
       const msg = `LIÈGUER ✓ Your order is confirmed! Pickup: ${pickupTime}. We can't wait to see you. Questions? Reply to this message.`;
       sendSMS(customerPhone, msg).catch(() => {});
+    }
+
+    // Add to Klaviyo if they opted in for promos
+    if (promoConsent === 'yes') {
+      const firstName = (customerName || '').split(' ')[0];
+      klaviyoProfile(firstName, customerEmail, customerPhone).catch(() => {});
     }
 
     res.status(200).json({ clientSecret: paymentIntent.client_secret });

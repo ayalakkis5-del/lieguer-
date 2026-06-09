@@ -485,6 +485,27 @@
     </div>
   </section>
 
+  <!-- NOTIFY ME LIST -->
+  <section class="notify-section" id="notify">
+    <div class="notify-inner">
+      <p class="label">Never Miss a Drop</p>
+      <h2>Join the<br /><em>list.</em></h2>
+      <p class="notify-sub">Be the first to know when orders open each week — Sunday night drops sell fast.</p>
+      <form class="notify-form" id="notifyForm" onsubmit="submitNotify(event)">
+        <div class="notify-fields">
+          <input type="text"  id="nfName"  placeholder="First name" autocomplete="given-name" />
+          <input type="email" id="nfEmail" placeholder="Email address" autocomplete="email" required />
+          <input type="tel"   id="nfPhone" placeholder="Phone (for SMS drops)" autocomplete="tel" />
+        </div>
+        <button type="submit" class="notify-btn" id="notifyBtn">Notify Me</button>
+        <p class="notify-fine">No spam. Drop announcements only. Unsubscribe anytime.</p>
+      </form>
+      <div id="notifySuccess" style="display:none;" class="notify-success">
+        You're on the list. ✓ We'll text you when orders open.
+      </div>
+    </div>
+  </section>
+
   <!-- CATERING -->
   <section class="catering" id="catering">
     <div class="catering-inner">
