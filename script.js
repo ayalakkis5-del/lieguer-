@@ -391,8 +391,12 @@ function goBackToOrder() {
   document.getElementById('stepPayment').style.display = 'none';
   document.getElementById('stepOrder').style.display   = '';
   document.getElementById('payment-element').innerHTML = '';
-  stripe = null; elements = null; paymentElement = null;
+  document.getElementById('btnPay').textContent = 'Confirm & Pay';
+  document.getElementById('btnPay').disabled = false;
+  stripe = null; elements = null; paymentElement = null; cardReady = false;
 }
+
+let cardReady = false;
 
 async function submitPayment() {
   const btn   = document.getElementById('btnPay');
@@ -405,50 +409,58 @@ async function submitPayment() {
   if (!cartData.pickup) { errEl.textContent = 'Please select a pickup time.'; return; }
   if (!name || !email || !phone) { errEl.textContent = 'Please fill in your name, email, and phone number.'; return; }
 
-  btn.textContent = 'Processing…';
-  btn.disabled = true;
   errEl.textContent = '';
 
-  // Create payment intent now that we have all info
-  try {
-    const piRes = await fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        amount: cartData.total,
-        items: cartData.items,
-        pickupTime: cartData.pickup,
-        customerName: name,
-        customerEmail: email,
-        customerPhone: phone,
-        promoConsent: promo,
-      }),
-    });
-    const { clientSecret, error: piError } = await piRes.json();
-    if (piError) { errEl.textContent = piError; btn.textContent = 'Confirm & Pay'; btn.disabled = false; return; }
+  // Phase 1: create payment intent + show card field
+  if (!cardReady) {
+    btn.textContent = 'Loading card field…';
+    btn.disabled = true;
 
-    elements = stripe.elements({ clientSecret, appearance: {
-      theme: 'flat',
-      variables: {
-        colorPrimary: '#c8852a',
-        colorBackground: '#faf7f2',
-        colorText: '#1a1208',
-        colorDanger: '#c0392b',
-        fontFamily: 'Jost, sans-serif',
-        borderRadius: '0px',
-      }
-    }});
-    paymentElement = elements.create('payment', { fields: { billingDetails: 'never' } });
-    paymentElement.mount('#payment-element');
+    try {
+      const piRes = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: cartData.total,
+          items: cartData.items,
+          pickupTime: cartData.pickup,
+          customerName: name,
+          customerEmail: email,
+          customerPhone: phone,
+          promoConsent: promo,
+        }),
+      });
+      const { clientSecret, error: piError } = await piRes.json();
+      if (piError) { errEl.textContent = piError; btn.textContent = 'Confirm & Pay'; btn.disabled = false; return; }
 
-    // Small pause to let Stripe element render
-    await new Promise(r => setTimeout(r, 800));
-  } catch (e) {
-    errEl.textContent = 'Could not connect. Please try again.';
-    btn.textContent = 'Confirm & Pay';
-    btn.disabled = false;
-    return;
+      elements = stripe.elements({ clientSecret, appearance: {
+        theme: 'flat',
+        variables: {
+          colorPrimary: '#c8852a',
+          colorBackground: '#faf7f2',
+          colorText: '#1a1208',
+          colorDanger: '#c0392b',
+          fontFamily: 'Jost, sans-serif',
+          borderRadius: '0px',
+        }
+      }});
+      paymentElement = elements.create('payment', { fields: { billingDetails: 'never' } });
+      paymentElement.mount('#payment-element');
+      cardReady = true;
+      btn.textContent = 'Pay Now →';
+      btn.disabled = false;
+      return; // wait for user to enter card, then click again
+    } catch (e) {
+      errEl.textContent = 'Could not connect. Please try again.';
+      btn.textContent = 'Confirm & Pay';
+      btn.disabled = false;
+      return;
+    }
   }
+
+  // Phase 2: confirm payment
+  btn.textContent = 'Processing…';
+  btn.disabled = true;
 
   const { error } = await stripe.confirmPayment({
     elements,
