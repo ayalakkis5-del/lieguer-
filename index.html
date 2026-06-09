@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LIÈGUER — Belgian Waffle Atelier & Leisure Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">LIÈGUER</span>
+    <div class="nav-links">
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#order" class="nav-cta">Order Now</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas class="hero-grid" id="heroGrid"></canvas>
+    <div class="hero-scene" id="heroScene">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Limited Opening — Sunday Night</p>
+        <h1>72&#8209;Hour<br /><span class="hero-italic">Liège Waffles</span></h1>
+        <p class="hero-sub">Cold&#8209;pressed. Imported European ingredients.<br />Notes of caramelized pearl sugar &amp; brown butter.</p>
+        <a href="#order" class="btn-primary">Reserve Yours</a>
+      </div>
+
+      <!-- 3D floating elements -->
+      <div class="float-card float-card--1" data-depth="0.04">
+        <span class="float-card-num">72</span>
+        <span class="float-card-label">hours</span>
+      </div>
+      <div class="float-card float-card--2" data-depth="0.07">
+        <span class="float-card-text">Belgian<br/>Pearl Sugar</span>
+      </div>
+      <div class="float-card float-card--3" data-depth="0.05">
+        <span class="float-card-text">Brown<br/>Butter</span>
+      </div>
+      <div class="float-orb float-orb--1"></div>
+      <div class="float-orb float-orb--2"></div>
+    </div>
+    <div class="hero-scroll-hint">↓</div>
+  </section>
+
+  <!-- THE WAFFLE -->
+  <section class="about">
+    <div class="about-text">
+      <p class="label">The Process</p>
+      <h2>Not a waffle.<br /><em>A commitment.</em></h2>
+      <p>Every LIÈGUER waffle begins 72 hours before it reaches you. The brioche dough — enriched with European butter, slow-developed with time — is cold-pressed to seal in a caramelized crust that shatters on contact.</p>
+      <p>Pearl sugar pearls imported from Belgium collapse into molten pockets. Brown butter weaves through every net. There is no shortcut version of this.</p>
+    </div>
+    <div class="about-details">
+      <div class="detail card-3d" data-tilt>
+        <span class="detail-num">72</span>
+        <span class="detail-label">hour cold ferment</span>
+      </div>
+      <div class="detail card-3d" data-tilt>
+        <span class="detail-num">100%</span>
+        <span class="detail-label">imported European ingredients</span>
+      </div>
+      <div class="detail card-3d" data-tilt>
+        <span class="detail-num">Ltd.</span>
+        <span class="detail-label">quantities each drop</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="menu-header">
+      <p class="label light">The Full Menu</p>
+      <h2><em>LIÈGUER</em></h2>
+      <p class="menu-subtitle">B E L G I A N &nbsp; W A F F L E &nbsp; A T E L I E R &nbsp; &amp; &nbsp; L E I S U R E &nbsp; S T U D I O</p>
+    </div>
+
+    <!-- WAFFLES -->
+    <div class="menu-section">
+      <p class="menu-section-title">T H E &nbsp; W A F F L E &nbsp; S E L E C T I O N</p>
+      <div class="menu-item menu-item--feature card-3d" data-tilt>
+        <div class="menu-item-top">
+          <span class="menu-item-name">The LIÈGEUR Box <em>(One Dozen)</em></span>
+          <span class="menu-item-price">$50</span>
+        </div>
+        <p class="menu-item-desc">Twelve signature caramelized Liège waffles, crafted from our traditional 72-hour cold-fermented brioche dough and baked with imported Belgian pearl sugar to achieve a deeply rich, glassy outer crust. Packaged in our custom matte white window box and hand-tied with our signature burgundy satin ribbon. Includes the complete signature three-sauce flight.</p>
+      </div>
+    </div>
+
+    <!-- ACCOMPANIMENTS -->
+    <div class="menu-section">
+      <p class="menu-section-title">T H E &nbsp; S I G N A T U R E &nbsp; A C C O M P A N I M E N T S</p>
+      <div class="sauce-grid">
+        <div class="sauce-card card-3d" data-tilt>
+          <p class="sauce-name">Wild Strawberry Coulis</p>
+          <p class="sauce-desc">A bright, intense reduction of sweet wild strawberries infused with slow-scraped Madagascar vanilla bean.</p>
+        </div>
+        <div class="sauce-card card-3d" data-tilt>
+          <p class="sauce-name">Dark Chocolate Ganache</p>
+          <p class="sauce-desc">A rich, velvety emulsion crafted from premium 70% dark Belgian chocolate and heavy European cream.</p>
+        </div>
+        <div class="sauce-card card-3d" data-tilt>
+          <p class="sauce-name">Smoked Caramel</p>
+          <p class="sauce-desc">A deep, amber artisanal caramel slow-cooked with sea salt and a subtle, sophisticated hint of hickory smoke.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESPRESSO -->
+    <div class="menu-section menu-section--dark">
+      <p class="menu-section-title light">E S P R E S S O &nbsp; S T U D I O</p>
+      <div class="espresso-list">
+        <div class="espresso-item card-3d-dark" data-tilt>
+          <div class="espresso-top">
+            <span class="espresso-name">Tiramisu Latte</span>
+            <span class="espresso-price">$8</span>
+          </div>
+          <p class="espresso-desc">Double-shot espresso and velvety textured milk layered over a rich mascarpone cream reduction, finished with a heavy dusting of dark Dutch-process cocoa. Served iced in our signature clear cans.</p>
+        </div>
+        <div class="espresso-item card-3d-dark" data-tilt>
+          <div class="espresso-top">
+            <span class="espresso-name">Madagascar Vanilla Latte</span>
+            <span class="espresso-price">$8</span>
+          </div>
+          <p class="espresso-desc">Bold espresso blended with micro-filtered milk and infused with an aromatic, slow-simmered Madagascar vanilla bean reduction. Served iced in our signature clear cans.</p>
+        </div>
+        <div class="espresso-item espresso-item--special card-3d-dark" data-tilt>
+          <div class="espresso-top">
+            <span class="espresso-name">The Fireside <em class="house-special">House Special</em></span>
+            <span class="espresso-price">$8</span>
+          </div>
+          <p class="espresso-desc">A complex, nostalgic profile featuring notes of caramelized charred sugar, warm honeyed graham crust, and a ribbon of melted milk chocolate. Served iced in our signature clear cans.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIRINGS -->
+    <div class="menu-section">
+      <p class="menu-section-title">T H E &nbsp; M O R N I N G &nbsp; C U R A T E D &nbsp; P A I R I N G S</p>
+      <div class="pairing-grid">
+        <div class="pairing-card card-3d" data-tilt>
+          <p class="pairing-name">The Classic Ritual</p>
+          <p class="pairing-price">$50</p>
+          <p class="pairing-desc">The benchmark experience. The LIÈGEUR Box containing 12 caramelized waffles paired flawlessly with the complete signature three-sauce flight.</p>
+        </div>
+        <div class="pairing-card pairing-card--feature card-3d" data-tilt>
+          <p class="pairing-name">The Complete Saturday Breakfast</p>
+          <p class="pairing-price">$66</p>
+          <p class="pairing-desc">Designed for the ultimate weekend luxury. The LIÈGEUR Box (12 Waffles), the complete three-sauce flight, plus your choice of any two Espresso Studio clear-canned lattes.</p>
+        </div>
+        <div class="pairing-card card-3d" data-tilt>
+          <p class="pairing-name">The Espresso Studio Flight</p>
+          <p class="pairing-price">$24</p>
+          <p class="pairing-desc">A curated beverage trio featuring one full-sized can of each of our signature iced lattes: Tiramisu, Madagascar Vanilla, and The Fireside.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span>ORDERS CLOSE THURSDAYS AT 11:59 PM</span>
+        <span class="ticker-dot">·</span>
+        <span>SECURE YOUR SLOT AT LIEGUER.COM</span>
+        <span class="ticker-dot">·</span>
+        <span>ORDERS CLOSE THURSDAYS AT 11:59 PM</span>
+        <span class="ticker-dot">·</span>
+        <span>SECURE YOUR SLOT AT LIEGUER.COM</span>
+        <span class="ticker-dot">·</span>
+        <span>ORDERS CLOSE THURSDAYS AT 11:59 PM</span>
+        <span class="ticker-dot">·</span>
+        <span>SECURE YOUR SLOT AT LIEGUER.COM</span>
+        <span class="ticker-dot">·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DROP INFO -->
+  <section class="drop" id="drop">
+    <div class="drop-inner">
+      <p class="label light">This Week's Drop</p>
+      <h2>Order opens<br /><em>Sunday night.</em></h2>
+      <div class="drop-grid">
+        <div class="drop-card card-3d-dark" data-tilt>
+          <p class="drop-card-label">Ordering Opens</p>
+          <p class="drop-card-val">Sunday Night</p>
+        </div>
+        <div class="drop-divider"></div>
+        <div class="drop-card card-3d-dark" data-tilt>
+          <p class="drop-card-label">Pickup</p>
+          <p class="drop-card-val">Saturday &amp; Sunday</p>
+        </div>
+      </div>
+      <p class="drop-note">Quantities are strictly limited. Orders close Thursdays at 11:59 PM — and we always sell out.</p>
+    </div>
+  </section>
+
+  <!-- ORDER / COUNTDOWN -->
+  <section class="order" id="order">
+    <div class="order-inner">
+
+      <!-- COUNTDOWN STATE (shown before Sunday 8pm) -->
+      <div id="stateCountdown">
+        <p class="label">This Drop Opens In</p>
+        <h2 id="countdownHeading">Orders open<br /><em>Sunday night.</em></h2>
+        <div class="countdown-clock">
+          <div class="clock-unit">
+            <span class="clock-num" id="cdDays">00</span>
+            <span class="clock-label">Days</span>
+          </div>
+          <span class="clock-colon">:</span>
+          <div class="clock-unit">
+            <span class="clock-num" id="cdHours">00</span>
+            <span class="clock-label">Hours</span>
+          </div>
+          <span class="clock-colon">:</span>
+          <div class="clock-unit">
+            <span class="clock-num" id="cdMins">00</span>
+            <span class="clock-label">Minutes</span>
+          </div>
+          <span class="clock-colon">:</span>
+          <div class="clock-unit">
+            <span class="clock-num" id="cdSecs">00</span>
+            <span class="clock-label">Seconds</span>
+          </div>
+        </div>
+        <p class="order-sub">Window opens Sunday at 8 PM and closes Thursday at 11:59 PM — or when we sell out.</p>
+        <p class="order-fine">Pickup available Saturday &amp; Sunday of the following week.</p>
+      </div>
+
+      <!-- OPEN STATE (shown Sun 8pm → Thu 11:59pm) -->
+      <div id="stateOpen" style="display:none;">
+        <p class="label">Orders Are Open</p>
+        <h2>Get yours<br /><em>before we sell out.</em></h2>
+        <p class="order-sub">The window is live. Pickup is this Saturday and Sunday. Select your items, choose your time, checkout — done.</p>
+        <a href="https://cash.app/order/$lieguer" class="btn-primary btn-order-live" target="_blank" rel="noopener">Order Now — Pick Your Time</a>
+        <p class="order-fine">Closes Thursday at 11:59 PM · Pickup Sat &amp; Sun</p>
+      </div>
+
+      <!-- CLOSED STATE (shown Fri & Sat while prepping) -->
+      <div id="stateClosed" style="display:none;">
+        <p class="label">Orders Closed</p>
+        <h2>This week's drop<br /><em>is sold out.</em></h2>
+        <p class="order-sub">Next window opens Sunday night. Drop your email and we'll ping you the moment it's live.</p>
+        <form class="order-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Your name" required />
+            <input type="email" name="email" placeholder="Email address" required />
+          </div>
+          <button type="submit" class="btn-primary">Notify Me Sunday</button>
+        </form>
+        <p class="order-fine">No spam. Just your waffle window.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">LIÈGUER</span>
+    <p class="footer-sub">Waffles, at your leisure.</p>
+    <p>Handmade. Limited. Worth the wait.</p>
+  </footer>
+
+  <div id="toast" class="toast">You're on the list. See you Sunday. 🧇</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
