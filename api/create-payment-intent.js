@@ -1,6 +1,7 @@
 const Stripe = require('stripe');
 const https  = require('https');
 const { klaviyoProfile } = require('./join-list');
+const { sendEmail } = require('./send-email');
 
 async function sendSMS(to, body) {
   const sid   = process.env.TWILIO_ACCOUNT_SID;
@@ -67,6 +68,34 @@ module.exports = async (req, res) => {
       const firstName = (customerName || '').split(' ')[0];
       klaviyoProfile(firstName, customerEmail, customerPhone).catch(() => {});
     }
+
+    // Send order notification to hellolieguer@gmail.com
+    const itemLines = (items || [])
+      .map(i => `<tr><td style="padding:6px 12px;">${i.qty}× ${i.name}</td><td style="padding:6px 12px;text-align:right;">$${(i.qty * i.price).toFixed(2)}</td></tr>`)
+      .join('');
+    sendEmail({
+      to: 'hellolieguer@gmail.com',
+      subject: `🧇 New Order — ${customerName || 'Customer'} · ${pickupTime}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;color:#1a1208;">
+          <h2 style="color:#c8852a;margin-bottom:4px;">New Order Received</h2>
+          <p style="color:#888;margin-top:0;">${new Date().toLocaleString('en-US',{timeZone:'America/Chicago'})}</p>
+          <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+            <tr style="background:#f5f0e8;"><th style="padding:8px 12px;text-align:left;">Item</th><th style="padding:8px 12px;text-align:right;">Price</th></tr>
+            ${itemLines}
+            <tr style="border-top:2px solid #c8852a;font-weight:bold;">
+              <td style="padding:8px 12px;">Total</td>
+              <td style="padding:8px 12px;text-align:right;">$${amount.toFixed(2)}</td>
+            </tr>
+          </table>
+          <p><strong>Pickup:</strong> ${pickupTime}</p>
+          <p><strong>Name:</strong> ${customerName || '—'}</p>
+          <p><strong>Email:</strong> ${customerEmail || '—'}</p>
+          <p><strong>Phone:</strong> ${customerPhone || '—'}</p>
+          <p><strong>Promo opt-in:</strong> ${promoConsent === 'yes' ? '✅ Yes' : 'No'}</p>
+        </div>
+      `,
+    }).catch(() => {});
 
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
