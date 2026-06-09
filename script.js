@@ -275,11 +275,14 @@ async function goToPayment() {
   document.getElementById('stepPayment').style.display = '';
 
   // Show order summary
-  const dipChoice = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
-  const dipNote = dipChoice && cartData.items.find(i => i.name === 'The LIÈGUER Box') ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle preference: ${dipChoice}</em>` : '';
+  const dipChoice    = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
+  const sauceChoice  = document.querySelector('input[name="includedSauce"]:checked')?.value || '';
+  const hasBox       = cartData.items.find(i => i.name === 'The LIÈGUER Box');
+  const dipNote      = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
+  const sauceNote    = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
   const summary = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
   document.getElementById('checkoutSummary').innerHTML =
-    `${summary}${dipNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Pickup: ${cartData.pickup}</strong><br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
+    `${summary}${dipNote}${sauceNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Pickup: ${cartData.pickup}</strong><br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
 
   // Init Stripe
   if (!stripe) stripe = Stripe(STRIPE_PK);

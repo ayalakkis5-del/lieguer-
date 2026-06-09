@@ -90,7 +90,7 @@
           <span class="menu-item-name">The LIÈGEUR Box <em>(One Dozen)</em></span>
           <span class="menu-item-price">$50</span>
         </div>
-        <p class="menu-item-desc">Twelve signature caramelized Liège waffles, crafted from our traditional 72-hour cold-fermented brioche dough and baked with imported Belgian pearl sugar to achieve a deeply rich, glassy outer crust. Packaged in our custom matte white window box and hand-tied with our signature burgundy satin ribbon. Includes the complete signature three-sauce flight.</p>
+        <p class="menu-item-desc">Twelve signature caramelized Liège waffles, crafted from our traditional 72-hour cold-fermented brioche dough and baked with imported Belgian pearl sugar to achieve a deeply rich, glassy outer crust. Packaged in our custom matte white window box and hand-tied with our signature burgundy satin ribbon. Includes your choice of one signature sauce. Additional sauces available as add-ons at $7 each.</p>
       </div>
     </div>
 
@@ -147,13 +147,13 @@
       <div class="pairing-grid">
         <div class="pairing-card card-3d" data-tilt>
           <p class="pairing-name">The Classic Ritual</p>
-          <p class="pairing-price">$50</p>
-          <p class="pairing-desc">The benchmark experience. The LIÈGEUR Box containing 12 caramelized waffles paired flawlessly with the complete signature three-sauce flight.</p>
+          <p class="pairing-price">$62</p>
+          <p class="pairing-desc">The benchmark experience. The LIÈGEUR Box containing 12 caramelized waffles paired with the complete signature three-sauce flight (all three, 4oz each).</p>
         </div>
         <div class="pairing-card pairing-card--feature card-3d" data-tilt>
           <p class="pairing-name">The Complete Saturday Breakfast</p>
-          <p class="pairing-price">$66</p>
-          <p class="pairing-desc">Designed for the ultimate weekend luxury. The LIÈGEUR Box (12 Waffles), the complete three-sauce flight, plus your choice of any two Espresso Studio clear-canned lattes.</p>
+          <p class="pairing-price">$78</p>
+          <p class="pairing-desc">Designed for the ultimate weekend luxury. The LIÈGEUR Box (12 Waffles), the complete three-sauce flight (all three, 4oz each), plus your choice of any two Espresso Studio clear-canned lattes.</p>
         </div>
         <div class="pairing-card card-3d" data-tilt>
           <p class="pairing-name">The Espresso Studio Flight</p>
@@ -263,7 +263,7 @@
 
           <!-- THE WAFFLES -->
           <p class="cart-section-label">— The Waffles —</p>
-          <p class="cart-section-note">All dozens include maple syrup. Sauces are available as add-ons below.</p>
+          <p class="cart-section-note">All dozens include maple syrup + your choice of one signature sauce. Additional sauces $7 each.</p>
           <div class="cart-items">
 
             <div class="cart-item cart-item--expandable" data-name="The LIÈGUER Box" data-price="50" id="boxItem">
@@ -279,7 +279,7 @@
               </div>
             </div>
 
-            <!-- Mix & match — shows when box qty > 0 -->
+            <!-- Mix & match + included sauce — shows when box qty > 0 -->
             <div class="cart-addon-row" id="waffleDipRow" style="display:none;">
               <p class="addon-label">Customize your dozen:</p>
               <div class="dip-options">
@@ -287,13 +287,19 @@
                 <label class="dip-opt"><input type="radio" name="waffleDip" value="All Chocolate-Dipped" /><span>All Chocolate-Dipped</span></label>
                 <label class="dip-opt"><input type="radio" name="waffleDip" value="Half Plain, Half Chocolate-Dipped" /><span>Half &amp; Half</span></label>
               </div>
+              <p class="addon-label" style="margin-top:1rem;">Your included sauce (choose one):</p>
+              <div class="dip-options">
+                <label class="dip-opt"><input type="radio" name="includedSauce" value="Wild Strawberry Coulis" checked /><span>Wild Strawberry Coulis</span></label>
+                <label class="dip-opt"><input type="radio" name="includedSauce" value="Dark Chocolate Ganache" /><span>Dark Chocolate Ganache</span></label>
+                <label class="dip-opt"><input type="radio" name="includedSauce" value="Smoked Caramel" /><span>Smoked Caramel</span></label>
+              </div>
             </div>
 
-            <div class="cart-item" data-name="The Classic Ritual" data-price="50">
+            <div class="cart-item" data-name="The Classic Ritual" data-price="62">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Classic Ritual</p>
-                <p class="cart-item-desc">The LIÈGUER Box (12 waffles) + the complete three-sauce flight. The benchmark experience.</p>
-                <p class="cart-item-price">$50</p>
+                <p class="cart-item-desc">The LIÈGUER Box (12 waffles) + all three signature sauces (4oz each). The benchmark experience.</p>
+                <p class="cart-item-price">$62</p>
               </div>
               <div class="cart-qty">
                 <button class="qty-btn" data-action="minus">−</button>
@@ -302,11 +308,11 @@
               </div>
             </div>
 
-            <div class="cart-item" data-name="The Complete Saturday Breakfast" data-price="66">
+            <div class="cart-item" data-name="The Complete Saturday Breakfast" data-price="78">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Complete Saturday Breakfast</p>
-                <p class="cart-item-desc">The LIÈGUER Box + three-sauce flight + any two Espresso Studio lattes. The full weekend luxury.</p>
-                <p class="cart-item-price">$66</p>
+                <p class="cart-item-desc">The LIÈGUER Box + all three signature sauces (4oz each) + any two Espresso Studio lattes. The full weekend luxury.</p>
+                <p class="cart-item-price">$78</p>
               </div>
               <div class="cart-qty">
                 <button class="qty-btn" data-action="minus">−</button>
@@ -319,11 +325,11 @@
           <!-- SAUCE ADD-ONS -->
           <p class="cart-section-label">— Signature Sauces <span style="font-weight:300;letter-spacing:0.05em;text-transform:none;">Add-ons · 4oz each</span> —</p>
           <div class="cart-items">
-            <div class="cart-item" data-name="Wild Strawberry Coulis (4oz)" data-price="5">
+            <div class="cart-item" data-name="Wild Strawberry Coulis (4oz)" data-price="7">
               <div class="cart-item-info">
                 <p class="cart-item-name">Wild Strawberry Coulis</p>
                 <p class="cart-item-desc">Bright reduction of wild strawberries with slow-scraped Madagascar vanilla bean.</p>
-                <p class="cart-item-price">$5</p>
+                <p class="cart-item-price">$7</p>
               </div>
               <div class="cart-qty">
                 <button class="qty-btn" data-action="minus">−</button>
@@ -331,11 +337,11 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
-            <div class="cart-item" data-name="Dark Chocolate Ganache (4oz)" data-price="5">
+            <div class="cart-item" data-name="Dark Chocolate Ganache (4oz)" data-price="7">
               <div class="cart-item-info">
                 <p class="cart-item-name">Dark Chocolate Ganache</p>
                 <p class="cart-item-desc">70% dark Belgian chocolate emulsified with heavy European cream. Rich and velvety.</p>
-                <p class="cart-item-price">$5</p>
+                <p class="cart-item-price">$7</p>
               </div>
               <div class="cart-qty">
                 <button class="qty-btn" data-action="minus">−</button>
@@ -343,11 +349,11 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
-            <div class="cart-item" data-name="Smoked Caramel (4oz)" data-price="5">
+            <div class="cart-item" data-name="Smoked Caramel (4oz)" data-price="7">
               <div class="cart-item-info">
                 <p class="cart-item-name">Smoked Caramel</p>
                 <p class="cart-item-desc">Amber caramel slow-cooked with sea salt and a hint of hickory smoke. Complex and addictive.</p>
-                <p class="cart-item-price">$5</p>
+                <p class="cart-item-price">$7</p>
               </div>
               <div class="cart-qty">
                 <button class="qty-btn" data-action="minus">−</button>
