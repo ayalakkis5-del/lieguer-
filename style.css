@@ -893,20 +893,28 @@ nav {
 
 /* Pickup slots */
 .pickup-select { margin-bottom: 2rem; }
+.pickup-day-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-bottom: 0.5rem;
+}
 .pickup-slots {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
 }
 .slot { cursor: pointer; }
 .slot input { display: none; }
 .slot span {
   display: block;
-  padding: 0.65rem 0.75rem;
+  padding: 0.55rem 0.4rem;
   border: 1px solid var(--light-rule);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 400;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   color: var(--mid);
   text-align: center;
   transition: all 0.15s;
@@ -918,6 +926,14 @@ nav {
   border-color: var(--dark);
 }
 .slot:hover span { border-color: var(--caramel); }
+.slot--full { cursor: not-allowed; opacity: 0.45; }
+.slot--full span {
+  background: rgba(74,53,32,0.05);
+  color: rgba(74,53,32,0.35);
+  font-size: 0.6rem;
+  text-decoration: line-through;
+}
+.slot--full:hover span { border-color: var(--light-rule); }
 
 /* Cart total */
 .cart-total {

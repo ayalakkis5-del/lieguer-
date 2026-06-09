@@ -246,9 +246,47 @@ function checkDipRow() {
   if (dipRow) dipRow.style.display = boxQty > 0 ? '' : 'none';
 }
 
-document.querySelectorAll('input[name="pickup"]').forEach(r => {
-  r.addEventListener('change', updateCart);
-});
+// Load slots dynamically from API
+async function loadSlots() {
+  try {
+    const res = await fetch('/api/slot-availability');
+    const { availability, slots } = await res.json();
+
+    const satContainer = document.getElementById('slotsSat');
+    const sunContainer = document.getElementById('slotsSun');
+    const loading      = document.getElementById('slotsLoading');
+    if (loading) loading.style.display = 'none';
+
+    slots.forEach(slot => {
+      const { available, remaining } = availability[slot];
+      const isSat = slot.startsWith('Saturday');
+      const container = isSat ? satContainer : sunContainer;
+      const timeLabel = slot.replace('Saturday ', '').replace('Sunday ', '');
+
+      const label = document.createElement('label');
+      label.className = 'slot' + (available ? '' : ' slot--full');
+
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'pickup';
+      input.value = slot;
+      if (!available) input.disabled = true;
+      input.addEventListener('change', updateCart);
+
+      const span = document.createElement('span');
+      span.textContent = available ? timeLabel : `${timeLabel} Full`;
+
+      label.appendChild(input);
+      label.appendChild(span);
+      container.appendChild(label);
+    });
+  } catch (e) {
+    const loading = document.getElementById('slotsLoading');
+    if (loading) loading.textContent = 'Could not load slots — please refresh.';
+  }
+}
+
+loadSlots();
 
 function updateCart() {
   let total = 0;

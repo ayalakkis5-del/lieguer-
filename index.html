@@ -417,15 +417,13 @@
           </div>
 
           <div class="pickup-select">
-            <p class="label" style="margin-bottom:0.75rem;">Pickup Time</p>
-            <div class="pickup-slots">
-              <label class="slot"><input type="radio" name="pickup" value="Saturday 10am–12pm" /><span>Sat 10am–12pm</span></label>
-              <label class="slot"><input type="radio" name="pickup" value="Saturday 12pm–2pm" /><span>Sat 12pm–2pm</span></label>
-              <label class="slot"><input type="radio" name="pickup" value="Saturday 2pm–4pm" /><span>Sat 2pm–4pm</span></label>
-              <label class="slot"><input type="radio" name="pickup" value="Sunday 10am–12pm" /><span>Sun 10am–12pm</span></label>
-              <label class="slot"><input type="radio" name="pickup" value="Sunday 12pm–2pm" /><span>Sun 12pm–2pm</span></label>
-              <label class="slot"><input type="radio" name="pickup" value="Sunday 2pm–4pm" /><span>Sun 2pm–4pm</span></label>
-            </div>
+            <p class="label" style="margin-bottom:0.25rem;">Pickup Time</p>
+            <p class="cart-section-note" style="margin-bottom:0.75rem;">9am–1pm · 15-min windows · 4 orders per slot</p>
+            <p class="pickup-day-label">Saturday</p>
+            <div class="pickup-slots" id="slotsSat"></div>
+            <p class="pickup-day-label" style="margin-top:1rem;">Sunday</p>
+            <div class="pickup-slots" id="slotsSun"></div>
+            <p id="slotsLoading" class="order-fine" style="text-align:center;margin-top:0.5rem;">Loading availability…</p>
           </div>
 
           <div class="cart-total">
