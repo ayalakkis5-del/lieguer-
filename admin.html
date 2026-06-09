@@ -250,6 +250,53 @@
       font-weight: 600;
       color: var(--caramel);
     }
+
+    /* ── PRINT BUTTON ── */
+    #printBtn {
+      background: #fff;
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 1.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    #printBtn:hover { border-color: var(--caramel); }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      body { background: #fff; font-size: 12px; }
+      #loginScreen, header button, .summary-row, #tallySection { display: none !important; }
+      header { border-bottom: 2px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+      header h1 { font-size: 1.4rem; }
+      .slot-group { break-inside: avoid; margin-bottom: 1.5rem; }
+      .slot-heading { font-size: 1.1rem; border-bottom: 1.5px solid #000; }
+      .slot-count { background: #000 !important; -webkit-print-color-adjust: exact; }
+      .order-card {
+        border: 1px solid #ccc;
+        border-radius: 0;
+        padding: 0.6rem 0.8rem;
+        margin-bottom: 0.4rem;
+        grid-template-columns: 1.2fr 1.5fr auto;
+        gap: 0.5rem 1rem;
+        page-break-inside: avoid;
+      }
+      .oc-order-date { display: none; }
+      .oc-total { font-size: 1.1rem; }
+      .oc-promo { background: #e8f5e9 !important; -webkit-print-color-adjust: exact; }
+      /* Checkbox column for packing */
+      .order-card::before {
+        content: '☐';
+        font-size: 1.4rem;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        order: 99;
+      }
+    }
   </style>
 </head>
 <body>
@@ -270,7 +317,10 @@
       <h1>LIÈGUER — Orders</h1>
       <p id="lastUpdated"></p>
     </div>
-    <button id="refreshBtn">↻ Refresh</button>
+    <div style="display:flex;gap:0.75rem;align-items:center;">
+      <button id="printBtn" onclick="window.print()">🖨 Print Sheet</button>
+      <button id="refreshBtn">↻ Refresh</button>
+    </div>
   </header>
 
   <div class="summary-row" id="summaryRow"></div>
