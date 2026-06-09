@@ -764,6 +764,42 @@ nav {
 
 .order-inner { max-width: 560px; margin: 0 auto; }
 
+/* Ava's story block */
+.ava-story {
+  background: var(--warm-white);
+  border: 1px solid var(--light-rule);
+  border-left: 3px solid var(--caramel);
+  padding: 1.75rem 1.5rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.ava-story-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-bottom: 1rem;
+}
+.ava-story-body {
+  font-size: 0.9rem;
+  color: var(--mid);
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+}
+.ava-story-cta {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--dark);
+  margin: 1.25rem 0 0.5rem;
+  line-height: 1.4;
+}
+.ava-story-sig {
+  font-size: 0.85rem;
+  color: var(--caramel);
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
 .order h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.2rem, 4vw, 3.5rem);
