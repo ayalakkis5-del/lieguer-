@@ -391,97 +391,111 @@ function goBackToOrder() {
   document.getElementById('stepPayment').style.display = 'none';
   document.getElementById('stepOrder').style.display   = '';
   document.getElementById('payment-element').innerHTML = '';
-  document.getElementById('btnPay').textContent = 'Confirm & Pay';
-  document.getElementById('btnPay').disabled = false;
-  stripe = null; elements = null; paymentElement = null; cardReady = false;
+  document.getElementById('btnLoadCard').style.display = '';
+  document.getElementById('btnPay').style.display      = 'none';
+  document.getElementById('btnPay').disabled           = false;
+  document.getElementById('payment-error').textContent = '';
+  stripe = null; elements = null; paymentElement = null;
 }
 
-let cardReady = false;
-
-async function submitPayment() {
-  const btn   = document.getElementById('btnPay');
+// Step A: validate info + create payment intent + mount card field
+async function loadCardField() {
+  const btn   = document.getElementById('btnLoadCard');
   const errEl = document.getElementById('payment-error');
   const name  = document.getElementById('payName').value.trim();
   const email = document.getElementById('payEmail').value.trim();
   const phone = document.getElementById('payPhone').value.trim();
   const promo = document.getElementById('payPromo')?.checked ? 'yes' : 'no';
 
-  if (!cartData.pickup) { errEl.textContent = 'Please select a pickup time.'; return; }
-  if (!name || !email || !phone) { errEl.textContent = 'Please fill in your name, email, and phone number.'; return; }
+  if (!cartData.pickup) { errEl.textContent = 'Please select a pickup time above.'; return; }
+  if (!name)  { errEl.textContent = 'Please enter your name.'; return; }
+  if (!email) { errEl.textContent = 'Please enter your email.'; return; }
+  if (!phone) { errEl.textContent = 'Please enter your phone number.'; return; }
 
   errEl.textContent = '';
+  btn.textContent   = 'Loading…';
+  btn.disabled      = true;
 
-  // Phase 1: create payment intent + show card field
-  if (!cardReady) {
-    btn.textContent = 'Loading card field…';
-    btn.disabled = true;
+  try {
+    const piRes = await fetch('/api/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: cartData.total,
+        items: cartData.items,
+        pickupTime: cartData.pickup,
+        customerName: name,
+        customerEmail: email,
+        customerPhone: phone,
+        promoConsent: promo,
+      }),
+    });
+    const { clientSecret, error: piError } = await piRes.json();
+    if (piError) { errEl.textContent = piError; btn.textContent = 'Enter Card Details'; btn.disabled = false; return; }
 
-    try {
-      const piRes = await fetch('/api/create-payment-intent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: cartData.total,
-          items: cartData.items,
-          pickupTime: cartData.pickup,
-          customerName: name,
-          customerEmail: email,
-          customerPhone: phone,
-          promoConsent: promo,
-        }),
-      });
-      const { clientSecret, error: piError } = await piRes.json();
-      if (piError) { errEl.textContent = piError; btn.textContent = 'Confirm & Pay'; btn.disabled = false; return; }
+    if (!stripe) stripe = Stripe(STRIPE_PK);
+    elements = stripe.elements({ clientSecret, appearance: {
+      theme: 'flat',
+      variables: {
+        colorPrimary: '#c8852a',
+        colorBackground: '#faf7f2',
+        colorText: '#1a1208',
+        colorDanger: '#c0392b',
+        fontFamily: 'Jost, sans-serif',
+        borderRadius: '0px',
+      }
+    }});
+    paymentElement = elements.create('payment', { fields: { billingDetails: 'never' } });
+    paymentElement.mount('#payment-element');
 
-      elements = stripe.elements({ clientSecret, appearance: {
-        theme: 'flat',
-        variables: {
-          colorPrimary: '#c8852a',
-          colorBackground: '#faf7f2',
-          colorText: '#1a1208',
-          colorDanger: '#c0392b',
-          fontFamily: 'Jost, sans-serif',
-          borderRadius: '0px',
-        }
-      }});
-      paymentElement = elements.create('payment', { fields: { billingDetails: 'never' } });
-      paymentElement.mount('#payment-element');
-      cardReady = true;
-      btn.textContent = 'Pay Now →';
-      btn.disabled = false;
-      return; // wait for user to enter card, then click again
-    } catch (e) {
-      errEl.textContent = 'Could not connect. Please try again.';
-      btn.textContent = 'Confirm & Pay';
-      btn.disabled = false;
-      return;
-    }
+    // Swap buttons
+    btn.style.display = 'none';
+    document.getElementById('btnPay').style.display = '';
+  } catch (e) {
+    errEl.textContent = 'Could not connect. Please try again.';
+    btn.textContent   = 'Enter Card Details';
+    btn.disabled      = false;
   }
+}
 
-  // Phase 2: confirm payment
+// Step B: charge the card
+async function submitPayment() {
+  const btn   = document.getElementById('btnPay');
+  const errEl = document.getElementById('payment-error');
+  const name  = document.getElementById('payName').value.trim();
+  const email = document.getElementById('payEmail').value.trim();
+  const phone = document.getElementById('payPhone').value.trim();
+
   btn.textContent = 'Processing…';
-  btn.disabled = true;
+  btn.disabled    = true;
+  errEl.textContent = '';
 
-  const { error } = await stripe.confirmPayment({
-    elements,
-    redirect: 'if_required',
-    confirmParams: {
-      payment_method_data: { billing_details: { name, email, phone } },
-      receipt_email: email,
-    },
-  });
+  try {
+    const { error } = await stripe.confirmPayment({
+      elements,
+      redirect: 'if_required',
+      confirmParams: {
+        payment_method_data: { billing_details: { name, email, phone } },
+        receipt_email: email,
+      },
+    });
 
-  if (error) {
-    errEl.textContent = error.message;
-    btn.textContent = 'Confirm & Pay';
-    btn.disabled = false;
-  } else {
-    document.getElementById('stepPayment').style.display = 'none';
-    document.getElementById('stepSuccess').style.display = '';
-    const pickupDay = cartData.pickup.startsWith('Sunday') ? 'Sunday' : 'Saturday';
-    document.getElementById('stepSuccess').querySelector('h2').innerHTML = `See you<br /><em>${pickupDay}.</em>`;
-    document.getElementById('successDetails').textContent =
-      `Your order is confirmed for ${cartData.pickup}. A receipt is on its way to ${email}. We'll text ${phone} with your pickup reminder.`;
+    if (error) {
+      errEl.textContent = error.message;
+      btn.textContent   = 'Pay Now →';
+      btn.disabled      = false;
+    } else {
+      document.getElementById('stepPayment').style.display = 'none';
+      document.getElementById('stepSuccess').style.display = '';
+      const pickupDay = cartData.pickup.startsWith('Sunday') ? 'Sunday' : 'Saturday';
+      document.getElementById('stepSuccess').querySelector('h2').innerHTML = `See you<br /><em>${pickupDay}.</em>`;
+      document.getElementById('successDetails').textContent =
+        `Your order is confirmed for ${cartData.pickup}. A confirmation email is on its way to ${email}.`;
+    }
+  } catch (e) {
+    errEl.textContent = 'Something went wrong. Please try again.';
+    btn.textContent   = 'Pay Now →';
+    btn.disabled      = false;
   }
 }
 

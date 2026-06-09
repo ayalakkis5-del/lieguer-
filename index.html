@@ -452,15 +452,16 @@
           <div class="checkout-fields">
             <input type="text" id="payName" placeholder="Your name" required />
             <input type="email" id="payEmail" placeholder="Email for receipt" required />
-            <input type="tel" id="payPhone" placeholder="Phone number — for pickup reminder" required />
+            <input type="tel" id="payPhone" placeholder="Phone number — for any questions about your order" required />
             <label class="promo-opt">
-              <input type="checkbox" id="payPromo" checked />
-              <span>Text me when ordering opens &amp; new flavors drop 🧇</span>
+              <input type="checkbox" id="payPromo" />
+              <span>Email me when the next drop opens &amp; new flavors arrive 🧇</span>
             </label>
           </div>
           <div id="payment-element" class="stripe-element" style="min-height:0;"></div>
           <p id="payment-error" class="payment-error"></p>
-          <button class="btn-primary btn-order-live" id="btnPay" onclick="submitPayment()" disabled>Confirm &amp; Pay</button>
+          <button class="btn-primary btn-order-live" id="btnLoadCard" onclick="loadCardField()">Enter Card Details →</button>
+          <button class="btn-primary btn-order-live" id="btnPay" onclick="submitPayment()" style="display:none;">Pay Now →</button>
           <button class="btn-back" onclick="goBackToOrder()">← Edit order</button>
         </div>
 
