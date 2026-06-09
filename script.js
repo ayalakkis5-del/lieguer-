@@ -317,7 +317,7 @@ function checkDipRow() {
 function renderEspressoCustomizations(item) {
   const name = item.dataset.name;
   const qty  = parseInt(item.querySelector('.qty-num').textContent);
-  const wrap = document.querySelector(`.espresso-cust-wrap[data-espresso-for="${CSS.escape(name)}"]`);
+  const wrap = document.querySelector(`.espresso-cust-wrap[data-espresso-for="${name}"]`);
   if (!wrap) return;
 
   if (qty === 0) {
@@ -414,7 +414,7 @@ function collectEspressoPrefs() {
     const qty  = parseInt(item.querySelector('.qty-num').textContent);
     if (qty === 0) return;
     const name = item.dataset.name;
-    const wrap = document.querySelector(`.espresso-cust-wrap[data-espresso-for="${CSS.escape(name)}"]`);
+    const wrap = document.querySelector(`.espresso-cust-wrap[data-espresso-for="${name}"]`);
     if (!wrap) return;
     wrap.querySelectorAll('.espresso-unit-row').forEach((row, i) => {
       const temp     = row.querySelector('.esp-temp').value;
