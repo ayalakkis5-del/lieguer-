@@ -324,7 +324,12 @@ async function loadSlots() {
       input.name = 'pickup';
       input.value = slot;
       if (!available) input.disabled = true;
-      input.addEventListener('change', updateCart);
+      input.addEventListener('change', () => {
+        cartData.pickup = slot;
+        // Enable pay button if a slot is now selected
+        const btnPay = document.getElementById('btnPay');
+        if (btnPay) btnPay.disabled = false;
+      });
 
       const span = document.createElement('span');
       span.textContent = available ? timeLabel : `${timeLabel} Full`;
@@ -339,7 +344,7 @@ async function loadSlots() {
   }
 }
 
-loadSlots();
+// Slots now load on step 2 — called in goToPayment()
 
 function updateCart() {
   let total = 0;
@@ -353,17 +358,20 @@ function updateCart() {
       items.push({ name, qty, price });
     }
   });
-  const pickup = document.querySelector('input[name="pickup"]:checked')?.value || '';
-  cartData = { items, total, pickup };
+  cartData = { items, total, pickup: cartData.pickup || '' };
 
   document.getElementById('cartTotal').textContent = `$${total}`;
   const btn = document.getElementById('btnToPayment');
-  btn.disabled = total === 0 || !pickup;
+  btn.disabled = total === 0;
 }
 
 async function goToPayment() {
   document.getElementById('stepOrder').style.display   = 'none';
   document.getElementById('stepPayment').style.display = '';
+  window.scrollTo({ top: document.getElementById('order').offsetTop - 80, behavior: 'smooth' });
+
+  // Load slots fresh now that we're on step 2
+  loadSlots();
 
   // Show order summary
   const dipChoice    = document.querySelector('input[name="waffleDip"]:checked')?.value || '';

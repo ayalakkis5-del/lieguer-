@@ -424,16 +424,6 @@
             </div>
           </div>
 
-          <div class="pickup-select">
-            <p class="label" style="margin-bottom:0.25rem;">Pickup Time</p>
-            <p class="cart-section-note" style="margin-bottom:0.75rem;">9am–1pm · 15-min windows · 4 orders per slot</p>
-            <p class="pickup-day-label">Saturday</p>
-            <div class="pickup-slots" id="slotsSat"></div>
-            <p class="pickup-day-label" style="margin-top:1rem;">Sunday</p>
-            <div class="pickup-slots" id="slotsSun"></div>
-            <p id="slotsLoading" class="order-fine" style="text-align:center;margin-top:0.5rem;">Loading availability…</p>
-          </div>
-
           <div class="cart-total">
             <span>Total</span>
             <span id="cartTotal">$0</span>
@@ -448,6 +438,17 @@
           <p class="label">Secure Checkout</p>
           <h2>Almost<br /><em>there.</em></h2>
           <div class="checkout-summary" id="checkoutSummary"></div>
+
+          <div class="pickup-select">
+            <p class="pickup-step-label">When are you picking up?</p>
+            <p class="cart-section-note" style="margin-bottom:1rem;">9am–1pm · 15-min windows · Following Saturday &amp; Sunday</p>
+            <p class="pickup-day-label">Saturday</p>
+            <div class="pickup-slots" id="slotsSat"></div>
+            <p class="pickup-day-label" style="margin-top:1.25rem;">Sunday</p>
+            <div class="pickup-slots" id="slotsSun"></div>
+            <p id="slotsLoading" class="order-fine" style="text-align:center;margin-top:0.5rem;">Loading availability…</p>
+          </div>
+
           <div class="checkout-fields">
             <input type="text" id="payName" placeholder="Your name" required />
             <input type="email" id="payEmail" placeholder="Email for receipt" required />
@@ -459,7 +460,7 @@
           </div>
           <div id="payment-element" class="stripe-element"></div>
           <p id="payment-error" class="payment-error"></p>
-          <button class="btn-primary btn-order-live" id="btnPay" onclick="submitPayment()">Confirm &amp; Pay</button>
+          <button class="btn-primary btn-order-live" id="btnPay" onclick="submitPayment()" disabled>Confirm &amp; Pay</button>
           <button class="btn-back" onclick="goBackToOrder()">← Edit order</button>
         </div>
 
@@ -531,21 +532,31 @@
       </div>
       <div class="catering-form-wrap">
         <form class="catering-form" id="cateringForm" onsubmit="submitInquiry(event)">
-          <div class="form-row">
+          <div class="catering-field-group">
             <input type="text"  name="name"       placeholder="Your name"       required />
+          </div>
+          <div class="catering-field-group">
             <input type="email" name="email"       placeholder="Email address"   required />
           </div>
-          <div class="form-row">
-            <input type="tel"   name="phone"       placeholder="Phone (optional)" />
-            <input type="text"  name="eventType"   placeholder="Type of event" />
+          <div class="catering-field-group">
+            <input type="tel"   name="phone"       placeholder="Phone number (optional)" />
           </div>
-          <div class="form-row">
-            <input type="text"  name="date"        placeholder="Approximate date" />
-            <input type="text"  name="guestCount"  placeholder="Guest count" />
+          <div class="catering-field-group">
+            <input type="text"  name="eventType"   placeholder="Type of event  (e.g. birthday, open house, corporate)" />
           </div>
-          <textarea name="details" placeholder="Tell us what you're looking for — quantities, theme, any details..." rows="4"></textarea>
-          <button type="submit" class="btn-primary">Send Inquiry</button>
-          <p class="order-fine">hellolieguer@gmail.com · We respond within 24 hours</p>
+          <div class="catering-field-row">
+            <div class="catering-field-group">
+              <input type="text"  name="date"        placeholder="Approximate date" />
+            </div>
+            <div class="catering-field-group">
+              <input type="text"  name="guestCount"  placeholder="Guest count" />
+            </div>
+          </div>
+          <div class="catering-field-group">
+            <textarea name="details" placeholder="Tell us what you're looking for — quantities, theme, any details..." rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn-primary catering-submit">Send Inquiry</button>
+          <p class="order-fine" style="margin-top:1rem;">hellolieguer@gmail.com · We respond within 24 hours</p>
         </form>
         <div id="cateringSuccess" style="display:none; text-align:center; padding:3rem 0;">
           <p style="font-size:2rem;margin-bottom:1rem;">🧇</p>
