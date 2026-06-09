@@ -139,6 +139,15 @@ module.exports = async (req, res) => {
           </td>
         </tr>
 
+        <!-- Reheat instructions -->
+        <tr>
+          <td style="padding:24px 40px;background:#faf7f2;border-top:1px solid #ede8df;border-bottom:1px solid #ede8df;">
+            <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#c8852a;text-align:center;">How to Enjoy</p>
+            <p style="margin:0 0 10px;font-size:14px;color:#1a1208;line-height:1.7;text-align:center;">Your waffles will be at room temperature when you pick them up — this is intentional. Room temp preserves the crunch.</p>
+            <p style="margin:0;font-size:14px;color:#1a1208;line-height:1.7;text-align:center;">Pop them in a <strong>toaster</strong> or a <strong>hot oven for a few minutes</strong> before serving — the pearl sugar will wake right back up, the edges will caramelize again, and they'll taste like they just came off the iron. ✨</p>
+          </td>
+        </tr>
+
         <!-- Fine print -->
         <tr>
           <td style="padding:20px 40px 28px;">
