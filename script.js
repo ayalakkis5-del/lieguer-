@@ -231,13 +231,20 @@ document.querySelectorAll('.cart-item').forEach(item => {
 
   plusBtn.addEventListener('click', () => {
     qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
+    checkDipRow();
     updateCart();
   });
   minusBtn.addEventListener('click', () => {
     const v = parseInt(qtyEl.textContent);
-    if (v > 0) { qtyEl.textContent = v - 1; updateCart(); }
+    if (v > 0) { qtyEl.textContent = v - 1; checkDipRow(); updateCart(); }
   });
 });
+
+function checkDipRow() {
+  const boxQty = parseInt(document.querySelector('#boxItem .qty-num').textContent);
+  const dipRow = document.getElementById('waffleDipRow');
+  if (dipRow) dipRow.style.display = boxQty > 0 ? '' : 'none';
+}
 
 document.querySelectorAll('input[name="pickup"]').forEach(r => {
   r.addEventListener('change', updateCart);
@@ -268,9 +275,11 @@ async function goToPayment() {
   document.getElementById('stepPayment').style.display = '';
 
   // Show order summary
-  const summary = cartData.items.map(i => `${i.qty}× ${i.name} — $${i.qty * i.price}`).join('<br>');
+  const dipChoice = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
+  const dipNote = dipChoice && cartData.items.find(i => i.name === 'The LIÈGUER Box') ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle preference: ${dipChoice}</em>` : '';
+  const summary = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
   document.getElementById('checkoutSummary').innerHTML =
-    `${summary}<br><strong style="font-size:0.9rem;color:var(--dark)">Pickup: ${cartData.pickup}</strong><br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total}</strong>`;
+    `${summary}${dipNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Pickup: ${cartData.pickup}</strong><br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
 
   // Init Stripe
   if (!stripe) stripe = Stripe(STRIPE_PK);

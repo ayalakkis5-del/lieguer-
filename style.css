@@ -826,6 +826,71 @@ nav {
   text-align: center;
 }
 
+/* Cart section labels */
+.cart-section-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  text-align: center;
+  margin: 1.75rem 0 0.6rem;
+}
+.cart-section-note {
+  font-size: 0.72rem;
+  color: rgba(74,53,32,0.55);
+  text-align: center;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+/* Item description */
+.cart-item-desc {
+  font-size: 0.72rem;
+  color: rgba(74,53,32,0.5);
+  line-height: 1.5;
+  margin-top: 0.2rem;
+  max-width: 36ch;
+}
+
+/* Mix & match dip row */
+.cart-addon-row {
+  background: rgba(200,133,42,0.04);
+  border: 1px solid rgba(200,133,42,0.15);
+  border-top: none;
+  padding: 0.85rem 1.25rem;
+}
+.addon-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-bottom: 0.6rem;
+}
+.dip-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.dip-opt { cursor: pointer; }
+.dip-opt input { display: none; }
+.dip-opt span {
+  display: block;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--light-rule);
+  font-size: 0.72rem;
+  color: var(--mid);
+  background: var(--warm-white);
+  transition: all 0.15s;
+}
+.dip-opt input:checked + span {
+  background: var(--dark);
+  color: var(--cream);
+  border-color: var(--dark);
+}
+.dip-opt:hover span { border-color: var(--caramel); }
+
 /* Pickup slots */
 .pickup-select { margin-bottom: 2rem; }
 .pickup-slots {

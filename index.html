@@ -244,10 +244,32 @@
           <h2>Build your<br /><em>order.</em></h2>
           <p class="order-sub">Pickup is this Saturday &amp; Sunday. Select your items below.</p>
 
+          <!-- TEST ITEM -->
+          <p class="cart-section-label">— Test Checkout —</p>
           <div class="cart-items">
-            <div class="cart-item" data-name="The LIÈGUER Box (One Dozen)" data-price="50">
+            <div class="cart-item" data-name="Test Item" data-price="0.01">
               <div class="cart-item-info">
-                <p class="cart-item-name">The LIÈGEUR Box <span class="cart-item-sub">One Dozen</span></p>
+                <p class="cart-item-name">Test Item <span class="cart-item-special">Dev Only</span></p>
+                <p class="cart-item-desc">For checkout testing only. Will be removed.</p>
+                <p class="cart-item-price">$0.01</p>
+              </div>
+              <div class="cart-qty">
+                <button class="qty-btn" data-action="minus">−</button>
+                <span class="qty-num">0</span>
+                <button class="qty-btn" data-action="plus">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- THE WAFFLES -->
+          <p class="cart-section-label">— The Waffles —</p>
+          <p class="cart-section-note">All dozens include maple syrup. Sauces are available as add-ons below.</p>
+          <div class="cart-items">
+
+            <div class="cart-item cart-item--expandable" data-name="The LIÈGUER Box" data-price="50" id="boxItem">
+              <div class="cart-item-info">
+                <p class="cart-item-name">The LIÈGUER Box <span class="cart-item-sub">One Dozen</span></p>
+                <p class="cart-item-desc">12 signature 72-hour cold-fermented Liège waffles. Caramelized Belgian pearl sugar crust, brown butter throughout. Packaged in our matte white box, tied with burgundy ribbon.</p>
                 <p class="cart-item-price">$50</p>
               </div>
               <div class="cart-qty">
@@ -256,9 +278,21 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
+
+            <!-- Mix & match — shows when box qty > 0 -->
+            <div class="cart-addon-row" id="waffleDipRow" style="display:none;">
+              <p class="addon-label">Customize your dozen:</p>
+              <div class="dip-options">
+                <label class="dip-opt"><input type="radio" name="waffleDip" value="All Plain" checked /><span>All Plain</span></label>
+                <label class="dip-opt"><input type="radio" name="waffleDip" value="All Chocolate-Dipped" /><span>All Chocolate-Dipped</span></label>
+                <label class="dip-opt"><input type="radio" name="waffleDip" value="Half Plain, Half Chocolate-Dipped" /><span>Half &amp; Half</span></label>
+              </div>
+            </div>
+
             <div class="cart-item" data-name="The Classic Ritual" data-price="50">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Classic Ritual</p>
+                <p class="cart-item-desc">The LIÈGUER Box (12 waffles) + the complete three-sauce flight. The benchmark experience.</p>
                 <p class="cart-item-price">$50</p>
               </div>
               <div class="cart-qty">
@@ -267,9 +301,11 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
+
             <div class="cart-item" data-name="The Complete Saturday Breakfast" data-price="66">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Complete Saturday Breakfast</p>
+                <p class="cart-item-desc">The LIÈGUER Box + three-sauce flight + any two Espresso Studio lattes. The full weekend luxury.</p>
                 <p class="cart-item-price">$66</p>
               </div>
               <div class="cart-qty">
@@ -278,9 +314,56 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
+          </div>
+
+          <!-- SAUCE ADD-ONS -->
+          <p class="cart-section-label">— Signature Sauces <span style="font-weight:300;letter-spacing:0.05em;text-transform:none;">Add-ons · 4oz each</span> —</p>
+          <div class="cart-items">
+            <div class="cart-item" data-name="Wild Strawberry Coulis (4oz)" data-price="5">
+              <div class="cart-item-info">
+                <p class="cart-item-name">Wild Strawberry Coulis</p>
+                <p class="cart-item-desc">Bright reduction of wild strawberries with slow-scraped Madagascar vanilla bean.</p>
+                <p class="cart-item-price">$5</p>
+              </div>
+              <div class="cart-qty">
+                <button class="qty-btn" data-action="minus">−</button>
+                <span class="qty-num">0</span>
+                <button class="qty-btn" data-action="plus">+</button>
+              </div>
+            </div>
+            <div class="cart-item" data-name="Dark Chocolate Ganache (4oz)" data-price="5">
+              <div class="cart-item-info">
+                <p class="cart-item-name">Dark Chocolate Ganache</p>
+                <p class="cart-item-desc">70% dark Belgian chocolate emulsified with heavy European cream. Rich and velvety.</p>
+                <p class="cart-item-price">$5</p>
+              </div>
+              <div class="cart-qty">
+                <button class="qty-btn" data-action="minus">−</button>
+                <span class="qty-num">0</span>
+                <button class="qty-btn" data-action="plus">+</button>
+              </div>
+            </div>
+            <div class="cart-item" data-name="Smoked Caramel (4oz)" data-price="5">
+              <div class="cart-item-info">
+                <p class="cart-item-name">Smoked Caramel</p>
+                <p class="cart-item-desc">Amber caramel slow-cooked with sea salt and a hint of hickory smoke. Complex and addictive.</p>
+                <p class="cart-item-price">$5</p>
+              </div>
+              <div class="cart-qty">
+                <button class="qty-btn" data-action="minus">−</button>
+                <span class="qty-num">0</span>
+                <button class="qty-btn" data-action="plus">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ESPRESSO -->
+          <p class="cart-section-label">— Espresso Studio —</p>
+          <div class="cart-items">
             <div class="cart-item" data-name="The Espresso Studio Flight" data-price="24">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Espresso Studio Flight</p>
+                <p class="cart-item-desc">One of each iced latte: Tiramisu, Madagascar Vanilla, and The Fireside. Served in signature clear cans.</p>
                 <p class="cart-item-price">$24</p>
               </div>
               <div class="cart-qty">
@@ -292,6 +375,7 @@
             <div class="cart-item" data-name="Tiramisu Latte" data-price="8">
               <div class="cart-item-info">
                 <p class="cart-item-name">Tiramisu Latte</p>
+                <p class="cart-item-desc">Double espresso, mascarpone cream, Dutch-process cocoa. Iced in our signature clear can.</p>
                 <p class="cart-item-price">$8</p>
               </div>
               <div class="cart-qty">
@@ -303,6 +387,7 @@
             <div class="cart-item" data-name="Madagascar Vanilla Latte" data-price="8">
               <div class="cart-item-info">
                 <p class="cart-item-name">Madagascar Vanilla Latte</p>
+                <p class="cart-item-desc">Bold espresso with slow-simmered Madagascar vanilla bean reduction. Iced in our signature clear can.</p>
                 <p class="cart-item-price">$8</p>
               </div>
               <div class="cart-qty">
@@ -314,6 +399,7 @@
             <div class="cart-item" data-name="The Fireside" data-price="8">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Fireside <span class="cart-item-special">House Special</span></p>
+                <p class="cart-item-desc">Caramelized charred sugar, honeyed graham, melted milk chocolate. Nostalgic and complex.</p>
                 <p class="cart-item-price">$8</p>
               </div>
               <div class="cart-qty">
