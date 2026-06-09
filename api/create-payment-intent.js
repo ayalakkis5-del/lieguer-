@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
     if (customerPhone) {
       const firstName = (customerName || 'friend').split(' ')[0];
       const itemSummary = (items || []).filter(i => !/test item/i.test(i.name)).map(i => `${i.qty}× ${i.name}`).join(', ');
-      const msg = `Hi ${firstName}! 🧇 Your LIÈGUER order is confirmed. ${itemSummary ? itemSummary + '. ' : ''}Pickup: ${pickupTime}. We can't wait to see you — follow along @lieguerwaffles on Instagram!`;
+      const msg = `Hi ${firstName}! 🧇 Your LIÈGUER order is confirmed. ${itemSummary ? itemSummary + '. ' : ''}Pickup: ${pickupTime} at 32951 Haverford Rd, Franklin MI 48025 (14 Mile & Telegraph). We can't wait to see you — @lieguerwaffles`;
       sendSMS(customerPhone, msg).catch(() => {});
     }
 
@@ -113,9 +113,13 @@ module.exports = async (req, res) => {
 
         <!-- Pickup callout -->
         <tr>
-          <td style="padding:24px 40px;background:#faf7f2;text-align:center;border-bottom:1px solid #ede8df;">
+          <td style="padding:28px 40px;background:#faf7f2;text-align:center;border-bottom:1px solid #ede8df;">
             <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#c8852a;">Your Pickup Time</p>
-            <p style="margin:0;font-family:Georgia,serif;font-size:22px;color:#1a1208;font-weight:400;">${pickupTime}</p>
+            <p style="margin:0 0 16px;font-family:Georgia,serif;font-size:22px;color:#1a1208;font-weight:400;">${pickupTime}</p>
+            <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#c8852a;">Pickup Location</p>
+            <p style="margin:0 0 4px;font-size:15px;color:#1a1208;font-weight:400;">32951 Haverford Rd, Franklin MI 48025</p>
+            <p style="margin:0;font-size:12px;color:#aaa;">14 Mile &amp; Telegraph</p>
+            <a href="https://maps.google.com/?q=32951+Haverford+Rd+Franklin+MI+48025" style="display:inline-block;margin-top:12px;font-size:12px;color:#c8852a;text-decoration:none;letter-spacing:0.06em;">Open in Google Maps →</a>
           </td>
         </tr>
 
