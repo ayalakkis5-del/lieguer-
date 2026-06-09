@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact — GridSphere Utility Consulting"
+  description="Tell us what's misaligned. We'll tell you whether we're the right fit, and what we'd do about it."
+>
+  <!-- ══ HERO ══ -->
+  <section class="grid-overlay" style="padding:160px 0 96px;border-bottom:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div class="hero-stagger flex flex-col gap-6" style="max-width:640px;">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">CONTACT</span>
+        <h1 class="font-display" style="font-size:clamp(3rem,6vw,5rem);letter-spacing:-0.03em;font-weight:600;line-height:1.0;">Let's talk.</h1>
+        <p style="color:var(--text-muted);font-size:1.0625rem;line-height:1.75;">
+          Tell us what's misaligned. We'll tell you whether we're the right fit, and what we'd do about it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FORM — CREAM BREAK ══ -->
+  <section style="padding:96px 0;border-top:1px solid var(--border-cream);background:var(--cream);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div class="grid md:grid-cols-[1fr_360px] gap-16 lg:gap-24 items-start">
+
+        <!-- Form -->
+        <!-- Replace YOUR_ACCESS_KEY with your Web3Forms key from web3forms.com -->
+        <form
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          class="reveal-fade-up flex flex-col gap-6"
+          id="contact-form"
+        >
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY" />
+          <input type="hidden" name="subject" value="GridSphere Website Inquiry" />
+          <input type="hidden" name="from_name" value="GridSphere Contact Form" />
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-2">
+              <label for="name" class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">Name</label>
+              <input id="name" name="name" type="text" required placeholder="Jane Smith" class="form-input" style="background:var(--cream-soft);border-color:var(--border-cream);color:var(--text-on-cream);" />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="company" class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">Company</label>
+              <input id="company" name="company" type="text" placeholder="Utility Co." class="form-input" style="background:var(--cream-soft);border-color:var(--border-cream);color:var(--text-on-cream);" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-2">
+              <label for="role" class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">Role</label>
+              <input id="role" name="role" type="text" placeholder="Director, OT Programs" class="form-input" style="background:var(--cream-soft);border-color:var(--border-cream);color:var(--text-on-cream);" />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="email" class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@utility.com" class="form-input" style="background:var(--cream-soft);border-color:var(--border-cream);color:var(--text-on-cream);" />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="message" class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">What are you working on?</label>
+            <textarea id="message" name="message" required rows="6"
+              placeholder="Describe your project, challenge, or question..."
+              class="form-input" style="resize:vertical;min-height:140px;background:var(--cream-soft);border-color:var(--border-cream);color:var(--text-on-cream);"></textarea>
+          </div>
+
+          <div>
+            <button type="submit" class="btn-primary-on-cream" style="border:none;cursor:pointer;">Send →</button>
+          </div>
+          <div id="form-result" role="alert" aria-live="polite" style="display:none;font-size:0.9rem;"></div>
+        </form>
+
+        <!-- Contact info -->
+        <div class="reveal-slide-left flex flex-col gap-0">
+          <div style="border:1px solid var(--border-cream);background:var(--cream-soft);">
+            <div style="padding:1.75rem 2rem;border-bottom:1px solid var(--border-cream);">
+              <span class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;display:block;margin-bottom:0.5rem;">EMAIL</span>
+              <a href="mailto:info@grid-sphere.com" style="color:var(--text-on-cream);font-size:0.9375rem;text-decoration:none;"
+                 onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-on-cream)'">
+                info@grid-sphere.com
+              </a>
+            </div>
+            <div style="padding:1.75rem 2rem;border-bottom:1px solid var(--border-cream);">
+              <span class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;display:block;margin-bottom:0.5rem;">LINKEDIN</span>
+              <a href="https://www.linkedin.com/company/gridsphere" target="_blank" rel="noopener noreferrer"
+                 style="color:var(--text-on-cream);font-size:0.9375rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;"
+                 onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-on-cream)'">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+                linkedin.com/company/gridsphere
+              </a>
+            </div>
+            <div style="padding:1.75rem 2rem;border-bottom:1px solid var(--border-cream);">
+              <span class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;display:block;margin-bottom:0.5rem;">LOCATION</span>
+              <span style="color:var(--text-on-cream);font-size:0.9375rem;">Detroit, MI</span>
+            </div>
+            <div style="padding:1.75rem 2rem;">
+              <pre style="font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:0.7rem;color:var(--text-muted-cream);line-height:1.9;margin:0;white-space:pre-wrap;">GridSphere, LLC
+100% Women-Owned Small Business
+UEI: GVLCTZXYBNE4
+CAGE: 1ALZ6
+SAM.gov registered</pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const resultDiv = document.getElementById('form-result');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      const json = await res.json();
+      if (json.success) {
+        form.reset();
+        if (resultDiv) {
+          resultDiv.style.display = 'block';
+          resultDiv.style.color = 'var(--accent)';
+          resultDiv.textContent = "Message sent. We'll be in touch shortly.";
+        }
+        btn.textContent = 'Sent ✓';
+      } else throw new Error(json.message);
+    } catch {
+      if (resultDiv) {
+        resultDiv.style.display = 'block';
+        resultDiv.style.color = '#b91c1c';
+        resultDiv.textContent = 'Something went wrong. Please email us directly at info@grid-sphere.com';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send →';
+    }
+  });
+</script>

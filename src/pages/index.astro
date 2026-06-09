@@ -1,0 +1,421 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { Database, GitBranch, Workflow, Smartphone, Compass, Users, Lightbulb } from 'lucide-astro';
+---
+
+<Layout
+  title="GridSphere — Utility Consulting and Research, Built on Alignment"
+  description="GridSphere helps electric and gas utilities close the gap between what their systems claim and what their crews actually see — across ADMS, GIS, and field mobility."
+>
+
+<!-- ══ HERO — navy, clean, no watermark ══ -->
+<section class="grid-overlay" style="position:relative;overflow:hidden;padding:160px 0 120px;min-height:90vh;display:flex;align-items:center;background:var(--bg);">
+  <div style="max-width:1200px;width:100%;position:relative;z-index:1;" class="mx-auto px-6">
+    <div class="hero-grid">
+
+      <!-- Eyebrow + burnt-orange hairline (signature use #1 of 3) -->
+      <div class="hero-eyebrow">
+        <span class="font-mono-label" style="color:var(--text-dim);">UTILITY CONSULTING / GRID MODERNIZATION</span>
+        <div style="width:80px;height:1px;background:var(--signature);margin-top:0.75rem;"></div>
+      </div>
+
+      <!-- H1 line 1 -->
+      <div class="hero-h1-line1">
+        <h1 class="font-display" style="font-size:clamp(3.5rem,8vw,7rem);font-weight:700;letter-spacing:-0.02em;line-height:1.0;color:var(--text);margin:0;">
+          The work isn't in the silos.
+        </h1>
+      </div>
+
+      <!-- H1 line 2 — muted second beat, no italic -->
+      <div class="hero-h1-line2">
+        <h1 class="font-display" style="font-size:clamp(3.5rem,8vw,7rem);font-weight:700;letter-spacing:-0.02em;line-height:1.0;color:var(--text-muted);margin:0;">
+          It's in the gaps between them.
+        </h1>
+      </div>
+
+      <!-- Sub -->
+      <div class="hero-sub">
+        <p style="color:var(--text-muted);font-size:1.0625rem;line-height:1.7;margin:0;">
+          GridSphere helps electric and gas utilities close the gap between what their systems claim and what their crews actually see — across ADMS, GIS, and field mobility.
+        </p>
+      </div>
+
+      <!-- CTAs -->
+      <div class="hero-ctas" style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a href="/capabilities" class="btn-primary">See Capabilities →</a>
+        <a href="/contact" class="btn-ghost">Start a Conversation</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 01 / THE GAP WE WORK IN — navy ══ -->
+<section style="padding:120px 0;background:var(--bg);border-top:1px solid var(--border);">
+  <div style="max-width:1200px;" class="mx-auto px-6">
+    <div class="spread-grid mb-20">
+      <div class="spread-label reveal-fade-up">
+        <span class="font-mono-label" style="color:var(--text-dim);">01 / The Gap We Work In</span>
+      </div>
+      <div class="spread-h2-right reveal-slide-left">
+        <h2 class="font-display" style="font-size:clamp(2rem,4.5vw,3.5rem);color:var(--text);">
+          Your ADMS is live. Your model says one thing. Your crews see another.
+        </h2>
+      </div>
+    </div>
+
+    <!-- Staggered cards -->
+    <div class="cards-stagger stagger-children">
+      <div class="cap-card reveal-fade-up card-pos-1" style="background:var(--surface);">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.75rem;">01</span>
+        <h3 class="cap-title font-display mt-4 mb-3" style="font-size:1.2rem;color:var(--text);">Integrated Systems</h3>
+        <p style="color:var(--text-muted);font-size:0.9375rem;line-height:1.7;">Manual promotions. Duplicate entries. Workflows designed for technology that's two upgrades behind. The rework piles up where nobody's measuring it.</p>
+      </div>
+      <div class="cap-card reveal-fade-up card-pos-2" style="background:var(--surface);">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.75rem;">02</span>
+        <h3 class="cap-title font-display mt-4 mb-3" style="font-size:1.2rem;color:var(--text);">Process Design</h3>
+        <p style="color:var(--text-muted);font-size:0.9375rem;line-height:1.7;">Most quality issues don't live inside a single system. They live in the handoffs — the moments where data crosses a boundary and loses meaning.</p>
+      </div>
+      <div class="cap-card reveal-fade-up card-pos-3" style="background:var(--surface);">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.75rem;">03</span>
+        <h3 class="cap-title font-display mt-4 mb-3" style="font-size:1.2rem;color:var(--text);">Cross-System QA</h3>
+        <p style="color:var(--text-muted);font-size:0.9375rem;line-height:1.7;">Testing catches what testing was designed to catch. We find what it wasn't.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02 / RANGE — CREAM BREAK ══ -->
+<section style="padding:120px 0;background:var(--cream);border-top:1px solid var(--border-cream);">
+  <div style="max-width:1200px;" class="mx-auto px-6">
+    <div class="range-grid">
+      <div class="range-label reveal-fade-up">
+        <span class="font-mono-label" style="color:var(--text-muted-cream);">02 / Range</span>
+      </div>
+      <div class="range-h2 reveal-slide-right">
+        <h2 class="font-display" style="font-size:clamp(2rem,4.5vw,3.5rem);color:var(--text-on-cream);">
+          From the field to the boardroom.
+        </h2>
+      </div>
+      <div class="range-p1 reveal-slide-right">
+        <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.75;">
+          We've stood with linemen during major outages. We've configured ADMS platforms in test environments. We've presented operational risk to C-suite leadership — sometimes in the same week, sometimes on the same project.
+        </p>
+      </div>
+      <div class="range-p2 reveal-slide-left">
+        <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.75;">
+          That range is rare. It's also the reason our recommendations actually hold up when they hit the field.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03 / DATA FLOW — navy ══ -->
+<section style="padding:120px 0;background:var(--bg);border-top:1px solid var(--border);">
+  <div style="max-width:1200px" class="mx-auto px-6">
+    <div style="text-align:right;margin-bottom:1.5rem;" class="reveal-slide-left">
+      <span class="font-mono-label" style="color:var(--text-dim);display:block;margin-bottom:1rem;">03 / Data Flow</span>
+      <h2 class="font-display" style="font-size:clamp(2rem,4.5vw,3.5rem);color:var(--text);">Where data goes to die.</h2>
+    </div>
+    <div style="max-width:480px;margin-bottom:5rem;" class="reveal-fade-up">
+      <p style="color:var(--text-muted);font-size:1.0625rem;line-height:1.7;">
+        Most utility modernization programs fail in the seams between systems — not inside any one of them. Here's where we work.
+      </p>
+    </div>
+
+    <!-- Flow diagram desktop -->
+    <div class="reveal-fade-up">
+      <div class="hidden md:flex items-start" style="gap:0;width:100%;">
+        {[
+          { num:'01', slug:'SOURCE',     name:'GIS',            sub:'Asset records, topology, spatial data' },
+          { num:'02', slug:'READINESS',  name:'Network Model',  sub:'Connectivity, phasing, model integrity' },
+          { num:'03', slug:'OPERATIONS', name:'ADMS / OMS',     sub:'Real-time control, switching, outage' },
+          { num:'04', slug:'EXECUTION',  name:'Field Mobility',  sub:'Crew tools, inspections, redlines' },
+          { num:'05', slug:'TRUTH',      name:'Crew Reality',   sub:'What actually happens in the field' },
+        ].map((stage, i, arr) => (
+          <>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+              <span style="font-family:'Outfit Variable','Outfit',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);text-align:center;">{stage.num} / {stage.slug}</span>
+              <div style="border:1px solid var(--border);background:var(--surface);padding:1.25rem 1rem;width:100%;text-align:center;transition:border-color 0.2s ease;"
+                   onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                <p class="font-display" style="font-size:1.1rem;font-weight:600;letter-spacing:-0.01em;margin:0 0 0.4rem;color:var(--text);">{stage.name}</p>
+                <p style="color:var(--text-muted);font-size:0.78rem;line-height:1.5;margin:0;">{stage.sub}</p>
+                <div style="margin-top:0.875rem;font-size:0.7rem;color:var(--signature);font-family:'Outfit Variable',sans-serif;font-weight:700;">+</div>
+              </div>
+            </div>
+            {i < arr.length - 1 && (
+              <div style="width:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding-top:3.25rem;">
+                <div style="width:100%;height:1px;background:var(--border-bright);position:relative;">
+                  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0.7;"></div>
+                </div>
+              </div>
+            )}
+          </>
+        ))}
+      </div>
+      <!-- Mobile vertical -->
+      <div class="flex md:hidden flex-col">
+        {[
+          { num:'01', slug:'SOURCE',     name:'GIS',            sub:'Asset records, topology, spatial data' },
+          { num:'02', slug:'READINESS',  name:'Network Model',  sub:'Connectivity, phasing, model integrity' },
+          { num:'03', slug:'OPERATIONS', name:'ADMS / OMS',     sub:'Real-time control, switching, outage' },
+          { num:'04', slug:'EXECUTION',  name:'Field Mobility',  sub:'Crew tools, inspections, redlines' },
+          { num:'05', slug:'TRUTH',      name:'Crew Reality',   sub:'What actually happens in the field' },
+        ].map((stage, i, arr) => (
+          <>
+            <div style="border:1px solid var(--border);background:var(--surface);padding:1.25rem 1.5rem;">
+              <span style="font-family:'Outfit Variable','Outfit',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);">{stage.num} / {stage.slug}</span>
+              <p class="font-display mt-2 mb-1" style="font-size:1.1rem;font-weight:600;color:var(--text);">{stage.name}</p>
+              <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.5;margin:0;">{stage.sub}</p>
+              <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--signature);font-family:'Outfit Variable',sans-serif;font-weight:700;">+</div>
+            </div>
+            {i < arr.length - 1 && (
+              <div style="display:flex;align-items:center;justify-content:center;height:20px;">
+                <div style="width:1px;height:100%;background:var(--border-bright);"></div>
+              </div>
+            )}
+          </>
+        ))}
+      </div>
+      <p style="font-family:'Outfit Variable','Outfit',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-dim);margin-top:2rem;font-style:italic;">Interactive view — coming soon</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 04 / WHAT WE DO — navy ══ -->
+<section style="padding:120px 0;background:var(--bg);border-top:1px solid var(--border);">
+  <div style="max-width:1200px;" class="mx-auto px-6">
+    <div class="spread-grid mb-16">
+      <div class="spread-label reveal-fade-up">
+        <span class="font-mono-label" style="color:var(--text-dim);">04 / What We Do</span>
+      </div>
+      <div class="spread-h2-right reveal-slide-left">
+        <h2 class="font-display" style="font-size:clamp(2rem,4.5vw,3.5rem);color:var(--text);">
+          Built for utilities that can't afford a misaligned go-live.
+        </h2>
+      </div>
+    </div>
+
+    <!-- 7 capability tiles -->
+    <div class="caps-grid stagger-children">
+      <!-- Feature tile: Innovation Advisory -->
+      <div class="cap-card-dark reveal-scale cap-feature" style="background:var(--surface);border-color:var(--accent);display:flex;flex-direction:column;justify-content:space-between;min-height:280px;">
+        <div>
+          <Lightbulb size={24} color="var(--accent-bright)" aria-hidden="true" />
+          <span style="display:block;margin-top:2rem;font-family:'Outfit Variable','Outfit',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-dim);">Featured</span>
+          <h3 class="cap-title font-display mt-3 mb-4" style="font-size:1.5rem;font-weight:600;color:var(--text);letter-spacing:-0.01em;">Innovation Advisory</h3>
+          <p style="color:var(--text-muted);font-size:0.9375rem;line-height:1.7;">Help utility leaders evaluate emerging technology, frame R&D priorities, and structure pilot programs. Strategic counsel for the work that's ahead of the roadmap, not on it.</p>
+        </div>
+        <a href="/capabilities" style="font-family:'Outfit Variable','Outfit',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--accent-bright);margin-top:1.5rem;text-decoration:none;transition:color 0.2s ease;"
+           onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--accent-bright)'">
+          Learn more →
+        </a>
+      </div>
+
+      <!-- 6 standard tiles -->
+      {[
+        { icon: Database,   title: 'Data Quality & Validation',    body: 'Reconcile inconsistencies across GIS, OMS, and ADMS before they become outages.' },
+        { icon: GitBranch,  title: 'Network Model Readiness',      body: 'Find the topology issues, data gaps, and readiness blockers that surface late.' },
+        { icon: Workflow,   title: 'Integration & Testing',        body: 'Validate interfaces, streamline adapter testing, create transparency across design, build, and field.' },
+        { icon: Smartphone, title: 'Field Workflow Modernization', body: 'Mobile data capture, redlining, inspection workflows — built for crew adoption.' },
+        { icon: Compass,    title: 'Strategic Advisory',           body: 'Translate technical complexity into a path leadership can actually fund and execute.' },
+        { icon: Users,      title: 'Implementation Resourcing',    body: 'Skilled, aligned bench support that integrates with primes, integrators, and internal teams.' },
+      ].map(({ icon: Icon, title, body }) => (
+        <div class="cap-card reveal-scale">
+          <Icon size={18} color="var(--text-dim)" aria-hidden="true" />
+          <h3 class="cap-title font-display mt-4 mb-2" style="font-size:1.05rem;font-weight:500;color:var(--text);">{title}</h3>
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">{body}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="reveal-fade-up mt-10">
+      <a href="/capabilities" class="link-underline" style="font-family:'Outfit Variable','Outfit',sans-serif;font-size:0.875rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-dim);">
+        View full capabilities →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05 / DIFFERENT BY DESIGN — CREAM BREAK ══ -->
+<section style="padding:120px 0;background:var(--cream);border-top:1px solid var(--border-cream);">
+  <div style="max-width:1200px" class="mx-auto px-6">
+    <div class="spread-grid mb-16">
+      <div class="spread-label reveal-fade-up">
+        <span class="font-mono-label" style="color:var(--text-muted-cream);">05 / Different by Design</span>
+      </div>
+      <div class="spread-h2-right reveal-slide-left">
+        <h2 class="font-display" style="font-size:clamp(2rem,4.5vw,3.5rem);color:var(--text-on-cream);">
+          A different kind of second set of eyes.
+        </h2>
+      </div>
+    </div>
+
+    <!-- Staggered stats -->
+    <div class="stats-stagger stagger-children">
+      <div class="stat-card reveal-fade-up stat-pos-1" style="border-color:var(--border-cream);">
+        <div class="font-display" style="font-size:clamp(2.5rem,5vw,4rem);font-weight:700;font-style:italic;color:var(--text-on-cream);letter-spacing:-0.02em;line-height:1.0;margin-bottom:1rem;">
+          Nearly a decade
+        </div>
+        <p style="color:var(--text-muted-cream);font-size:0.9375rem;line-height:1.7;">of supporting electric and gas utilities through digital grid transformation, ADMS, GIS, and field mobility programs.</p>
+      </div>
+      <div class="stat-card reveal-fade-up stat-pos-2" style="border-color:var(--border-cream);">
+        <div class="font-display" style="font-size:clamp(2.5rem,5vw,4rem);font-weight:700;font-style:italic;color:var(--text-on-cream);letter-spacing:-0.02em;line-height:1.0;margin-bottom:1rem;">
+          Field-tested
+        </div>
+        <p style="color:var(--text-muted-cream);font-size:0.9375rem;line-height:1.7;">recommendations that have survived contact with crews, control rooms, and outage events.</p>
+      </div>
+      <div class="stat-card reveal-fade-up stat-pos-3" style="border-color:var(--border-cream);">
+        <div class="font-display" style="font-size:clamp(2.5rem,5vw,4rem);font-weight:700;font-style:italic;color:var(--text-on-cream);letter-spacing:-0.02em;line-height:1.0;margin-bottom:1rem;">
+          Vendor-neutral
+        </div>
+        <p style="color:var(--text-muted-cream);font-size:0.9375rem;line-height:1.7;">We don't sell platforms. We tell you when one isn't working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 06 / PULL QUOTE — navy (signature use #2 of 3: burnt orange) ══ -->
+<section style="padding:100px 0;background:var(--bg);overflow:hidden;">
+  <div style="max-width:1200px" class="mx-auto px-6">
+    <div class="pullquote-grid">
+      <div class="pullquote-text reveal-scale-slow">
+        <p
+          class="font-display"
+          style="font-size:clamp(4rem,12vw,10rem);font-weight:500;letter-spacing:-0.04em;color:var(--signature);line-height:0.95;font-style:italic;margin:0;"
+          aria-label="We protect outcomes."
+        >
+          We protect outcomes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 07 / CTA — navy ══ -->
+<CtaBanner
+  label="07 / NEXT"
+  heading="Let's improve your operational and situational awareness."
+  sub="Tell us what's misaligned. We'll tell you what we'd do about it."
+  cta="Start a Conversation →"
+  href="/contact"
+/>
+
+</Layout>
+
+<style>
+  /* ── Hero grid ── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0 1.5rem;
+  }
+  .hero-eyebrow  { grid-column: 1 / 5;  grid-row: 1; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+  .hero-h1-line1 { grid-column: 1 / 10; grid-row: 2; margin-bottom: 0.25rem; opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards; }
+  .hero-h1-line2 { grid-column: 1 / 10; grid-row: 3; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.5s ease 0.6s forwards; }
+  .hero-sub      { grid-column: 1 / 7;  grid-row: 4; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s ease 0.8s forwards; }
+  .hero-ctas     { grid-column: 1 / 7;  grid-row: 5; opacity: 0; animation: fadeUp 0.7s ease 1.0s forwards; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Spread label + H2-right ── */
+  .spread-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0 1.5rem;
+    align-items: start;
+  }
+  .spread-label    { grid-column: 1 / 3; }
+  .spread-h2-right { grid-column: 4 / 13; }
+
+  /* ── Range section ── */
+  .range-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .range-label { grid-column: 9 / 13; text-align: right; }
+  .range-h2    { grid-column: 1 / 8; margin-top: 1rem; }
+  .range-p1    { grid-column: 1 / 6; margin-top: 2rem; }
+  .range-p2    { grid-column: 8 / 13; margin-top: 5rem; }
+
+  /* ── Staggered cards ── */
+  .cards-stagger {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+  .card-pos-1 { grid-column: 1 / 5; }
+  .card-pos-2 { grid-column: 5 / 9; margin-top: 3rem; }
+  .card-pos-3 { grid-column: 9 / 13; margin-top: 6rem; }
+
+  /* ── Caps grid ── */
+  .caps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .cap-feature { grid-column: span 1; }
+
+  /* ── Staggered stats ── */
+  .stats-stagger {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+  .stat-pos-1 { grid-column: 1 / 5; }
+  .stat-pos-2 { grid-column: 4 / 9; margin-top: 3rem; }
+  .stat-pos-3 { grid-column: 8 / 13; margin-top: 6rem; }
+
+  /* ── Pull quote off-center ── */
+  .pullquote-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+  .pullquote-text { grid-column: 2 / 12; }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .hero-grid,
+    .spread-grid,
+    .range-grid,
+    .cards-stagger,
+    .stats-stagger,
+    .pullquote-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .hero-h1-line1, .hero-h1-line2 { margin-bottom: 0; }
+    .card-pos-2, .card-pos-3,
+    .stat-pos-2, .stat-pos-3,
+    .range-p2 { margin-top: 0; }
+    .range-label { text-align: left; }
+    .caps-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Tablet ── */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero-h1-line1 { grid-column: 1 / 11; }
+    .hero-h1-line2 { grid-column: 1 / 11; }
+    .hero-sub      { grid-column: 1 / 9; }
+    .hero-ctas     { grid-column: 1 / 9; }
+    .spread-h2-right { grid-column: 3 / 13; }
+    .caps-grid { grid-template-columns: repeat(2, 1fr); }
+    .cards-stagger { grid-template-columns: repeat(6, 1fr); }
+    .card-pos-1 { grid-column: 1 / 4; }
+    .card-pos-2 { grid-column: 4 / 7; margin-top: 2rem; }
+    .card-pos-3 { grid-column: 2 / 6; margin-top: 0; }
+    .stats-stagger { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-pos-1 { grid-column: 1 / 2; }
+    .stat-pos-2 { grid-column: 2 / 3; margin-top: 2rem; }
+    .stat-pos-3 { grid-column: 1 / 3; margin-top: 0; }
+  }
+</style>

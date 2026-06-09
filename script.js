@@ -396,6 +396,35 @@ async function submitPayment() {
   }
 }
 
+// ── Catering inquiry form ────────────────────────────────
+async function submitInquiry(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn  = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  const data = Object.fromEntries(new FormData(form));
+
+  try {
+    const res = await fetch('/api/send-inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('cateringSuccess').style.display = '';
+    } else {
+      throw new Error();
+    }
+  } catch {
+    btn.textContent = 'Send Inquiry';
+    btn.disabled = false;
+    alert('Something went wrong — please email hellolieguer@gmail.com directly.');
+  }
+}
+
 // Notify me form
 function handleSubmit(e) {
   e.preventDefault();

@@ -1136,6 +1136,92 @@ nav {
   letter-spacing: 0.05em;
 }
 
+/* ─── CATERING ───────────────────────────────────────────── */
+.catering {
+  background: var(--cream);
+  border-top: 1px solid var(--light-rule);
+  padding: 7rem 6rem;
+}
+
+.catering-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.catering-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+}
+.catering-text h2 em { font-style: italic; color: var(--brown-butter); }
+
+.catering-text p {
+  font-size: 0.9rem;
+  color: var(--mid);
+  line-height: 1.8;
+  max-width: 42ch;
+  margin-bottom: 1.5rem;
+}
+
+.catering-uses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.catering-uses span {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brown-butter);
+  border: 1px solid rgba(122,79,30,0.25);
+  padding: 0.35em 0.85em;
+}
+
+.catering-reply {
+  font-size: 0.75rem !important;
+  color: rgba(74,53,32,0.5) !important;
+  font-style: italic;
+}
+
+.catering-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.catering-form input,
+.catering-form textarea {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  background: var(--warm-white);
+  border: 1px solid var(--light-rule);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+.catering-form input::placeholder,
+.catering-form textarea::placeholder { color: rgba(74,53,32,0.4); }
+.catering-form input:focus,
+.catering-form textarea:focus { border-color: var(--caramel); }
+.catering-form .btn-primary { margin-top: 0.5rem; width: 100%; }
+
+@media (max-width: 900px) {
+  .catering { padding: 4rem 2rem; }
+  .catering-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+
 /* ─── FOOTER ─────────────────────────────────────────────── */
 footer {
   background: var(--dark);

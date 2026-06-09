@@ -1,0 +1,271 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+---
+
+<Layout
+  title="Capabilities — GridSphere Utility Consulting"
+  description="Specialized ADMS, GIS, and field mobility consulting for utilities modernizing their operational technology stack — built around the systems and handoffs that actually break."
+>
+  <!-- ══ HERO ══ -->
+  <section class="grid-overlay" style="padding:160px 0 96px;border-bottom:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div class="hero-stagger flex flex-col gap-6" style="max-width:700px;">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">CAPABILITIES</span>
+        <h1 class="font-display" style="font-size:clamp(3rem,6vw,5rem);letter-spacing:-0.03em;font-weight:600;line-height:1.0;">Capabilities</h1>
+        <p style="color:var(--text-muted);font-size:1.0625rem;line-height:1.75;">
+          Specialized support for utilities modernizing their operational technology stack — built around the systems and handoffs that actually break.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 01 DATA QUALITY — navy ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/7;" class="reveal-slide-right">
+          <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">01 / DATA QUALITY &amp; VALIDATION</span>
+          <h2 class="font-display mt-5" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;font-weight:500;line-height:1.15;color:var(--text);">
+            The systems disagree. Our work is making them agree — without breaking what already works.
+          </h2>
+        </div>
+        <div style="grid-column:7/13;" class="reveal-slide-left">
+          <p style="font-size:1.0625rem;line-height:1.75;margin-bottom:2rem;color:var(--text-muted);">We build QA/QC processes that reconcile inconsistencies across GIS, OMS, and ADMS, surface root causes (not just symptoms), and reduce the rework cycles that quietly consume program budgets.</p>
+          <div>
+            <p class="font-mono-label mb-4" style="font-size:0.65rem;color:var(--text-dim);">Typical engagements</p>
+            <ul class="flex flex-col gap-3 list-none m-0 p-0">
+              {['Pre-go-live data audits','Cross-system reconciliation playbooks','Sustained QA frameworks for ongoing operations'].map(e => (
+                <li class="flex items-start gap-3">
+                  <span style="flex-shrink:0;margin-top:0.15em;color:var(--border-bright);">—</span>
+                  <span style="font-size:0.9375rem;line-height:1.65;color:var(--text-muted);">{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 02 NETWORK MODEL — surface ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--surface);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/7;" class="reveal-slide-right">
+          <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">02 / NETWORK MODEL READINESS</span>
+          <h2 class="font-display mt-5" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;font-weight:500;line-height:1.15;color:var(--text);">
+            Your GIS and ADMS need to agree before go-live — not after.
+          </h2>
+        </div>
+        <div style="grid-column:7/13;" class="reveal-slide-left">
+          <p style="font-size:1.0625rem;line-height:1.75;margin-bottom:2rem;color:var(--text-muted);">We identify the data gaps, topology issues, and connectivity errors that surface late, cost the most, and put crew safety and outage response at risk. Then we build the readiness framework to keep them from coming back.</p>
+          <div>
+            <p class="font-mono-label mb-4" style="font-size:0.65rem;color:var(--text-dim);">Typical engagements</p>
+            <ul class="flex flex-col gap-3 list-none m-0 p-0">
+              {['Network model validation','Topology and connectivity audits','Go-live readiness assessments'].map(e => (
+                <li class="flex items-start gap-3">
+                  <span style="flex-shrink:0;margin-top:0.15em;color:var(--border-bright);">—</span>
+                  <span style="font-size:0.9375rem;line-height:1.65;color:var(--text-muted);">{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 INTEGRATION — navy ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/7;" class="reveal-slide-right">
+          <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">03 / INTEGRATION &amp; TESTING SUPPORT</span>
+          <h2 class="font-display mt-5" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;font-weight:500;line-height:1.15;color:var(--text);">
+            Systems that don't talk to each other create failures nobody tracks until something breaks in the field.
+          </h2>
+        </div>
+        <div style="grid-column:7/13;" class="reveal-slide-left">
+          <p style="font-size:1.0625rem;line-height:1.75;margin-bottom:2rem;color:var(--text-muted);">We validate interfaces, streamline adapter testing, and create transparency across design, implementation, and operational use — so the seams hold under load.</p>
+          <div>
+            <p class="font-mono-label mb-4" style="font-size:0.65rem;color:var(--text-dim);">Typical engagements</p>
+            <ul class="flex flex-col gap-3 list-none m-0 p-0">
+              {['Interface validation across ADMS / GIS / OMS / mobile','Adapter and middleware test design','End-to-end scenario testing'].map(e => (
+                <li class="flex items-start gap-3">
+                  <span style="flex-shrink:0;margin-top:0.15em;color:var(--border-bright);">—</span>
+                  <span style="font-size:0.9375rem;line-height:1.65;color:var(--text-muted);">{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 04 FIELD WORKFLOW — surface ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--surface);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/7;" class="reveal-slide-right">
+          <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">04 / FIELD WORKFLOW MODERNIZATION</span>
+          <h2 class="font-display mt-5" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;font-weight:500;line-height:1.15;color:var(--text);">
+            The field-to-office handoff is where data goes to die.
+          </h2>
+        </div>
+        <div style="grid-column:7/13;" class="reveal-slide-left">
+          <p style="font-size:1.0625rem;line-height:1.75;margin-bottom:2rem;color:var(--text-muted);">We help utilities design mobile, inspection, and redlining workflows that crews actually adopt — because they were built around how the work happens, not how the org chart imagines it.</p>
+          <div>
+            <p class="font-mono-label mb-4" style="font-size:0.65rem;color:var(--text-dim);">Typical engagements</p>
+            <ul class="flex flex-col gap-3 list-none m-0 p-0">
+              {['Field mobility platform configuration and rollout','Inspection workflow design','Redlining and as-built capture programs'].map(e => (
+                <li class="flex items-start gap-3">
+                  <span style="flex-shrink:0;margin-top:0.15em;color:var(--border-bright);">—</span>
+                  <span style="font-size:0.9375rem;line-height:1.65;color:var(--text-muted);">{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 05 STRATEGIC ADVISORY — navy ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/7;" class="reveal-slide-right">
+          <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">05 / STRATEGIC ADVISORY</span>
+          <h2 class="font-display mt-5" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;font-weight:500;line-height:1.15;color:var(--text);">
+            Most utilities have a technology vision. Few have a path that survives contact with budget cycles, vendor timelines, and operational reality.
+          </h2>
+        </div>
+        <div style="grid-column:7/13;" class="reveal-slide-left">
+          <p style="font-size:1.0625rem;line-height:1.75;margin-bottom:2rem;color:var(--text-muted);">We translate technical complexity into strategy that's actually executable — and we'll tell you when a roadmap doesn't add up.</p>
+          <div>
+            <p class="font-mono-label mb-4" style="font-size:0.65rem;color:var(--text-dim);">Typical engagements</p>
+            <ul class="flex flex-col gap-3 list-none m-0 p-0">
+              {['OT modernization roadmap development','Vendor and platform decision support','Program risk assessments'].map(e => (
+                <li class="flex items-start gap-3">
+                  <span style="flex-shrink:0;margin-top:0.15em;color:var(--border-bright);">—</span>
+                  <span style="font-size:0.9375rem;line-height:1.65;color:var(--text-muted);">{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 06 IMPLEMENTATION — surface ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--surface);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/7;" class="reveal-slide-right">
+          <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">06 / IMPLEMENTATION RESOURCING</span>
+          <h2 class="font-display mt-5" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;font-weight:500;line-height:1.15;color:var(--text);">
+            When the program needs more hands — but only the right hands.
+          </h2>
+        </div>
+        <div style="grid-column:7/13;" class="reveal-slide-left">
+          <p style="font-size:1.0625rem;line-height:1.75;margin-bottom:2rem;color:var(--text-muted);">GridSphere provides skilled, aligned implementation support that integrates cleanly with primes, system integrators, and internal utility teams. We collaborate inside your delivery model, not around it.</p>
+          <div>
+            <p class="font-mono-label mb-4" style="font-size:0.65rem;color:var(--text-dim);">Typical engagements</p>
+            <ul class="flex flex-col gap-3 list-none m-0 p-0">
+              {['Embedded program support','Prime and integrator collaboration','Technical staffing augmentation'].map(e => (
+                <li class="flex items-start gap-3">
+                  <span style="flex-shrink:0;margin-top:0.15em;color:var(--border-bright);">—</span>
+                  <span style="font-size:0.9375rem;line-height:1.65;color:var(--text-muted);">{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 07 INNOVATION ADVISORY — CREAM BREAK ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border-cream);background:var(--cream);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/7;" class="reveal-slide-right">
+          <span class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">07 / INNOVATION ADVISORY</span>
+          <h2 class="font-display mt-5" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;font-weight:500;line-height:1.15;color:var(--text-on-cream);">
+            Strategic counsel for the work that's ahead of the roadmap, not on it.
+          </h2>
+        </div>
+        <div style="grid-column:7/13;" class="reveal-slide-left">
+          <p style="font-size:1.0625rem;line-height:1.75;margin-bottom:2rem;color:var(--text-muted-cream);">Help utility leaders evaluate emerging technology, frame R&D priorities, and structure pilot programs. We help operators identify what's worth piloting, structure partnerships that protect against vendor lock-in, and translate emerging tech into a path leadership can actually fund.</p>
+          <div>
+            <p class="font-mono-label mb-4" style="font-size:0.65rem;color:var(--text-muted-cream);">Typical engagements</p>
+            <ul class="flex flex-col gap-3 list-none m-0 p-0">
+              {['Emerging technology landscape assessments','Pilot program design and partner selection','R&D roadmap development and validation','Sensor and operational technology strategy'].map(e => (
+                <li class="flex items-start gap-3">
+                  <span style="flex-shrink:0;margin-top:0.15em;color:var(--text-muted-cream);">—</span>
+                  <span style="font-size:0.9375rem;line-height:1.65;color:var(--text-muted-cream);">{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div style="margin-top:2.5rem;">
+            <a href="/contact" class="btn-primary-on-cream">Start a Conversation →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTORS & CLASSIFICATIONS ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div class="reveal-fade-up mb-12">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">SECTORS &amp; CLASSIFICATIONS</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-16 reveal-fade-up">
+        <div>
+          <h3 class="font-display text-2xl mb-6" style="font-weight:500;letter-spacing:-0.01em;color:var(--text);">Sectors served</h3>
+          <ul class="flex flex-col gap-3 list-none m-0 p-0">
+            {['Electric utilities','Gas utilities','Combined IOUs','Public power'].map(s => (
+              <li style="color:var(--text-muted);font-size:1rem;" class="flex items-center gap-3">
+                <span style="color:var(--border-bright);">·</span>{s}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display text-2xl mb-6" style="font-weight:500;letter-spacing:-0.01em;color:var(--text);">NAICS code</h3>
+          <div style="border:1px solid var(--border);padding:1rem 1.75rem;display:flex;align-items:baseline;gap:2rem;margin-bottom:0.75rem;">
+            <span style="font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.8rem;color:var(--accent);flex-shrink:0;font-weight:500;">541690</span>
+            <span style="color:var(--text-muted);font-size:0.9375rem;">Other Scientific &amp; Technical Consulting Services</span>
+          </div>
+          <p class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;font-style:italic;">Additional NAICS classifications under expansion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    label="NEXT"
+    heading="Let's improve your operational and situational awareness."
+    sub="Tell us what's misaligned. We'll tell you what we'd do about it."
+    cta="Start a Conversation →"
+    href="/contact"
+  />
+</Layout>
+
+<style>
+  @media (max-width: 767px) {
+    [style*="grid-template-columns:repeat(12,1fr)"] {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 1.5rem !important;
+    }
+    [style*="grid-column:"] {
+      margin-top: 0 !important;
+    }
+  }
+</style>

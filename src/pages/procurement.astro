@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+---
+
+<Layout
+  title="Federal Contracting — GridSphere Utility Consulting"
+  description="Everything procurement officers and primes need to evaluate GridSphere for federal contracting opportunities — registrations, NAICS codes, capability statement, and point of contact."
+>
+  <!-- ══ HERO ══ -->
+  <section class="grid-overlay" style="padding:160px 0 96px;border-bottom:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div class="hero-stagger flex flex-col gap-6" style="max-width:700px;">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">FEDERAL CONTRACTING</span>
+        <h1 class="font-display" style="font-size:clamp(3rem,6vw,5rem);letter-spacing:-0.03em;font-weight:600;line-height:1.0;">For procurement officers and primes.</h1>
+        <p style="color:var(--text-muted);font-size:1.0625rem;line-height:1.75;">
+          Everything you need to evaluate GridSphere for federal contracting opportunities, in one place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 01 / ENTITY — CREAM BREAK ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border-cream);background:var(--cream);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div class="reveal-fade-up mb-10">
+        <span class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">01 / ENTITY</span>
+        <h2 class="font-display mt-5" style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:500;color:var(--text-on-cream);">Registered, certified, ready.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-16 reveal-fade-up">
+        <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.8;">
+          GridSphere, LLC is a SAM.gov-registered, 100% women-owned small business based in Detroit, Michigan, providing specialized utility consulting services in ADMS, GIS, network model readiness, and field mobility. The firm is structured to support both commercial primes and federal agency engagements through subcontracting and direct vehicles.
+        </p>
+        <div style="border:1px solid var(--border-cream);background:var(--cream);">
+          <div style="padding:1.25rem 1.75rem;border-bottom:1px solid var(--border-cream);background:var(--cream-soft);">
+            <span class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;">Entity Details</span>
+          </div>
+          {[
+            ['Legal Name',                  'GridSphere, LLC'],
+            ['DBA',                         'GridSphere Consulting'],
+            ['UEI',                         'GVLCTZXYBNE4'],
+            ['CAGE Code',                   '1ALZ6'],
+            ['SAM.gov Status',              'Active'],
+            ['Ownership',                   '100% Women-Owned'],
+            ['Small Business Status',       'Self-certified WOSB'],
+            ['WOSB Federal Certification',  'In progress (SBA)'],
+            ['State of Incorporation',      'Michigan'],
+            ['Registered Address',          'Detroit, Michigan'],
+          ].map(([label, value]) => (
+            <div style="padding:0.875rem 1.75rem;border-bottom:1px solid var(--border-cream);background:var(--cream);display:flex;justify-content:space-between;gap:1rem;align-items:baseline;">
+              <span class="font-mono-label" style="color:var(--text-muted-cream);font-size:0.65rem;flex-shrink:0;">{label}</span>
+              <span style="color:var(--text-on-cream);font-size:0.875rem;text-align:right;font-family:'JetBrains Mono','Fira Code',monospace;">{value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 02 / NAICS CODES — navy ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div class="reveal-fade-up mb-10">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">02 / NAICS CODES</span>
+        <h2 class="font-display mt-5" style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:500;color:var(--text);">Primary classification.</h2>
+      </div>
+      <div class="reveal-fade-up flex flex-col gap-0" style="max-width:700px;">
+        <div style="border:1px solid var(--border);padding:1rem 1.75rem;display:flex;align-items:baseline;gap:2rem;">
+          <span style="font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.8rem;color:var(--accent);flex-shrink:0;font-weight:500;">541690</span>
+          <span style="color:var(--text-muted);font-size:0.9375rem;">Other Scientific &amp; Technical Consulting Services</span>
+        </div>
+        <p class="font-mono-label mt-4" style="color:var(--text-dim);font-size:0.65rem;font-style:italic;">Additional NAICS classifications under expansion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 / CORE COMPETENCIES — surface ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--surface);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div class="reveal-fade-up mb-10">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">03 / CORE COMPETENCIES</span>
+        <h2 class="font-display mt-5" style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:500;color:var(--text);">What we deliver.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-x-16 gap-y-0 reveal-fade-up">
+        {[
+          'ADMS implementation, validation, and operational readiness',
+          'GIS modernization and network model integrity',
+          'Cross-system QA across GIS, OMS, ADMS, and field mobility',
+          'Field workflow design and crew adoption programs',
+          'OT modernization strategy and roadmap development',
+          'Implementation resourcing and prime/SI partnership',
+          'Innovation advisory and emerging technology evaluation',
+        ].map(item => (
+          <div class="flex items-start gap-4" style="padding:1rem 0;border-bottom:1px solid var(--border);">
+            <span style="color:var(--border-bright);flex-shrink:0;margin-top:0.15em;">—</span>
+            <span style="color:var(--text-muted);font-size:0.9375rem;line-height:1.65;">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 04 / DIFFERENTIATORS — navy ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div class="reveal-fade-up mb-10">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">04 / DIFFERENTIATORS</span>
+        <h2 class="font-display mt-5" style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:500;color:var(--text);">Why GridSphere.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);" class="reveal-fade-up">
+        {[
+          {
+            label: 'Vendor-neutral',
+            body: "We don't sell platforms. Our recommendations are accountable to outcomes, not commission structures.",
+          },
+          {
+            label: 'Field-grounded',
+            body: "Our principal has stood with crews during outage events, configured ADMS in test environments, and presented program risk to executive leadership. Recommendations survive contact with operational reality.",
+          },
+          {
+            label: '100% Women-Owned, Small Business',
+            body: "GridSphere is 100% women-owned and operates as a self-certified Woman-Owned Small Business. Formal WOSB certification through the U.S. Small Business Administration is currently in progress. Subcontracting through GridSphere supports prime contractor small business and supplier diversity utilization goals.",
+          },
+        ].map(({ label, body }) => (
+          <div class="cap-card flex flex-col gap-4" style="background:var(--surface);">
+            <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">{label}</span>
+            <p style="color:var(--text-muted);font-size:0.9375rem;line-height:1.75;">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 05 / CAPABILITY STATEMENT — surface ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--surface);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div class="reveal-fade-up mb-6">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">05 / CAPABILITY STATEMENT</span>
+        <h2 class="font-display mt-5" style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:500;color:var(--text);">Download the full capability statement.</h2>
+      </div>
+      <div class="reveal-fade-up flex flex-col gap-6" style="max-width:560px;">
+        <p style="color:var(--text-muted);font-size:1.0625rem;line-height:1.75;">
+          One-page PDF for inclusion in capture proposals and prime evaluation packages.
+        </p>
+        <!-- PDF will be added at /public/gridsphere-capability-statement.pdf -->
+        <a href="#" class="btn-primary" style="width:fit-content;">Download Capability Statement (PDF)</a>
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">PDF coming soon — contact us to request a copy in the interim.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 06 / POINT OF CONTACT — navy ══ -->
+  <section style="padding:80px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div class="reveal-fade-up mb-10">
+        <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">06 / POINT OF CONTACT</span>
+        <h2 class="font-display mt-5" style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:500;color:var(--text);">Procurement inquiries.</h2>
+      </div>
+      <div class="reveal-fade-up" style="max-width:480px;">
+        <div style="border:1px solid var(--border);background:var(--surface);">
+          <div style="padding:1.75rem 2rem;border-bottom:1px solid var(--border);">
+            <p class="font-display" style="font-size:1.2rem;font-weight:500;margin:0 0 0.25rem;color:var(--text);">Aya Lakkis</p>
+            <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;">Founder &amp; Principal</span>
+          </div>
+          <div style="padding:1.75rem 2rem;border-bottom:1px solid var(--border);">
+            <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;display:block;margin-bottom:0.4rem;">EMAIL</span>
+            <a href="mailto:info@grid-sphere.com" style="color:var(--text);font-size:0.9375rem;text-decoration:none;"
+               onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text)'">
+              info@grid-sphere.com
+            </a>
+          </div>
+          <div style="padding:1.75rem 2rem;border-bottom:1px solid var(--border);">
+            <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;display:block;margin-bottom:0.4rem;">LINKEDIN</span>
+            <a href="https://www.linkedin.com/company/gridsphere" target="_blank" rel="noopener noreferrer"
+               style="color:var(--text);font-size:0.9375rem;text-decoration:none;"
+               onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text)'">
+              linkedin.com/company/gridsphere
+            </a>
+          </div>
+          <div style="padding:1.75rem 2rem;">
+            <span class="font-mono-label" style="color:var(--text-dim);font-size:0.65rem;display:block;margin-bottom:0.4rem;">RESPONSE TIME</span>
+            <span style="color:var(--text-muted);font-size:0.9375rem;">Within 1 business day</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    label="NEXT"
+    heading="Considering GridSphere for an upcoming opportunity?"
+    sub="Request a capability statement, past performance summary, or pricing approach."
+    cta="Get in Touch →"
+    href="/contact"
+  />
+</Layout>
+
+<style>
+  @media (max-width: 767px) {
+    [style*="grid-template-columns:repeat(3,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

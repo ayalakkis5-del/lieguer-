@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+---
+
+<Layout
+  title="About — GridSphere Utility Consulting"
+  description="Aya Lakkis is a utility consultant with nearly a decade of experience at the intersection of field operations, enterprise systems, and grid modernization."
+>
+
+  <!-- ══ HERO — navy ══ -->
+  <section class="grid-overlay" style="padding:160px 0 96px;border-bottom:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px;position:relative;z-index:1;" class="mx-auto px-6">
+      <div class="hero-stagger flex flex-col gap-6" style="max-width:700px;">
+        <span class="font-mono-label" style="color:var(--text-dim);">About</span>
+        <h1 class="font-display" style="font-size:clamp(3rem,6vw,5rem);font-weight:700;letter-spacing:-0.02em;line-height:1.0;color:var(--text);">Aya Lakkis</h1>
+        <p style="color:var(--text-muted);font-size:1.0625rem;line-height:1.75;">Founder &amp; Principal, GridSphere LLC</p>
+        <a
+          href="https://www.linkedin.com/in/ayalakkis/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Aya Lakkis on LinkedIn"
+          style="display:inline-flex;align-items:center;gap:0.5rem;width:fit-content;color:var(--text-muted);text-decoration:none;transition:color 0.2s ease;"
+          onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          <span class="font-mono-label" style="color:inherit;">LinkedIn</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 01 / BACKGROUND — cream ══ -->
+  <section style="padding:96px 0;border-top:1px solid var(--border-cream);background:var(--cream);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/4;" class="reveal-fade-up">
+          <span class="font-mono-label" style="color:var(--text-muted-cream);">01 / Background</span>
+        </div>
+        <div style="grid-column:4/13;" class="reveal-slide-left flex flex-col gap-6">
+          <h2 class="font-display" style="font-size:clamp(1.75rem,3.5vw,2.75rem);color:var(--text-on-cream);">Background</h2>
+          <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.8;max-width:640px;">
+            Aya Lakkis is a utility consultant with nearly a decade of experience at the intersection of field operations, enterprise systems, and grid modernization. She has worked across the full delivery arc — from configuring ADMS platforms in test environments to standing with crews during outage events to presenting program risk to C-suite leadership.
+          </p>
+          <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.8;max-width:640px;">
+            Her background spans network model design and validation, GIS modernization, ADMS and OMS integration, field mobility deployment, and cross-system QA. Before founding GridSphere, she spent nine years at DTE Energy and Accenture, where she was consistently trusted to operate above her formal title — backfilling Senior Manager roles, leading enterprise testing strategy, and shaping programs from early planning through go-live.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 02 / EXPERIENCE — navy ══ -->
+  <section style="padding:96px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/4;" class="reveal-fade-up">
+          <span class="font-mono-label" style="color:var(--text-dim);">02 / Experience</span>
+        </div>
+        <div style="grid-column:4/13;" class="reveal-slide-left">
+          <h2 class="font-display mb-8" style="font-size:clamp(1.75rem,3.5vw,2.75rem);color:var(--text);">What she's actually done</h2>
+          <ul class="flex flex-col gap-5 list-none m-0 p-0" style="max-width:640px;">
+            {[
+              "Led the technical and field deployment of a mobile GIS platform used by 450+ T&D field personnel at DTE Energy, including overhead, underground, primary services, DER, and control room operators",
+              "Supported $11M+ in ADMS change orders by surfacing field-driven insights and cross-functional alignment gaps",
+              "Supervised a team of 14 union-represented GIS analysts and drafters responsible for gas pipeline mapping and safety readiness",
+              "Founded and leads Accenture's Global GIS Connect — a quarterly knowledge-sharing forum with 400+ geospatial professionals across continents",
+              "Led UAT, SIT, and FAT testing across business units; provided emergency response escalation support during go-live events",
+              "Presented at Schneider LINK, ESRI IMGIS/GEOCONX, and the USGIF GEOINT Summit",
+            ].map(item => (
+              <li class="flex items-start gap-4">
+                <span style="flex-shrink:0;margin-top:0.2em;color:var(--border-bright);">—</span>
+                <span style="color:var(--text-muted);font-size:0.9375rem;line-height:1.75;">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 / EXTENDED BENCH — cream ══ -->
+  <section style="padding:96px 0;border-top:1px solid var(--border-cream);background:var(--cream);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/4;" class="reveal-fade-up">
+          <span class="font-mono-label" style="color:var(--text-muted-cream);">03 / Extended Bench</span>
+        </div>
+        <div style="grid-column:4/13;" class="reveal-slide-left flex flex-col gap-6">
+          <h2 class="font-display" style="font-size:clamp(1.75rem,3.5vw,2.75rem);color:var(--text-on-cream);">Extended bench</h2>
+          <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.8;max-width:640px;">
+            GridSphere operates lean by design — but not alone. For engagements requiring deep platform expertise, Aya works with a trusted bench of senior technical specialists including global solution architects with direct experience in GIS and ADMS/electrical engineering at scale. These are practitioners who have configured, deployed, and troubleshot the same systems our clients are modernizing.
+          </p>
+          <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.8;max-width:640px;">
+            This isn't a staffing list. It's a small group of people who know the work and can be brought in when the engagement calls for it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 04 / EDUCATION — navy ══ -->
+  <section style="padding:96px 0;border-top:1px solid var(--border);background:var(--bg);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/4;" class="reveal-fade-up">
+          <span class="font-mono-label" style="color:var(--text-dim);">04 / Education</span>
+        </div>
+        <div style="grid-column:4/13;" class="reveal-slide-left">
+          <h2 class="font-display mb-8" style="font-size:clamp(1.75rem,3.5vw,2.75rem);color:var(--text);">Education</h2>
+          <div style="border:1px solid var(--border);max-width:640px;">
+            {[
+              ['B.S., Geospatial Information Science & Technology', 'Eastern Michigan University'],
+              ['Graduate Coursework, Geospatial Intelligence',      'Johns Hopkins University'],
+            ].map(([degree, institution], i, arr) => (
+              <div style={`padding:1rem 1.75rem;display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline;${i < arr.length - 1 ? 'border-bottom:1px solid var(--border);' : ''}`}>
+                <span style="color:var(--text-muted);font-size:0.9375rem;line-height:1.5;">{degree}</span>
+                <span style="color:var(--text-dim);font-size:0.8rem;text-align:right;font-family:'JetBrains Mono','Fira Code',monospace;flex-shrink:0;">{institution}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 05 / WHY GRIDSPHERE — cream ══ -->
+  <section style="padding:96px 0;border-top:1px solid var(--border-cream);background:var(--cream);">
+    <div style="max-width:1200px" class="mx-auto px-6">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start;">
+        <div style="grid-column:1/4;" class="reveal-fade-up">
+          <span class="font-mono-label" style="color:var(--text-muted-cream);">05 / Why GridSphere</span>
+        </div>
+        <div style="grid-column:4/13;" class="reveal-slide-left flex flex-col gap-6">
+          <h2 class="font-display" style="font-size:clamp(1.75rem,3.5vw,2.75rem);color:var(--text-on-cream);">Why GridSphere</h2>
+          <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.8;max-width:640px;">
+            GridSphere was founded on a simple premise: the gap between what utility systems claim and what utility crews experience is where most modernization programs quietly fail — and closing that gap requires someone who has been on both sides of it.
+          </p>
+          <p style="color:var(--text-muted-cream);font-size:1.0625rem;line-height:1.8;max-width:640px;">
+            Aya built GridSphere to bring that perspective to utilities and primes who need a second set of eyes that will actually tell them the truth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    heading="Work with someone who's been in the field."
+    sub="Tell us what you're working on. We'll tell you whether we're the right fit."
+    cta="Start a Conversation →"
+    href="/contact"
+  />
+
+</Layout>
+
+<style>
+  @media (max-width: 767px) {
+    [style*="grid-template-columns:repeat(12,1fr)"] {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 1.5rem !important;
+    }
+    [style*="grid-column:"] {
+      margin-top: 0 !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    [style*="justify-content:space-between;gap:1.5rem"] {
+      flex-direction: column !important;
+      gap: 0.25rem !important;
+    }
+  }
+</style>

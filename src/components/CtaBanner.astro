@@ -1,0 +1,29 @@
+---
+interface Props {
+  label?: string;
+  heading: string;
+  sub: string;
+  cta: string;
+  href: string;
+  dark?: boolean;
+}
+const { label = 'NEXT', heading, sub, cta, href, dark = false } = Astro.props;
+---
+<section
+  class="cta-banner reveal-fade-up"
+  style={`padding: 120px 0;${dark ? ' background:var(--surface);border-color:var(--border);' : ''}`}
+>
+  <div style="max-width:1200px" class="mx-auto px-6">
+    <span class="font-mono-label" style="color:var(--text-dim);">{label}</span>
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mt-6">
+      <div class="flex flex-col gap-4" style="max-width:560px;">
+        <h2
+          class="font-display"
+          style="font-size:clamp(2rem,4vw,3.25rem);color:var(--text);"
+        >{heading}</h2>
+        <p style="font-size:1rem;line-height:1.7;color:var(--text-muted);">{sub}</p>
+      </div>
+      <a href={href} class="btn-primary" style="flex-shrink:0;">{cta}</a>
+    </div>
+  </div>
+</section>

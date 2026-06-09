@@ -1,4 +1,29 @@
 const Stripe = require('stripe');
+const https  = require('https');
+
+async function sendSMS(to, body) {
+  const sid   = process.env.TWILIO_ACCOUNT_SID;
+  const token = process.env.TWILIO_AUTH_TOKEN;
+  const from  = process.env.TWILIO_PHONE;
+  if (!sid || !token || !from) return; // skip if not configured
+
+  const params = new URLSearchParams({ To: to, From: from, Body: body }).toString();
+  return new Promise((resolve) => {
+    const req = https.request({
+      hostname: 'api.twilio.com',
+      path: `/2010-04-01/Accounts/${sid}/Messages.json`,
+      method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + Buffer.from(`${sid}:${token}`).toString('base64'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(params),
+      },
+    }, (r) => { r.resume(); r.on('end', resolve); });
+    req.on('error', resolve);
+    req.write(params);
+    req.end();
+  });
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,6 +54,12 @@ module.exports = async (req, res) => {
       },
       receipt_email: customerEmail || undefined,
     });
+
+    // Send SMS confirmation if phone provided
+    if (customerPhone) {
+      const msg = `LIÈGUER ✓ Your order is confirmed! Pickup: ${pickupTime}. We can't wait to see you. Questions? Reply to this message.`;
+      sendSMS(customerPhone, msg).catch(() => {});
+    }
 
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {

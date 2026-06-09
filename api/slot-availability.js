@@ -1,6 +1,6 @@
 const Stripe = require('stripe');
 
-const MAX_PER_SLOT = 4;
+const MAX_PER_SLOT = 2;
 
 const SLOTS = [];
 const days = ['Saturday', 'Sunday'];

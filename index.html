@@ -18,6 +18,7 @@
     <span class="nav-logo">LIÈGUER</span>
     <div class="nav-links">
       <a href="#menu" class="nav-link">Menu</a>
+      <a href="#catering" class="nav-link">Catering</a>
       <a href="#order" class="nav-cta">Order Now</a>
     </div>
   </nav>
@@ -481,6 +482,49 @@
         <p class="order-fine">No spam. Just your waffle window.</p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- CATERING -->
+  <section class="catering" id="catering">
+    <div class="catering-inner">
+      <div class="catering-text">
+        <p class="label">Beyond the Drop</p>
+        <h2>Catering &amp;<br /><em>Private Events</em></h2>
+        <p>LIÈGUER is available for corporate events, real-estate open houses, birthday celebrations, and private gatherings. Each event is handled personally — we'll work with you on quantities, timing, and presentation.</p>
+        <div class="catering-uses">
+          <span>Weekday Corporate</span>
+          <span>Real-Estate Opens</span>
+          <span>Birthdays</span>
+          <span>Private Parties</span>
+          <span>Brand Activations</span>
+        </div>
+        <p class="catering-reply">We respond within 24 hours.</p>
+      </div>
+      <div class="catering-form-wrap">
+        <form class="catering-form" id="cateringForm" onsubmit="submitInquiry(event)">
+          <div class="form-row">
+            <input type="text"  name="name"       placeholder="Your name"       required />
+            <input type="email" name="email"       placeholder="Email address"   required />
+          </div>
+          <div class="form-row">
+            <input type="tel"   name="phone"       placeholder="Phone (optional)" />
+            <input type="text"  name="eventType"   placeholder="Type of event" />
+          </div>
+          <div class="form-row">
+            <input type="text"  name="date"        placeholder="Approximate date" />
+            <input type="text"  name="guestCount"  placeholder="Guest count" />
+          </div>
+          <textarea name="details" placeholder="Tell us what you're looking for — quantities, theme, any details..." rows="4"></textarea>
+          <button type="submit" class="btn-primary">Send Inquiry</button>
+          <p class="order-fine">hellolieguer@gmail.com · We respond within 24 hours</p>
+        </form>
+        <div id="cateringSuccess" style="display:none; text-align:center; padding:3rem 0;">
+          <p style="font-size:2rem;margin-bottom:1rem;">🧇</p>
+          <p class="label">Inquiry Received</p>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.75rem;color:var(--dark)">We'll be in touch<br /><em style="color:var(--brown-butter)">within 24 hours.</em></h3>
+        </div>
+      </div>
     </div>
   </section>
 
