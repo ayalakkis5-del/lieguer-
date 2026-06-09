@@ -541,6 +541,15 @@ function updateCart() {
   document.getElementById('cartTotal').textContent = `$${total.toFixed(2).replace('.00', '')}`;
   const btn = document.getElementById('btnToPayment');
   btn.disabled = total === 0;
+
+  // Refresh checkout summary total if on step 2
+  const summaryEl = document.getElementById('checkoutSummary');
+  if (summaryEl && summaryEl.innerHTML) {
+    summaryEl.innerHTML = summaryEl.innerHTML.replace(
+      /<strong[^>]*>Total:.*?<\/strong>/,
+      `<strong style="font-size:0.9rem;color:var(--dark)">Total: $${total.toFixed(2)}</strong>`
+    );
+  }
 }
 
 async function goToPayment() {
@@ -582,6 +591,11 @@ function goBackToOrder() {
   document.getElementById('btnLoadCard').style.display = '';
   document.getElementById('btnPay').style.display      = 'none';
   document.getElementById('btnPay').disabled           = false;
+  // Reset tip
+  selectedTip = 0;
+  document.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('tip-btn--active'));
+  document.getElementById('tipCustomWrap').style.display = 'none';
+  document.getElementById('tipCustomInput').value = '';
   document.getElementById('payment-error').textContent = '';
   stripe = null; elements = null; paymentElement = null;
 }

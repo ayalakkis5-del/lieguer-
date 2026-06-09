@@ -422,22 +422,6 @@
 
           <!-- Espresso customizations injected here by JS per drink per unit -->
 
-          <!-- TIP -->
-          <div class="tip-row">
-            <p class="tip-label">Add a tip? <span class="tip-sublabel">100% goes to the maker 🧇</span></p>
-            <div class="tip-btns">
-              <button class="tip-btn" data-tip="1">$1</button>
-              <button class="tip-btn" data-tip="2">$2</button>
-              <button class="tip-btn" data-tip="3">$3</button>
-              <button class="tip-btn" data-tip="5">$5</button>
-              <button class="tip-btn tip-btn--other" data-tip="other">Other</button>
-            </div>
-            <div class="tip-custom" id="tipCustomWrap" style="display:none;">
-              <span class="tip-dollar">$</span>
-              <input type="number" id="tipCustomInput" class="tip-custom-input" placeholder="0" min="0" step="1" />
-            </div>
-          </div>
-
           <div class="cart-total">
             <span>Total</span>
             <span id="cartTotal">$0</span>
@@ -472,6 +456,22 @@
               <span>Email me when the next drop opens &amp; new flavors arrive 🧇</span>
             </label>
           </div>
+          <!-- TIP -->
+          <div class="tip-row">
+            <p class="tip-label">Add a little love? <span class="tip-sublabel">Every bit goes back into the continuation of this 🧇</span></p>
+            <div class="tip-btns">
+              <button class="tip-btn" data-tip="1">$1</button>
+              <button class="tip-btn" data-tip="2">$2</button>
+              <button class="tip-btn" data-tip="3">$3</button>
+              <button class="tip-btn" data-tip="5">$5</button>
+              <button class="tip-btn tip-btn--other" data-tip="other">Other</button>
+            </div>
+            <div class="tip-custom" id="tipCustomWrap" style="display:none;">
+              <span class="tip-dollar">$</span>
+              <input type="number" id="tipCustomInput" class="tip-custom-input" placeholder="0" min="0" step="1" />
+            </div>
+          </div>
+
           <div class="stripe-trust-note">
             🔒 Your card information is never seen or stored by LIÈGUER. All payments are securely processed by <a href="https://stripe.com" target="_blank" rel="noopener">Stripe</a>, the same technology trusted by Amazon, Google, and millions of businesses worldwide.
           </div>
