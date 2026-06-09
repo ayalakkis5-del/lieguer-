@@ -307,11 +307,15 @@ function checkEspressoRow() {
   if (row) row.style.display = hasEspresso ? '' : 'none';
 }
 
-// Light ice warning
+// Espresso temp + ice note
 document.addEventListener('change', e => {
+  if (e.target.name === 'espressoTemp') {
+    const iceSection = document.getElementById('iceSection');
+    if (iceSection) iceSection.style.display = e.target.value === 'Hot' ? 'none' : '';
+  }
   if (e.target.name === 'espressoIce') {
     const note = document.getElementById('lightIceNote');
-    if (note) note.style.display = e.target.value === 'Light Ice' ? '' : 'none';
+    if (note) note.style.display = (e.target.value === 'Light Ice' || e.target.value === 'No Ice') ? '' : 'none';
   }
 });
 
@@ -394,11 +398,12 @@ async function goToPayment() {
   const sauceChoice = document.querySelector('input[name="includedSauce"]:checked')?.value || '';
   const milkChoice  = document.querySelector('input[name="espressoMilk"]:checked')?.value || '';
   const iceChoice   = document.querySelector('input[name="espressoIce"]:checked')?.value || '';
+  const tempChoice  = document.querySelector('input[name="espressoTemp"]:checked')?.value || 'Iced';
   const hasBox      = cartData.items.find(i => i.name === 'The LIÈGUER Box');
   const hasEspresso = cartData.items.some(i => /latte|flight|fireside/i.test(i.name));
   const dipNote     = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
   const sauceNote   = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
-  const milkNote    = hasEspresso && milkChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Milk: ${milkChoice} · Ice: ${iceChoice}</em>` : '';
+  const milkNote    = hasEspresso && milkChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">${tempChoice} · ${milkChoice}${tempChoice === 'Iced' ? ' · ' + iceChoice : ''}</em>` : '';
   const summary     = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
   document.getElementById('checkoutSummary').innerHTML =
     `${summary}${dipNote}${sauceNote}${milkNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
@@ -450,6 +455,7 @@ async function loadCardField() {
         promoConsent: promo,
         espressoMilk: document.querySelector('input[name="espressoMilk"]:checked')?.value || '',
         espressoIce:  document.querySelector('input[name="espressoIce"]:checked')?.value || '',
+        espressoTemp: document.querySelector('input[name="espressoTemp"]:checked')?.value || 'Iced',
       }),
     });
     const { clientSecret, error: piError } = await piRes.json();
