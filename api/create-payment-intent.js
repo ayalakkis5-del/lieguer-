@@ -81,7 +81,7 @@ module.exports = async (req, res) => {
             <td style="padding:10px 16px;border-bottom:1px solid #ede8df;font-size:14px;color:#1a1208;">${i.qty}× ${i.name}</td>
             <td style="padding:10px 16px;border-bottom:1px solid #ede8df;font-size:14px;color:#1a1208;text-align:right;">$${(i.qty * i.price).toFixed(2)}</td>
           </tr>`).join('');
-      sendEmail({
+      await sendEmail({
         to: customerEmail,
         subject: `Your LIÈGUER order is confirmed 🧇`,
         html: `
@@ -158,14 +158,14 @@ module.exports = async (req, res) => {
   </table>
 </body>
 </html>`,
-      }).catch(() => {});
+      });
     }
 
     // Internal order notification to hellolieguer@gmail.com
     const itemLines = (items || [])
       .map(i => `<tr><td style="padding:6px 12px;">${i.qty}× ${i.name}</td><td style="padding:6px 12px;text-align:right;">$${(i.qty * i.price).toFixed(2)}</td></tr>`)
       .join('');
-    sendEmail({
+    await sendEmail({
       to: 'hellolieguer@gmail.com',
       subject: `🧇 New Order — ${customerName || 'Customer'} · ${pickupTime}`,
       html: `
@@ -187,7 +187,7 @@ module.exports = async (req, res) => {
           <p><strong>Promo opt-in:</strong> ${promoConsent === 'yes' ? '✅ Yes' : 'No'}</p>
         </div>
       `,
-    }).catch(() => {});
+    });
 
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
