@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LIÈGUER — Order Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --caramel: #c8852a;
+      --brown: #7a4f1e;
+      --dark: #1a1208;
+      --card: #fff;
+      --muted: #888;
+      --border: #e8e0d0;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    #loginScreen h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      letter-spacing: 0.12em;
+    }
+    #loginScreen p { color: var(--muted); font-size: 0.9rem; }
+    #pwInput {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      width: 280px;
+      background: #fff;
+      outline: none;
+    }
+    #pwInput:focus { border-color: var(--caramel); }
+    #loginBtn {
+      background: var(--dark);
+      color: var(--cream);
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #loginBtn:hover { background: var(--brown); }
+    #loginErr { color: #c0392b; font-size: 0.85rem; display: none; }
+
+    /* ── DASHBOARD ── */
+    #dashboard { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+    }
+    header p { color: var(--muted); font-size: 0.85rem; }
+    #refreshBtn {
+      background: var(--caramel);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    #refreshBtn:hover { opacity: 0.85; }
+
+    /* ── SUMMARY CARDS ── */
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .summary-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+    }
+    .summary-card .s-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .summary-card .s-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .summary-card .s-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── SLOT GROUPS ── */
+    .slot-group { margin-bottom: 2.5rem; }
+    .slot-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--caramel);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .slot-count {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      background: var(--caramel);
+      color: #fff;
+      border-radius: 20px;
+      padding: 0.15rem 0.65rem;
+    }
+
+    /* ── ORDER CARDS ── */
+    .order-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.75rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 1rem 2rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .order-card { grid-template-columns: 1fr 1fr; }
+    }
+    .order-card .oc-name {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .order-card .oc-contact {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      line-height: 1.6;
+    }
+    .order-card .oc-contact a {
+      color: var(--caramel);
+      text-decoration: none;
+    }
+    .oc-items { font-size: 0.85rem; line-height: 1.7; }
+    .oc-items .item-line { display: flex; gap: 0.4rem; }
+    .oc-items .item-qty {
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 0 5px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      line-height: 1.6;
+      white-space: nowrap;
+    }
+    .oc-total {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .oc-promo {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.4rem;
+    }
+    .oc-order-date { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* ── EMPTY / LOADING ── */
+    #loadingMsg, #emptyMsg {
+      text-align: center;
+      color: var(--muted);
+      padding: 4rem 0;
+      font-size: 1rem;
+    }
+
+    /* ── WAFFLES TO MAKE ── */
+    .tally-section { margin-bottom: 2.5rem; }
+    .tally-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .tally-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .tally-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tally-item .t-name { font-size: 0.88rem; }
+    .tally-item .t-qty {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--caramel);
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <h1>LIÈGUER</h1>
+  <p>Order dashboard — enter your admin password to continue.</p>
+  <input type="password" id="pwInput" placeholder="Password" />
+  <button id="loginBtn">Enter</button>
+  <p id="loginErr">Incorrect password.</p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header>
+    <div>
+      <h1>LIÈGUER — Orders</h1>
+      <p id="lastUpdated"></p>
+    </div>
+    <button id="refreshBtn">↻ Refresh</button>
+  </header>
+
+  <div class="summary-row" id="summaryRow"></div>
+
+  <div class="tally-section" id="tallySection" style="display:none;">
+    <h2>Production Tally</h2>
+    <div class="tally-grid" id="tallyGrid"></div>
+  </div>
+
+  <div id="ordersContainer">
+    <div id="loadingMsg">Loading orders…</div>
+  </div>
+</div>
+
+<script>
+  let adminPassword = '';
+
+  document.getElementById('loginBtn').addEventListener('click', tryLogin);
+  document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+  function tryLogin() {
+    adminPassword = document.getElementById('pwInput').value.trim();
+    if (!adminPassword) return;
+    loadOrders();
+  }
+
+  document.getElementById('refreshBtn').addEventListener('click', loadOrders);
+
+  async function loadOrders() {
+    document.getElementById('ordersContainer').innerHTML = '<div id="loadingMsg">Loading orders…</div>';
+
+    try {
+      const res = await fetch(`/api/orders?password=${encodeURIComponent(adminPassword)}`);
+      if (res.status === 401) {
+        document.getElementById('loginErr').style.display = 'block';
+        return;
+      }
+      const { orders } = await res.json();
+
+      // Switch screens
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('loginErr').style.display = 'none';
+      document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+
+      renderDashboard(orders);
+    } catch (err) {
+      document.getElementById('ordersContainer').innerHTML = `<div id="loadingMsg">Error: ${err.message}</div>`;
+    }
+  }
+
+  function renderDashboard(orders) {
+    // ── SUMMARY ──
+    const totalRevenue = orders.reduce((s, o) => s + parseFloat(o.amount), 0);
+    const promoCount = orders.filter(o => o.promoConsent === 'yes').length;
+
+    // Count waffles: each "LIÈGUER Box", "Classic Ritual", "Complete Saturday Breakfast" = 1 dozen
+    let totalDozens = 0;
+    const itemTally = {};
+    orders.forEach(o => {
+      (o.items || []).forEach(it => {
+        const key = it.name;
+        itemTally[key] = (itemTally[key] || 0) + (it.qty || 1);
+        if (/box|ritual|saturday breakfast/i.test(it.name)) {
+          totalDozens += (it.qty || 1);
+        }
+      });
+    });
+
+    document.getElementById('summaryRow').innerHTML = `
+      <div class="summary-card">
+        <p class="s-label">Total Orders</p>
+        <p class="s-val">${orders.length}</p>
+        <p class="s-sub">succeeded payments</p>
+      </div>
+      <div class="summary-card">
+        <p class="s-label">Revenue</p>
+        <p class="s-val">$${totalRevenue.toFixed(2)}</p>
+        <p class="s-sub">after Stripe fees ~$${(totalRevenue * 0.971 - orders.length * 0.30).toFixed(2)}</p>
+      </div>
+      <div class="summary-card">
+        <p class="s-label">Dozens to Make</p>
+        <p class="s-val">${totalDozens}</p>
+        <p class="s-sub">${totalDozens * 12} individual waffles</p>
+      </div>
+      <div class="summary-card">
+        <p class="s-label">Promo Opt-ins</p>
+        <p class="s-val">${promoCount}</p>
+        <p class="s-sub">SMS subscribers</p>
+      </div>
+    `;
+
+    // ── PRODUCTION TALLY ──
+    if (Object.keys(itemTally).length > 0) {
+      document.getElementById('tallySection').style.display = 'block';
+      document.getElementById('tallyGrid').innerHTML = Object.entries(itemTally)
+        .filter(([k]) => !/test item/i.test(k))
+        .sort((a, b) => b[1] - a[1])
+        .map(([name, qty]) => `
+          <div class="tally-item">
+            <span class="t-name">${name}</span>
+            <span class="t-qty">×${qty}</span>
+          </div>`)
+        .join('');
+    }
+
+    // ── GROUP BY PICKUP SLOT ──
+    if (orders.length === 0) {
+      document.getElementById('ordersContainer').innerHTML = '<div id="emptyMsg">No orders yet.</div>';
+      return;
+    }
+
+    const groups = {};
+    orders.forEach(o => {
+      const key = o.pickupTime || 'No pickup time';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(o);
+    });
+
+    // Sort groups by day + time
+    const sortedKeys = Object.keys(groups).sort((a, b) => {
+      const dayA = a.startsWith('Sun') ? 1 : 0;
+      const dayB = b.startsWith('Sun') ? 1 : 0;
+      if (dayA !== dayB) return dayA - dayB;
+      return a.localeCompare(b);
+    });
+
+    let html = '';
+    sortedKeys.forEach(slot => {
+      const slotOrders = groups[slot];
+      html += `
+        <div class="slot-group">
+          <p class="slot-heading">
+            ${slot}
+            <span class="slot-count">${slotOrders.length} order${slotOrders.length !== 1 ? 's' : ''}</span>
+          </p>
+          ${slotOrders.map(o => renderOrderCard(o)).join('')}
+        </div>`;
+    });
+
+    document.getElementById('ordersContainer').innerHTML = html;
+  }
+
+  function renderOrderCard(o) {
+    const itemLines = (o.items || [])
+      .filter(it => !/test item/i.test(it.name))
+      .map(it => `<div class="item-line"><span class="item-qty">×${it.qty || 1}</span> ${it.name}</div>`)
+      .join('');
+
+    const promoTag = o.promoConsent === 'yes'
+      ? '<span class="oc-promo">✓ SMS opt-in</span>' : '';
+
+    return `
+      <div class="order-card">
+        <div>
+          <p class="oc-name">${o.customerName}</p>
+          <p class="oc-contact">
+            <a href="mailto:${o.customerEmail}">${o.customerEmail}</a><br/>
+            <a href="tel:${o.customerPhone}">${o.customerPhone}</a>
+          </p>
+          ${promoTag}
+          <p class="oc-order-date">Ordered ${o.date}</p>
+        </div>
+        <div class="oc-items">${itemLines || '<em style="color:#aaa">—</em>'}</div>
+        <div></div>
+        <div class="oc-total">$${o.amount}</div>
+      </div>`;
+  }
+</script>
+</body>
+</html>
