@@ -475,6 +475,7 @@ async function submitPayment() {
       elements,
       redirect: 'if_required',
       confirmParams: {
+        return_url: 'https://lieguer.com/#order',
         receipt_email: email,
       },
     });
@@ -492,7 +493,7 @@ async function submitPayment() {
         `Your order is confirmed for ${cartData.pickup}. A confirmation email is on its way to ${email}.`;
     }
   } catch (e) {
-    errEl.textContent = 'Something went wrong. Please try again.';
+    errEl.textContent = e?.message || 'Something went wrong. Please try again.';
     btn.textContent   = 'Pay Now →';
     btn.disabled      = false;
   }
