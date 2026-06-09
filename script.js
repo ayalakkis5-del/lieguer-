@@ -373,44 +373,18 @@ async function goToPayment() {
   // Load slots fresh now that we're on step 2
   loadSlots();
 
-  // Show order summary
-  const dipChoice    = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
-  const sauceChoice  = document.querySelector('input[name="includedSauce"]:checked')?.value || '';
-  const hasBox       = cartData.items.find(i => i.name === 'The LIÈGUER Box');
-  const dipNote      = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
-  const sauceNote    = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
-  const summary = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
+  // Show order summary (pickup shown after slot is chosen)
+  const dipChoice  = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
+  const sauceChoice = document.querySelector('input[name="includedSauce"]:checked')?.value || '';
+  const hasBox     = cartData.items.find(i => i.name === 'The LIÈGUER Box');
+  const dipNote    = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
+  const sauceNote  = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
+  const summary    = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
   document.getElementById('checkoutSummary').innerHTML =
-    `${summary}${dipNote}${sauceNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Pickup: ${cartData.pickup}</strong><br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
+    `${summary}${dipNote}${sauceNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
 
-  // Init Stripe
+  // Init Stripe elements (no payment intent yet — created on submit)
   if (!stripe) stripe = Stripe(STRIPE_PK);
-
-  // Create payment intent
-  const res = await fetch('/api/create-payment-intent', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ amount: cartData.total, items: cartData.items, pickupTime: cartData.pickup, customerName: document.getElementById('payName')?.value || '', customerEmail: document.getElementById('payEmail')?.value || '', customerPhone: document.getElementById('payPhone')?.value || '', promoConsent: document.getElementById('payPromo')?.checked ? 'yes' : 'no' }),
-  });
-  const { clientSecret, error } = await res.json();
-  if (error) { document.getElementById('payment-error').textContent = error; return; }
-
-  elements = stripe.elements({ clientSecret, appearance: {
-    theme: 'flat',
-    variables: {
-      colorPrimary: '#c8852a',
-      colorBackground: '#faf7f2',
-      colorText: '#1a1208',
-      colorDanger: '#c0392b',
-      fontFamily: 'Jost, sans-serif',
-      borderRadius: '0px',
-    }
-  }});
-
-  paymentElement = elements.create('payment', {
-    fields: { billingDetails: 'never' }
-  });
-  paymentElement.mount('#payment-element');
 }
 
 function goBackToOrder() {
@@ -428,11 +402,53 @@ async function submitPayment() {
   const phone = document.getElementById('payPhone').value.trim();
   const promo = document.getElementById('payPromo')?.checked ? 'yes' : 'no';
 
+  if (!cartData.pickup) { errEl.textContent = 'Please select a pickup time.'; return; }
   if (!name || !email || !phone) { errEl.textContent = 'Please fill in your name, email, and phone number.'; return; }
 
   btn.textContent = 'Processing…';
   btn.disabled = true;
   errEl.textContent = '';
+
+  // Create payment intent now that we have all info
+  try {
+    const piRes = await fetch('/api/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: cartData.total,
+        items: cartData.items,
+        pickupTime: cartData.pickup,
+        customerName: name,
+        customerEmail: email,
+        customerPhone: phone,
+        promoConsent: promo,
+      }),
+    });
+    const { clientSecret, error: piError } = await piRes.json();
+    if (piError) { errEl.textContent = piError; btn.textContent = 'Confirm & Pay'; btn.disabled = false; return; }
+
+    elements = stripe.elements({ clientSecret, appearance: {
+      theme: 'flat',
+      variables: {
+        colorPrimary: '#c8852a',
+        colorBackground: '#faf7f2',
+        colorText: '#1a1208',
+        colorDanger: '#c0392b',
+        fontFamily: 'Jost, sans-serif',
+        borderRadius: '0px',
+      }
+    }});
+    paymentElement = elements.create('payment', { fields: { billingDetails: 'never' } });
+    paymentElement.mount('#payment-element');
+
+    // Small pause to let Stripe element render
+    await new Promise(r => setTimeout(r, 800));
+  } catch (e) {
+    errEl.textContent = 'Could not connect. Please try again.';
+    btn.textContent = 'Confirm & Pay';
+    btn.disabled = false;
+    return;
+  }
 
   const { error } = await stripe.confirmPayment({
     elements,
