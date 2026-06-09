@@ -1,31 +1,22 @@
-const https = require('https');
+const nodemailer = require('nodemailer');
 
-function sendEmail({ to, subject, html }) {
-  const body = JSON.stringify({
-    from: 'LIÈGUER <onboarding@resend.dev>',
-    to: Array.isArray(to) ? to : [to],
+function getTransport() {
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'hellolieguer@gmail.com',
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
+  });
+}
+
+async function sendEmail({ to, subject, html }) {
+  const transporter = getTransport();
+  await transporter.sendMail({
+    from: '"LIÈGUER" <hellolieguer@gmail.com>',
+    to: Array.isArray(to) ? to.join(', ') : to,
     subject,
     html,
-  });
-
-  return new Promise((resolve, reject) => {
-    const req = https.request({
-      hostname: 'api.resend.com',
-      path: '/emails',
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(body),
-      },
-    }, (r) => {
-      let data = '';
-      r.on('data', c => data += c);
-      r.on('end', () => r.statusCode < 300 ? resolve(data) : reject(new Error(`Resend ${r.statusCode}: ${data}`)));
-    });
-    req.on('error', reject);
-    req.write(body);
-    req.end();
   });
 }
 
