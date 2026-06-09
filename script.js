@@ -169,10 +169,10 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
   function updateBanner(state, now) {
     banner.className = 'top-banner';
     if (state === 'open') {
-      // Count down to Thursday 11:59pm
+      // Count down to Wednesday 11:59pm
       const close = new Date(now);
-      const daysToThu = (4 - now.getDay() + 7) % 7 || 7;
-      close.setDate(now.getDate() + (now.getDay() === 4 ? 0 : daysToThu));
+      const daysToWed = (3 - now.getDay() + 7) % 7 || 7;
+      close.setDate(now.getDate() + (now.getDay() === 3 ? 0 : daysToWed));
       close.setHours(23, 59, 0, 0);
       banner.classList.add('banner--open');
       bannerText.textContent = '✦ Ordering is OPEN — closes in';
@@ -218,14 +218,13 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
     const hour = now.getHours();
     const min  = now.getMinutes();
 
-    // OPEN: Sunday 8pm → Thursday 11:59pm
+    // OPEN: Sunday 8pm → Wednesday 11:59pm
     const sunAfter8  = day === 0 && (hour >= 20);
-    const monToThu   = day >= 1 && day <= 4;
-    const thuBefore  = day === 4 && (hour < 24);
-    const thuClosed  = day === 4 && hour === 23 && min === 59;
+    const monToWed   = day >= 1 && day <= 3;
+    const wedClosed  = day === 3 && hour === 23 && min === 59;
 
-    if (thuClosed) return 'closed';
-    if (sunAfter8 || (monToThu && !(day === 4 && hour >= 24))) return 'open';
+    if (wedClosed) return 'closed';
+    if (sunAfter8 || monToWed) return 'open';
 
     // CLOSED: Friday & Saturday (prepping)
     if (day === 5 || day === 6) return 'closed';
