@@ -10,19 +10,21 @@ module.exports = async (req, res) => {
 
   try {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-    const { amount, items, pickupDay, pickupTime, customerName, customerEmail } = req.body;
+    const { amount, items, pickupTime, customerName, customerEmail, customerPhone } = req.body;
 
-    if (!amount || amount < 50) return res.status(400).json({ error: 'Invalid amount' });
+    const amountCents = Math.round(amount * 100);
+    // Stripe minimum is 50 cents
+    if (!amount || amountCents < 50) return res.status(400).json({ error: 'Minimum order is $0.50' });
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100), // cents
+      amount: amountCents,
       currency: 'usd',
       metadata: {
         items: JSON.stringify(items),
-        pickupDay,
         pickupTime,
-        customerName,
-        customerEmail,
+        customerName:  customerName  || '',
+        customerEmail: customerEmail || '',
+        customerPhone: customerPhone || '',
       },
       receipt_email: customerEmail || undefined,
     });

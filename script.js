@@ -291,7 +291,7 @@ async function goToPayment() {
   const res = await fetch('/api/create-payment-intent', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ amount: cartData.total, items: cartData.items, pickupTime: cartData.pickup }),
+    body: JSON.stringify({ amount: cartData.total, items: cartData.items, pickupTime: cartData.pickup, customerName: document.getElementById('payName')?.value || '', customerEmail: document.getElementById('payEmail')?.value || '', customerPhone: document.getElementById('payPhone')?.value || '' }),
   });
   const { clientSecret, error } = await res.json();
   if (error) { document.getElementById('payment-error').textContent = error; return; }
@@ -324,8 +324,9 @@ async function submitPayment() {
   const errEl = document.getElementById('payment-error');
   const name  = document.getElementById('payName').value.trim();
   const email = document.getElementById('payEmail').value.trim();
+  const phone = document.getElementById('payPhone').value.trim();
 
-  if (!name || !email) { errEl.textContent = 'Please enter your name and email.'; return; }
+  if (!name || !email || !phone) { errEl.textContent = 'Please fill in your name, email, and phone number.'; return; }
 
   btn.textContent = 'Processing…';
   btn.disabled = true;
@@ -335,7 +336,7 @@ async function submitPayment() {
     elements,
     redirect: 'if_required',
     confirmParams: {
-      payment_method_data: { billing_details: { name, email } },
+      payment_method_data: { billing_details: { name, email, phone } },
       receipt_email: email,
     },
   });
@@ -350,7 +351,7 @@ async function submitPayment() {
     const pickupDay = cartData.pickup.startsWith('Sunday') ? 'Sunday' : 'Saturday';
     document.getElementById('stepSuccess').querySelector('h2').innerHTML = `See you<br /><em>${pickupDay}.</em>`;
     document.getElementById('successDetails').textContent =
-      `Your order is confirmed for ${cartData.pickup}. A receipt is on its way to ${email}.`;
+      `Your order is confirmed for ${cartData.pickup}. A receipt is on its way to ${email}. We'll text ${phone} with your pickup reminder.`;
   }
 }
 
