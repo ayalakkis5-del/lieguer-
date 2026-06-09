@@ -356,8 +356,8 @@
 
           <!-- ESPRESSO -->
           <p class="cart-section-label">— Espresso Studio —</p>
-          <div class="cart-items">
-            <div class="cart-item" data-name="The Espresso Studio Flight" data-price="24">
+          <div class="cart-items" id="espressoItems">
+            <div class="cart-item" data-name="The Espresso Studio Flight" data-price="24" data-espresso="true">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Espresso Studio Flight</p>
                 <p class="cart-item-desc">One of each iced latte: Tiramisu, Madagascar Vanilla, and The Fireside.</p>
@@ -369,7 +369,7 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
-            <div class="cart-item" data-name="Tiramisu Latte" data-price="8">
+            <div class="cart-item" data-name="Tiramisu Latte" data-price="8" data-espresso="true">
               <div class="cart-item-info">
                 <p class="cart-item-name">Tiramisu Latte</p>
                 <p class="cart-item-desc">Double espresso, mascarpone cream, Dutch-process cocoa. Served iced.</p>
@@ -381,7 +381,7 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
-            <div class="cart-item" data-name="Madagascar Vanilla Latte" data-price="8">
+            <div class="cart-item" data-name="Madagascar Vanilla Latte" data-price="8" data-espresso="true">
               <div class="cart-item-info">
                 <p class="cart-item-name">Madagascar Vanilla Latte</p>
                 <p class="cart-item-desc">Bold espresso with slow-simmered Madagascar vanilla bean reduction. Served iced.</p>
@@ -393,7 +393,7 @@
                 <button class="qty-btn" data-action="plus">+</button>
               </div>
             </div>
-            <div class="cart-item" data-name="The Fireside" data-price="8">
+            <div class="cart-item" data-name="The Fireside" data-price="8" data-espresso="true">
               <div class="cart-item-info">
                 <p class="cart-item-name">The Fireside <span class="cart-item-special">House Special</span></p>
                 <p class="cart-item-desc">Caramelized charred sugar, honeyed graham, melted milk chocolate. Nostalgic and complex.</p>
@@ -403,6 +403,43 @@
                 <button class="qty-btn" data-action="minus">−</button>
                 <span class="qty-num">0</span>
                 <button class="qty-btn" data-action="plus">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Espresso customizations — shown when any espresso qty > 0 -->
+          <div class="cart-addon-row" id="espressoCustomRow" style="display:none;">
+            <p class="addon-label">Customize your lattes:</p>
+
+            <p class="addon-sublabel">Milk</p>
+            <div class="dip-options">
+              <label class="dip-opt"><input type="radio" name="espressoMilk" value="Whole Milk" checked /><span>Whole Milk</span></label>
+              <label class="dip-opt"><input type="radio" name="espressoMilk" value="Oat Milk" /><span>Oat Milk</span></label>
+              <label class="dip-opt"><input type="radio" name="espressoMilk" value="Almond Milk" /><span>Almond Milk</span></label>
+            </div>
+
+            <p class="addon-sublabel" style="margin-top:1rem;">Ice</p>
+            <div class="dip-options">
+              <label class="dip-opt"><input type="radio" name="espressoIce" value="Regular Ice" checked /><span>Regular Ice</span></label>
+              <label class="dip-opt"><input type="radio" name="espressoIce" value="Light Ice" /><span>Light Ice</span></label>
+              <label class="dip-opt"><input type="radio" name="espressoIce" value="Extra Ice" /><span>Extra Ice</span></label>
+              <label class="dip-opt"><input type="radio" name="espressoIce" value="No Ice" /><span>No Ice</span></label>
+            </div>
+            <p id="lightIceNote" class="addon-ice-note" style="display:none;">💧 Light ice means more milk in your drink — just so you know!</p>
+
+            <p class="addon-sublabel" style="margin-top:1rem;">Cold Foam Add-on <span style="color:var(--caramel);font-weight:500;">+$1 per drink</span></p>
+            <div class="cart-items" style="margin-top:0.5rem;">
+              <div class="cart-item" data-name="Cold Foam Add-on" data-price="1">
+                <div class="cart-item-info">
+                  <p class="cart-item-name">Cold Foam</p>
+                  <p class="cart-item-desc">Silky frothed heavy cream — rich, photo-worthy, and worth every penny.</p>
+                  <p class="cart-item-price">$1 each</p>
+                </div>
+                <div class="cart-qty">
+                  <button class="qty-btn" data-action="minus">−</button>
+                  <span class="qty-num">0</span>
+                  <button class="qty-btn" data-action="plus">+</button>
+                </div>
               </div>
             </div>
           </div>

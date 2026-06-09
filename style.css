@@ -926,6 +926,23 @@ nav {
   color: var(--caramel);
   margin-bottom: 0.6rem;
 }
+.addon-sublabel {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 0.5rem;
+}
+.addon-ice-note {
+  font-size: 0.8rem;
+  color: var(--caramel);
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(200,133,42,0.08);
+  border-radius: 6px;
+  border-left: 3px solid var(--caramel);
+}
 .dip-options {
   display: flex;
   gap: 0.5rem;

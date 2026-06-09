@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
 
   try {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-    const { amount, items, pickupTime, customerName, customerEmail, customerPhone, promoConsent } = req.body;
+    const { amount, items, pickupTime, customerName, customerEmail, customerPhone, promoConsent, espressoMilk, espressoIce } = req.body;
 
     const amountCents = Math.round(amount * 100);
     // Stripe minimum is 50 cents
@@ -53,6 +53,8 @@ module.exports = async (req, res) => {
         customerEmail: customerEmail || '',
         customerPhone: customerPhone || '',
         promoConsent:  promoConsent  || 'no',
+        espressoMilk:  espressoMilk  || '',
+        espressoIce:   espressoIce   || '',
       },
       receipt_email: customerEmail || undefined,
     });
@@ -185,6 +187,8 @@ module.exports = async (req, res) => {
           <p><strong>Email:</strong> ${customerEmail || '—'}</p>
           <p><strong>Phone:</strong> ${customerPhone || '—'}</p>
           <p><strong>Promo opt-in:</strong> ${promoConsent === 'yes' ? '✅ Yes' : 'No'}</p>
+          ${espressoMilk ? `<p><strong>Espresso milk:</strong> ${espressoMilk}</p>` : ''}
+          ${espressoIce  ? `<p><strong>Espresso ice:</strong> ${espressoIce}</p>` : ''}
         </div>
       `,
     });

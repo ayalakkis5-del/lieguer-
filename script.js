@@ -285,11 +285,12 @@ document.querySelectorAll('.cart-item').forEach(item => {
   plusBtn.addEventListener('click', () => {
     qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
     checkDipRow();
+    checkEspressoRow();
     updateCart();
   });
   minusBtn.addEventListener('click', () => {
     const v = parseInt(qtyEl.textContent);
-    if (v > 0) { qtyEl.textContent = v - 1; checkDipRow(); updateCart(); }
+    if (v > 0) { qtyEl.textContent = v - 1; checkDipRow(); checkEspressoRow(); updateCart(); }
   });
 });
 
@@ -298,6 +299,21 @@ function checkDipRow() {
   const dipRow = document.getElementById('waffleDipRow');
   if (dipRow) dipRow.style.display = boxQty > 0 ? '' : 'none';
 }
+
+function checkEspressoRow() {
+  const hasEspresso = [...document.querySelectorAll('[data-espresso="true"] .qty-num')]
+    .some(el => parseInt(el.textContent) > 0);
+  const row = document.getElementById('espressoCustomRow');
+  if (row) row.style.display = hasEspresso ? '' : 'none';
+}
+
+// Light ice warning
+document.addEventListener('change', e => {
+  if (e.target.name === 'espressoIce') {
+    const note = document.getElementById('lightIceNote');
+    if (note) note.style.display = e.target.value === 'Light Ice' ? '' : 'none';
+  }
+});
 
 // Load slots dynamically from API
 async function loadSlots() {
@@ -374,14 +390,18 @@ async function goToPayment() {
   loadSlots();
 
   // Show order summary (pickup shown after slot is chosen)
-  const dipChoice  = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
+  const dipChoice   = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
   const sauceChoice = document.querySelector('input[name="includedSauce"]:checked')?.value || '';
-  const hasBox     = cartData.items.find(i => i.name === 'The LIÈGUER Box');
-  const dipNote    = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
-  const sauceNote  = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
-  const summary    = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
+  const milkChoice  = document.querySelector('input[name="espressoMilk"]:checked')?.value || '';
+  const iceChoice   = document.querySelector('input[name="espressoIce"]:checked')?.value || '';
+  const hasBox      = cartData.items.find(i => i.name === 'The LIÈGUER Box');
+  const hasEspresso = cartData.items.some(i => /latte|flight|fireside/i.test(i.name));
+  const dipNote     = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
+  const sauceNote   = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
+  const milkNote    = hasEspresso && milkChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Milk: ${milkChoice} · Ice: ${iceChoice}</em>` : '';
+  const summary     = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
   document.getElementById('checkoutSummary').innerHTML =
-    `${summary}${dipNote}${sauceNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
+    `${summary}${dipNote}${sauceNote}${milkNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
 
   // Init Stripe elements (no payment intent yet — created on submit)
   if (!stripe) stripe = Stripe(STRIPE_PK);
@@ -428,6 +448,8 @@ async function loadCardField() {
         customerEmail: email,
         customerPhone: phone,
         promoConsent: promo,
+        espressoMilk: document.querySelector('input[name="espressoMilk"]:checked')?.value || '',
+        espressoIce:  document.querySelector('input[name="espressoIce"]:checked')?.value || '',
       }),
     });
     const { clientSecret, error: piError } = await piRes.json();
