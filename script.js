@@ -408,6 +408,31 @@ function renderEspressoCustomizations(item) {
   }
 }
 
+// ── Tip buttons ──
+let selectedTip = 0;
+document.querySelectorAll('.tip-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('tip-btn--active'));
+    const val = btn.dataset.tip;
+    if (val === 'other') {
+      btn.classList.add('tip-btn--active');
+      document.getElementById('tipCustomWrap').style.display = '';
+      const input = document.getElementById('tipCustomInput');
+      input.focus();
+      selectedTip = parseFloat(input.value) || 0;
+    } else {
+      btn.classList.add('tip-btn--active');
+      document.getElementById('tipCustomWrap').style.display = 'none';
+      selectedTip = parseFloat(val);
+    }
+    updateCart();
+  });
+});
+document.getElementById('tipCustomInput')?.addEventListener('input', e => {
+  selectedTip = parseFloat(e.target.value) || 0;
+  updateCart();
+});
+
 // Show ice note via event delegation so it works across all dynamically rendered rows
 document.addEventListener('change', e => {
   if (e.target.classList.contains('esp-ice')) {
@@ -504,6 +529,12 @@ function updateCart() {
   const foamCount = document.querySelectorAll('.esp-foam:checked').length;
   total += foamCount;
   if (foamCount > 0) items.push({ name: 'Cold Foam', qty: foamCount, price: 1 });
+
+  // Add tip
+  if (selectedTip > 0) {
+    total += selectedTip;
+    items.push({ name: 'Tip', qty: 1, price: selectedTip });
+  }
 
   cartData = { items, total, pickup: cartData.pickup || '' };
 
