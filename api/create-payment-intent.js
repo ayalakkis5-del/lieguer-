@@ -37,7 +37,8 @@ module.exports = async (req, res) => {
 
   try {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-    const { amount, items, pickupTime, customerName, customerEmail, customerPhone, promoConsent, espressoMilk, espressoIce, espressoTemp } = req.body;
+    const { amount, items, pickupTime, customerName, customerEmail, customerPhone, promoConsent, espressoPrefs } = req.body;
+    const parsedEspressoPrefs = espressoPrefs ? JSON.parse(espressoPrefs) : [];
 
     const amountCents = Math.round(amount * 100);
     // Stripe minimum is 50 cents
@@ -53,9 +54,7 @@ module.exports = async (req, res) => {
         customerEmail: customerEmail || '',
         customerPhone: customerPhone || '',
         promoConsent:  promoConsent  || 'no',
-        espressoMilk:  espressoMilk  || '',
-        espressoIce:   espressoIce   || '',
-        espressoTemp:  espressoTemp  || 'Iced',
+        espressoPrefs: espressoPrefs || '',
       },
       receipt_email: customerEmail || undefined,
     });
@@ -188,7 +187,16 @@ module.exports = async (req, res) => {
           <p><strong>Email:</strong> ${customerEmail || '—'}</p>
           <p><strong>Phone:</strong> ${customerPhone || '—'}</p>
           <p><strong>Promo opt-in:</strong> ${promoConsent === 'yes' ? '✅ Yes' : 'No'}</p>
-          ${espressoMilk ? `<p><strong>Espresso:</strong> ${espressoTemp || 'Iced'} · ${espressoMilk}${espressoTemp !== 'Hot' ? ' · ' + espressoIce : ''}</p>` : ''}
+          ${parsedEspressoPrefs.length ? `
+            <p><strong>Espresso Customizations:</strong></p>
+            <ul style="margin:4px 0 0 1rem;padding:0;font-size:14px;line-height:1.8;">
+              ${parsedEspressoPrefs.map(p => {
+                const parts = [p.temp, p.milk];
+                if (p.temp === 'Iced' && p.ice) parts.push(p.ice);
+                if (p.foam) parts.push(p.foamType || 'Cold Foam');
+                return `<li><strong>${p.drink}:</strong> ${parts.join(' · ')}</li>`;
+              }).join('')}
+            </ul>` : ''}
         </div>
       `,
     });

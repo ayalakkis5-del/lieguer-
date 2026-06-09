@@ -285,13 +285,27 @@ document.querySelectorAll('.cart-item').forEach(item => {
   plusBtn.addEventListener('click', () => {
     qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
     checkDipRow();
-    checkEspressoRow();
+    if (item.dataset.espresso) renderEspressoCustomizations(item);
     updateCart();
   });
   minusBtn.addEventListener('click', () => {
     const v = parseInt(qtyEl.textContent);
-    if (v > 0) { qtyEl.textContent = v - 1; checkDipRow(); checkEspressoRow(); updateCart(); }
+    if (v > 0) {
+      qtyEl.textContent = v - 1;
+      checkDipRow();
+      if (item.dataset.espresso) renderEspressoCustomizations(item);
+      updateCart();
+    }
   });
+});
+
+// Insert per-item espresso customization wrappers into DOM
+document.querySelectorAll('[data-espresso="true"]').forEach(item => {
+  const wrap = document.createElement('div');
+  wrap.className = 'espresso-cust-wrap';
+  wrap.dataset.espressoFor = item.dataset.name;
+  wrap.style.display = 'none';
+  item.after(wrap);
 });
 
 function checkDipRow() {
@@ -300,24 +314,119 @@ function checkDipRow() {
   if (dipRow) dipRow.style.display = boxQty > 0 ? '' : 'none';
 }
 
-function checkEspressoRow() {
-  const hasEspresso = [...document.querySelectorAll('[data-espresso="true"] .qty-num')]
-    .some(el => parseInt(el.textContent) > 0);
-  const row = document.getElementById('espressoCustomRow');
-  if (row) row.style.display = hasEspresso ? '' : 'none';
+function renderEspressoCustomizations(item) {
+  const name = item.dataset.name;
+  const qty  = parseInt(item.querySelector('.qty-num').textContent);
+  const wrap = document.querySelector(`.espresso-cust-wrap[data-espresso-for="${CSS.escape(name)}"]`);
+  if (!wrap) return;
+
+  if (qty === 0) {
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+    return;
+  }
+
+  // Snapshot existing values so we don't lose them on re-render
+  const existing = [];
+  wrap.querySelectorAll('.espresso-unit-row').forEach(row => {
+    existing.push({
+      milk:     row.querySelector('.esp-milk').value,
+      temp:     row.querySelector('.esp-temp').value,
+      ice:      row.querySelector('.esp-ice').value,
+      foam:     row.querySelector('.esp-foam').checked,
+      foamType: row.querySelector('.esp-foam-type').value,
+    });
+  });
+
+  wrap.innerHTML = '';
+  wrap.style.display = '';
+
+  const headerEl = document.createElement('p');
+  headerEl.className = 'addon-label';
+  headerEl.textContent = qty > 1 ? `Customize your ${qty} ${name}s:` : `Customize your ${name}:`;
+  wrap.appendChild(headerEl);
+
+  for (let i = 0; i < qty; i++) {
+    const prev    = existing[i] || {};
+    const isHot   = prev.temp === 'Hot';
+    const foamOn  = !!prev.foam;
+    const foamVal = prev.foamType || (name.toLowerCase().includes('tiramisu') ? 'Tiramisu Cold Foam' : 'Sweet Cream Cold Foam');
+    const unitLabel = qty > 1 ? `${name} #${i + 1}` : name;
+
+    const row = document.createElement('div');
+    row.className = 'espresso-unit-row';
+    row.innerHTML = `
+      <p class="espresso-unit-label">${unitLabel}</p>
+      <div class="espresso-unit-fields">
+        <div class="espresso-field">
+          <label class="espresso-field-lbl">Temp</label>
+          <select class="esp-select esp-temp">
+            <option value="Iced"${!isHot ? ' selected' : ''}>Iced</option>
+            <option value="Hot"${isHot ? ' selected' : ''}>Hot</option>
+          </select>
+        </div>
+        <div class="espresso-field">
+          <label class="espresso-field-lbl">Milk</label>
+          <select class="esp-select esp-milk">
+            <option value="Whole Milk"${(!prev.milk || prev.milk === 'Whole Milk') ? ' selected' : ''}>Whole Milk</option>
+            <option value="Oat Milk"${prev.milk === 'Oat Milk' ? ' selected' : ''}>Oat Milk</option>
+            <option value="Almond Milk"${prev.milk === 'Almond Milk' ? ' selected' : ''}>Almond Milk</option>
+          </select>
+        </div>
+        <div class="espresso-field esp-ice-field"${isHot ? ' style="display:none"' : ''}>
+          <label class="espresso-field-lbl">Ice</label>
+          <select class="esp-select esp-ice">
+            <option value="Regular Ice"${(!prev.ice || prev.ice === 'Regular Ice') ? ' selected' : ''}>Regular Ice</option>
+            <option value="Light Ice"${prev.ice === 'Light Ice' ? ' selected' : ''}>Light Ice</option>
+            <option value="Extra Ice"${prev.ice === 'Extra Ice' ? ' selected' : ''}>Extra Ice</option>
+            <option value="No Ice"${prev.ice === 'No Ice' ? ' selected' : ''}>No Ice</option>
+          </select>
+        </div>
+      </div>
+      <label class="espresso-foam-label">
+        <input type="checkbox" class="esp-foam"${foamOn ? ' checked' : ''} />
+        <span class="espresso-foam-text">Cold Foam <span class="foam-price">+$1</span>
+          <select class="esp-foam-type esp-select esp-foam-type-sel">
+            <option value="Sweet Cream Cold Foam"${foamVal !== 'Tiramisu Cold Foam' ? ' selected' : ''}>Sweet Cream</option>
+            <option value="Tiramisu Cold Foam"${foamVal === 'Tiramisu Cold Foam' ? ' selected' : ''}>Tiramisu</option>
+          </select>
+        </span>
+      </label>
+    `;
+
+    row.querySelector('.esp-temp').addEventListener('change', e => {
+      row.querySelector('.esp-ice-field').style.display = e.target.value === 'Hot' ? 'none' : '';
+      updateCart();
+    });
+    row.querySelector('.esp-milk').addEventListener('change', updateCart);
+    row.querySelector('.esp-ice').addEventListener('change', updateCart);
+    row.querySelector('.esp-foam').addEventListener('change', updateCart);
+    row.querySelector('.esp-foam-type').addEventListener('change', updateCart);
+
+    wrap.appendChild(row);
+  }
 }
 
-// Espresso temp + ice note
-document.addEventListener('change', e => {
-  if (e.target.name === 'espressoTemp') {
-    const iceSection = document.getElementById('iceSection');
-    if (iceSection) iceSection.style.display = e.target.value === 'Hot' ? 'none' : '';
-  }
-  if (e.target.name === 'espressoIce') {
-    const note = document.getElementById('lightIceNote');
-    if (note) note.style.display = (e.target.value === 'Light Ice' || e.target.value === 'No Ice') ? '' : 'none';
-  }
-});
+// Helper: collect all per-drink prefs as array
+function collectEspressoPrefs() {
+  const prefs = [];
+  document.querySelectorAll('[data-espresso="true"]').forEach(item => {
+    const qty  = parseInt(item.querySelector('.qty-num').textContent);
+    if (qty === 0) return;
+    const name = item.dataset.name;
+    const wrap = document.querySelector(`.espresso-cust-wrap[data-espresso-for="${CSS.escape(name)}"]`);
+    if (!wrap) return;
+    wrap.querySelectorAll('.espresso-unit-row').forEach((row, i) => {
+      const temp     = row.querySelector('.esp-temp').value;
+      const milk     = row.querySelector('.esp-milk').value;
+      const ice      = temp === 'Hot' ? '' : row.querySelector('.esp-ice').value;
+      const foam     = row.querySelector('.esp-foam').checked;
+      const foamType = foam ? row.querySelector('.esp-foam-type').value : '';
+      prefs.push({ drink: qty > 1 ? `${name} #${i + 1}` : name, milk, temp, ice, foam, foamType });
+    });
+  });
+  return prefs;
+}
 
 // Load slots dynamically from API
 async function loadSlots() {
@@ -378,9 +487,14 @@ function updateCart() {
       items.push({ name, qty, price });
     }
   });
+  // Add cold foam add-ons (each checked esp-foam = $1)
+  const foamCount = document.querySelectorAll('.esp-foam:checked').length;
+  total += foamCount;
+  if (foamCount > 0) items.push({ name: 'Cold Foam', qty: foamCount, price: 1 });
+
   cartData = { items, total, pickup: cartData.pickup || '' };
 
-  document.getElementById('cartTotal').textContent = `$${total}`;
+  document.getElementById('cartTotal').textContent = `$${total.toFixed(2).replace('.00', '')}`;
   const btn = document.getElementById('btnToPayment');
   btn.disabled = total === 0;
 }
@@ -396,17 +510,22 @@ async function goToPayment() {
   // Show order summary (pickup shown after slot is chosen)
   const dipChoice   = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
   const sauceChoice = document.querySelector('input[name="includedSauce"]:checked')?.value || '';
-  const milkChoice  = document.querySelector('input[name="espressoMilk"]:checked')?.value || '';
-  const iceChoice   = document.querySelector('input[name="espressoIce"]:checked')?.value || '';
-  const tempChoice  = document.querySelector('input[name="espressoTemp"]:checked')?.value || 'Iced';
   const hasBox      = cartData.items.find(i => i.name === 'The LIÈGUER Box');
-  const hasEspresso = cartData.items.some(i => /latte|flight|fireside/i.test(i.name));
   const dipNote     = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
   const sauceNote   = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
-  const milkNote    = hasEspresso && milkChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">${tempChoice} · ${milkChoice}${tempChoice === 'Iced' ? ' · ' + iceChoice : ''}</em>` : '';
-  const summary     = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
+
+  // Per-drink espresso prefs
+  const espPrefs = collectEspressoPrefs();
+  const espNote  = espPrefs.map(p => {
+    const parts = [p.temp, p.milk];
+    if (p.temp === 'Iced' && p.ice) parts.push(p.ice);
+    if (p.foam) parts.push(p.foamType || 'Cold Foam');
+    return `<br><em style="font-size:0.75rem;color:var(--caramel)">${p.drink}: ${parts.join(' · ')}</em>`;
+  }).join('');
+
+  const summary = cartData.items.map(i => `${i.qty}× ${i.name} — $${(i.qty * i.price).toFixed(2)}`).join('<br>');
   document.getElementById('checkoutSummary').innerHTML =
-    `${summary}${dipNote}${sauceNote}${milkNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
+    `${summary}${dipNote}${sauceNote}${espNote}<br><strong style="font-size:0.9rem;color:var(--dark)">Total: $${cartData.total.toFixed(2)}</strong>`;
 
   // Init Stripe elements (no payment intent yet — created on submit)
   if (!stripe) stripe = Stripe(STRIPE_PK);
@@ -453,9 +572,7 @@ async function loadCardField() {
         customerEmail: email,
         customerPhone: phone,
         promoConsent: promo,
-        espressoMilk: document.querySelector('input[name="espressoMilk"]:checked')?.value || '',
-        espressoIce:  document.querySelector('input[name="espressoIce"]:checked')?.value || '',
-        espressoTemp: document.querySelector('input[name="espressoTemp"]:checked')?.value || 'Iced',
+        espressoPrefs: JSON.stringify(collectEspressoPrefs()),
       }),
     });
     const { clientSecret, error: piError } = await piRes.json();

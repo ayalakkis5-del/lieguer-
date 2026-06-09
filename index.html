@@ -408,63 +408,7 @@
             </div>
           </div>
 
-          <!-- Espresso customizations — shown when any espresso qty > 0 -->
-          <div class="cart-addon-row" id="espressoCustomRow" style="display:none;">
-            <p class="addon-label">Customize your drinks:</p>
-
-            <p class="addon-sublabel">Temperature</p>
-            <div class="dip-options">
-              <label class="dip-opt"><input type="radio" name="espressoTemp" value="Iced" checked /><span>Iced</span></label>
-              <label class="dip-opt"><input type="radio" name="espressoTemp" value="Hot" /><span>Hot</span></label>
-            </div>
-
-            <p class="addon-sublabel" style="margin-top:1rem;">Milk</p>
-            <div class="dip-options">
-              <label class="dip-opt"><input type="radio" name="espressoMilk" value="Whole Milk" checked /><span>Whole Milk</span></label>
-              <label class="dip-opt"><input type="radio" name="espressoMilk" value="Oat Milk" /><span>Oat Milk</span></label>
-              <label class="dip-opt"><input type="radio" name="espressoMilk" value="Almond Milk" /><span>Almond Milk</span></label>
-            </div>
-
-            <div id="iceSection" style="margin-top:1rem;">
-              <p class="addon-sublabel">Ice</p>
-              <div class="dip-options">
-                <label class="dip-opt"><input type="radio" name="espressoIce" value="Regular Ice" checked /><span>Regular Ice</span></label>
-                <label class="dip-opt"><input type="radio" name="espressoIce" value="Light Ice" /><span>Light Ice</span></label>
-                <label class="dip-opt"><input type="radio" name="espressoIce" value="Extra Ice" /><span>Extra Ice</span></label>
-                <label class="dip-opt"><input type="radio" name="espressoIce" value="No Ice" /><span>No Ice</span></label>
-              </div>
-              <p id="lightIceNote" class="addon-ice-note" style="display:none;">💧 Heads up — less ice means more milk will fill your cup.</p>
-            </div>
-
-            <p class="addon-sublabel" style="margin-top:1.5rem;">Cold Foam <span style="color:var(--caramel);font-weight:500;">+$1 each</span></p>
-            <p class="cart-section-note" style="margin-bottom:0.75rem;">Silky and photo-worthy. Add it to any drink.</p>
-            <div class="cart-items" style="margin-top:0;">
-              <div class="cart-item" data-name="Sweet Cream Cold Foam" data-price="1">
-                <div class="cart-item-info">
-                  <p class="cart-item-name">Sweet Cream Cold Foam</p>
-                  <p class="cart-item-desc">Lightly sweetened frothed heavy cream. Goes on everything.</p>
-                  <p class="cart-item-price">$1</p>
-                </div>
-                <div class="cart-qty">
-                  <button class="qty-btn" data-action="minus">−</button>
-                  <span class="qty-num">0</span>
-                  <button class="qty-btn" data-action="plus">+</button>
-                </div>
-              </div>
-              <div class="cart-item" data-name="Tiramisu Cold Foam" data-price="1">
-                <div class="cart-item-info">
-                  <p class="cart-item-name">Tiramisu Cold Foam</p>
-                  <p class="cart-item-desc">Whipped cream &amp; mascarpone with dark cocoa powder on top. Made for the Tiramisu Latte — incredible on the others too.</p>
-                  <p class="cart-item-price">$1</p>
-                </div>
-                <div class="cart-qty">
-                  <button class="qty-btn" data-action="minus">−</button>
-                  <span class="qty-num">0</span>
-                  <button class="qty-btn" data-action="plus">+</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Espresso customizations injected here by JS per drink per unit -->
 
           <div class="cart-total">
             <span>Total</span>
