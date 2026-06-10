@@ -1,16 +1,16 @@
 const Stripe = require('stripe');
 
-const MAX_PER_SLOT = 2;
+const MAX_PER_SLOT = 1;
+const TOTAL_CAP    = 5; // shown as 6 to customers
 
 const SLOTS = [];
-const days = ['Saturday', 'Sunday'];
 const times = [
   '9:00am','9:15am','9:30am','9:45am',
   '10:00am','10:15am','10:30am','10:45am',
   '11:00am','11:15am','11:30am','11:45am',
   '12:00pm','12:15pm','12:30pm','12:45pm'
 ];
-days.forEach(day => times.forEach(t => SLOTS.push(`${day} ${t}`)));
+times.forEach(t => SLOTS.push(`Saturday ${t}`));
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,31 +22,39 @@ module.exports = async (req, res) => {
     // Fetch recent successful/pending payment intents
     const intents = await stripe.paymentIntents.list({ limit: 100 });
 
-    // Count per slot
+    // Count per slot and total
     const counts = {};
     SLOTS.forEach(s => counts[s] = 0);
+    let totalOrders = 0;
 
     intents.data
       .filter(pi => ['succeeded', 'processing', 'requires_capture'].includes(pi.status))
       .forEach(pi => {
         const slot = pi.metadata?.pickupTime;
-        if (slot && counts[slot] !== undefined) counts[slot]++;
+        if (slot && counts[slot] !== undefined) {
+          counts[slot]++;
+          totalOrders++;
+        }
       });
+
+    const totalRemaining = Math.max(0, TOTAL_CAP - totalOrders);
+    const soldOut = totalRemaining === 0;
 
     const availability = {};
     SLOTS.forEach(s => {
+      const slotFull = counts[s] >= MAX_PER_SLOT;
       availability[s] = {
-        available: counts[s] < MAX_PER_SLOT,
+        available: !soldOut && !slotFull,
         remaining: Math.max(0, MAX_PER_SLOT - counts[s]),
       };
     });
 
-    res.status(200).json({ availability, slots: SLOTS });
+    res.status(200).json({ availability, slots: SLOTS, totalOrders, totalRemaining, totalCap: 6 });
   } catch (err) {
     console.error(err);
     // On error, return all slots as available so checkout isn't blocked
     const availability = {};
     SLOTS.forEach(s => availability[s] = { available: true, remaining: MAX_PER_SLOT });
-    res.status(200).json({ availability, slots: SLOTS });
+    res.status(200).json({ availability, slots: SLOTS, totalOrders: 0, totalRemaining: 6, totalCap: 6 });
   }
 };

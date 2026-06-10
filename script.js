@@ -241,6 +241,7 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
     elOpen.style.display      = state === 'open'      ? '' : 'none';
     elClosed.style.display    = state === 'closed'    ? '' : 'none';
     updateBanner(state, now);
+    if (state === 'open') loadBoxCounter();
 
     if (state === 'countdown') {
       // Target: next Sunday 8pm
@@ -465,6 +466,31 @@ function collectEspressoPrefs() {
   return prefs;
 }
 
+// Live box counter
+async function loadBoxCounter() {
+  try {
+    const res = await fetch('/api/slot-availability');
+    const { totalRemaining, totalCap } = await res.json();
+    const counter = document.getElementById('boxCounter');
+    const numEl   = document.getElementById('boxCounterNum');
+    const ctaEl   = document.getElementById('boxCounterCta');
+    if (!counter) return;
+    counter.style.display = '';
+    if (totalRemaining === 0) {
+      numEl.textContent = 'Sold out this week';
+      ctaEl.textContent = 'Join the notify list →';
+      ctaEl.closest('a').href = '#notify';
+    } else if (totalRemaining <= 3) {
+      numEl.textContent = `Only ${totalRemaining} left`;
+      numEl.style.color = '#c0392b';
+      ctaEl.textContent = 'Order now →';
+    } else {
+      numEl.textContent = `${totalCap} boxes this week`;
+      ctaEl.textContent = 'Order now →';
+    }
+  } catch {}
+}
+
 // Load slots dynamically from API
 async function loadSlots() {
   try {
@@ -472,14 +498,12 @@ async function loadSlots() {
     const { availability, slots } = await res.json();
 
     const satContainer = document.getElementById('slotsSat');
-    const sunContainer = document.getElementById('slotsSun');
     const loading      = document.getElementById('slotsLoading');
     if (loading) loading.style.display = 'none';
 
     slots.forEach(slot => {
       const { available, remaining } = availability[slot];
-      const isSat = slot.startsWith('Saturday');
-      const container = isSat ? satContainer : sunContainer;
+      const container = satContainer;
       const timeLabel = slot.replace('Saturday ', '').replace('Sunday ', '');
 
       const label = document.createElement('label');
@@ -709,8 +733,8 @@ async function submitPayment() {
     } else {
       document.getElementById('stepPayment').style.display = 'none';
       document.getElementById('stepSuccess').style.display = '';
-      const { sat, sun } = getPickupDates();
-      const pickupDate = cartData.pickup.startsWith('Sunday') ? sun : sat;
+      const { sat } = getPickupDates();
+      const pickupDate = sat;
       document.getElementById('stepSuccess').querySelector('h2').innerHTML = `See you<br /><em>${pickupDate}.</em>`;
       document.getElementById('successDetails').textContent =
         `Your order is confirmed for ${cartData.pickup}. A confirmation email is on its way to ${email}.`;

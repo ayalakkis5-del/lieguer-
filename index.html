@@ -63,8 +63,8 @@
     <div class="about-text">
       <p class="label">The Process</p>
       <h2>Not a waffle.<br /><em>A commitment.</em></h2>
-      <p>Every LIÈGUER waffle begins 72 hours before it reaches you. The brioche dough — enriched with European butter, slow-developed with time — is cold-pressed to seal in a caramelized crust that shatters on contact.</p>
-      <p>Pearl sugar pearls imported from Belgium collapse into molten pockets. Brown butter weaves through every net. There is no shortcut version of this.</p>
+      <p>Every LIÈGUER waffle begins 72 hours before it reaches you. The brioche dough — enriched with European butter, slow-developed with time — is cold-fermented to develop a caramelized crust that shatters on contact.</p>
+      <p>Pearl sugar imported from Belgium collapses into molten pockets. Brown butter weaves through every net. There is no shortcut version of this.</p>
     </div>
     <div class="about-details">
       <div class="detail card-3d" data-tilt>
@@ -99,7 +99,6 @@
           <span class="menu-item-price">$50</span>
         </div>
         <p class="menu-item-desc">Twelve signature caramelized Liège waffles, crafted from our traditional 72-hour cold-fermented brioche dough and baked with imported Belgian pearl sugar to achieve a deeply rich, glassy outer crust. Packaged in our custom matte white window box and hand-tied with our signature burgundy satin ribbon. Includes your choice of one signature sauce. Additional sauces available as add-ons at $7 each.</p>
-        <p class="menu-item-transparency">We believe in transparency — and we want everyone to taste these waffles. So here's why it costs what it costs: French flour $8 · Belgian pearl sugar $8 · European butter $3 · Packaging $2.50 — and that's not even everything. Madagascar vanilla, premium chocolate, and more go into every batch. That's over half the price before a single hour of labor. We keep it as low as we can.</p>
       </div>
       <div class="menu-item card-3d" data-tilt style="margin-top:1rem;border:1.5px solid var(--caramel);">
         <div class="menu-item-top">
@@ -182,15 +181,15 @@
     <!-- TICKER -->
     <div class="ticker-wrap">
       <div class="ticker">
-        <span>ORDERS CLOSE THURSDAYS AT 11:59 PM</span>
+        <span>ORDERS CLOSE WEDNESDAYS AT 11:59 PM</span>
         <span class="ticker-dot">·</span>
         <span>SECURE YOUR SLOT AT LIEGUER.COM</span>
         <span class="ticker-dot">·</span>
-        <span>ORDERS CLOSE THURSDAYS AT 11:59 PM</span>
+        <span>ORDERS CLOSE WEDNESDAYS AT 11:59 PM</span>
         <span class="ticker-dot">·</span>
         <span>SECURE YOUR SLOT AT LIEGUER.COM</span>
         <span class="ticker-dot">·</span>
-        <span>ORDERS CLOSE THURSDAYS AT 11:59 PM</span>
+        <span>ORDERS CLOSE WEDNESDAYS AT 11:59 PM</span>
         <span class="ticker-dot">·</span>
         <span>SECURE YOUR SLOT AT LIEGUER.COM</span>
         <span class="ticker-dot">·</span>
@@ -211,10 +210,10 @@
         <div class="drop-divider"></div>
         <div class="drop-card card-3d-dark" data-tilt>
           <p class="drop-card-label">Pickup</p>
-          <p class="drop-card-val">The Following Sat &amp; Sun</p>
+          <p class="drop-card-val">The Following Saturday</p>
         </div>
       </div>
-      <p class="drop-note">Order Sunday night → closes Wednesday 11:59 PM → pickup the <em>following</em> Saturday &amp; Sunday. Orders close Wednesday to allow for our full 72-hour fermentation. Strictly limited — we always sell out.</p>
+      <p class="drop-note">Order Sunday night → closes Wednesday 11:59 PM → pickup the <em>following</em> Saturday. Orders close Wednesday to allow for our full 72-hour fermentation. Strictly limited — we always sell out.</p>
     </div>
   </section>
 
@@ -265,11 +264,20 @@
       <!-- OPEN STATE (shown Sun 8pm → Thu 11:59pm) -->
       <div id="stateOpen" style="display:none;">
 
+        <!-- LIVE BOX COUNTER -->
+        <div class="box-counter" id="boxCounter" style="display:none;">
+          <a href="#order" class="box-counter-inner">
+            <span class="box-counter-label">This week</span>
+            <span class="box-counter-num" id="boxCounterNum">6 boxes</span>
+            <span class="box-counter-cta" id="boxCounterCta">Order now →</span>
+          </a>
+        </div>
+
         <!-- STEP 1: Build your order -->
         <div id="stepOrder">
           <p class="label">Orders Are Open</p>
           <h2>Build your<br /><em>order.</em></h2>
-          <p class="order-sub">Order now, pick up <strong>next</strong> Saturday or Sunday. Closes Wednesday at 11:59 PM.</p>
+          <p class="order-sub">Order now, pick up <strong>next</strong> Saturday. Closes Wednesday at 11:59 PM.</p>
 
           <!-- THE WAFFLES -->
           <p class="cart-section-label">— The Waffles —</p>
@@ -448,7 +456,7 @@
           </div>
 
           <button class="btn-primary" id="btnToPayment" disabled onclick="goToPayment()">Continue to Payment</button>
-          <p class="order-fine">Orders close Wed 11:59 PM · Pickup the following Sat &amp; Sun · All sales final — no refunds or cancellations after orders close</p>
+          <p class="order-fine">Orders close Wed 11:59 PM · Pickup the following Saturday · All sales final — no refunds or cancellations after orders close</p>
         </div>
 
         <!-- STEP 2: Payment -->
@@ -459,11 +467,9 @@
 
           <div class="pickup-select">
             <p class="pickup-step-label">When are you picking up?</p>
-            <p class="cart-section-note" style="margin-bottom:1rem;">9am–1pm · 15-min windows · Following Saturday &amp; Sunday</p>
+            <p class="cart-section-note" style="margin-bottom:1rem;">9am–1pm · 15-min windows · Following Saturday</p>
             <p class="pickup-day-label" id="pickupLabelSat">Saturday</p>
             <div class="pickup-slots" id="slotsSat"></div>
-            <p class="pickup-day-label" id="pickupLabelSun" style="margin-top:1.25rem;">Sunday</p>
-            <div class="pickup-slots" id="slotsSun"></div>
             <p id="slotsLoading" class="order-fine" style="text-align:center;margin-top:0.5rem;">Loading availability…</p>
           </div>
 
@@ -478,7 +484,7 @@
           </div>
           <!-- TIP -->
           <div class="tip-row">
-            <p class="tip-label">Add a little love? <span class="tip-sublabel">Every bit goes back into the continuation of this 🧇</span></p>
+            <p class="tip-label">Fuel the next drop <span class="tip-sublabel">Tips go straight into the flour and butter 🧇</span></p>
             <div class="tip-btns">
               <button class="tip-btn" data-tip="1">$1</button>
               <button class="tip-btn" data-tip="2">$2</button>
@@ -615,7 +621,7 @@
             <textarea name="details" placeholder="Tell us what you're looking for — quantities, theme, any details..." rows="5"></textarea>
           </div>
           <button type="submit" class="btn-primary catering-submit">Send Inquiry</button>
-          <p class="order-fine" style="margin-top:1rem;">hellolieguer@gmail.com · We respond within 24 hours</p>
+          <p class="order-fine" style="margin-top:1rem;">hello@lieguer.com · We respond within 24 hours</p>
         </form>
         <div id="cateringSuccess" style="display:none; text-align:center; padding:3rem 0;">
           <p style="font-size:2rem;margin-bottom:1rem;">🧇</p>

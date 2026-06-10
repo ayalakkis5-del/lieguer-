@@ -1008,6 +1008,40 @@ nav {
 }
 .dip-opt:hover span { border-color: var(--caramel); }
 
+/* Live box counter */
+.box-counter {
+  margin-bottom: 2rem;
+}
+.box-counter-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--dark);
+  color: var(--cream);
+  text-decoration: none;
+  border-left: 3px solid var(--caramel);
+  transition: opacity 0.15s;
+}
+.box-counter-inner:hover { opacity: 0.85; }
+.box-counter-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.45);
+}
+.box-counter-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--cream);
+}
+.box-counter-cta {
+  font-size: 0.78rem;
+  color: var(--caramel);
+  letter-spacing: 0.06em;
+}
+
 /* Tip row */
 .tip-row {
   padding: 1.1rem 0 1.25rem;
