@@ -11,9 +11,9 @@ module.exports = async (req, res) => {
     const { name, email, phone, eventType, date, guestCount, details } = req.body;
     if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
 
-    // Internal alert to hello@lieguer.com
+    // Internal alert to hellolieguer@gmail.com
     await sendEmail({
-      to: 'hello@lieguer.com',
+      to: 'hellolieguer@gmail.com',
       subject: `New Catering Inquiry — ${eventType || 'General'} from ${name}`,
       html: `
         <h2>New Catering Inquiry</h2>
@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
         </tr>
         <tr>
           <td style="padding:28px 40px;text-align:center;border-bottom:1px solid #ede8df;">
-            <p style="margin:0;font-size:14px;color:#888;line-height:1.8;">Questions? Reply to this email or reach us at<br/><a href="mailto:hello@lieguer.com" style="color:#c8852a;text-decoration:none;">hello@lieguer.com</a></p>
+            <p style="margin:0;font-size:14px;color:#888;line-height:1.8;">Questions? Reply to this email or reach us at<br/><a href="mailto:hellolieguer@gmail.com" style="color:#c8852a;text-decoration:none;">hellolieguer@gmail.com</a></p>
           </td>
         </tr>
         <tr>

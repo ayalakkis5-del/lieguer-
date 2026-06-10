@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
         <!-- Fine print -->
         <tr>
           <td style="padding:20px 40px 28px;text-align:center;">
-            <p style="margin:0;font-size:12px;color:#aaa;line-height:1.7;">Something came up? Reply to this email and we'll do our best.<br/>hello@lieguer.com</p>
+            <p style="margin:0;font-size:12px;color:#aaa;line-height:1.7;">Something came up? Reply to this email and we'll do our best.<br/>hellolieguer@gmail.com</p>
           </td>
         </tr>
 

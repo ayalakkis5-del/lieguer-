@@ -153,7 +153,7 @@ module.exports = async (req, res) => {
           <td style="padding:20px 40px 28px;">
             <p style="margin:0 0 10px;font-size:13px;font-weight:bold;color:#1a1208;line-height:1.7;text-align:center;text-transform:uppercase;letter-spacing:0.04em;">Please pick up within 15 minutes of your scheduled time.</p>
             <p style="margin:0 0 10px;font-size:12px;color:#666;line-height:1.7;text-align:center;">We cannot guarantee accommodations for other times or issue refunds for missed windows — but if anything comes up, please reach out and we will do our absolute best.</p>
-            <p style="margin:0;font-size:12px;color:#aaa;line-height:1.7;text-align:center;">All sales final. No refunds or cancellations after orders close Wednesday 11:59 PM.<br/>Questions? Reply to this email or reach us at hello@lieguer.com</p>
+            <p style="margin:0;font-size:12px;color:#aaa;line-height:1.7;text-align:center;">All sales final. No refunds or cancellations after orders close Wednesday 11:59 PM.<br/>Questions? Reply to this email or reach us at hellolieguer@gmail.com</p>
           </td>
         </tr>
 
@@ -174,12 +174,12 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Internal order notification to hello@lieguer.com
+    // Internal order notification to hellolieguer@gmail.com
     const itemLines = (items || [])
       .map(i => `<tr><td style="padding:6px 12px;">${i.qty}× ${i.name}</td><td style="padding:6px 12px;text-align:right;">$${(i.qty * i.price).toFixed(2)}</td></tr>`)
       .join('');
     await sendEmail({
-      to: 'hello@lieguer.com',
+      to: 'hellolieguer@gmail.com',
       subject: `🧇 New Order — ${customerName || 'Customer'} · ${pickupTime}`,
       html: `
         <div style="font-family:sans-serif;max-width:520px;margin:0 auto;color:#1a1208;">
