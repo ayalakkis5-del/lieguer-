@@ -272,7 +272,7 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
 })();
 
 // ── Stripe In-Page Checkout ──────────────────────────────
-const STRIPE_PK = 'pk_test_51TgRKSBYPi4eMJXqHLGxctfF7esAXO4nO2McmpR64qhgl0xOj6PwIm2ALd4Z3FtZd7zJcSt88yQDMzX71VTVCf2S00CqrsH9YO';
+const STRIPE_PK = 'pk_live_51TgRKLBGEHGGFsb7Y8EcGnX0qnTcaYqceNnXQyqpcZhug6D209Q1uhOJptlnm0cMcIoyhHBgwDcyjdKBIDy6VxEn001opqgZO4';
 let stripe, elements, paymentElement;
 let cartData = { items: [], total: 0, pickup: '' };
 
