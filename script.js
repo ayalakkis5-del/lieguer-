@@ -241,7 +241,7 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
     elOpen.style.display      = state === 'open'      ? '' : 'none';
     elClosed.style.display    = state === 'closed'    ? '' : 'none';
     updateBanner(state, now);
-    if (state === 'open') loadBoxCounter();
+    // if (state === 'open') loadBoxCounter(); // hidden for now
 
     if (state === 'countdown') {
       // Target: next Sunday 8pm
