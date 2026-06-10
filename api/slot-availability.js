@@ -22,6 +22,15 @@ module.exports = async (req, res) => {
     // Fetch recent successful/pending payment intents
     const intents = await stripe.paymentIntents.list({ limit: 100 });
 
+    // Only count orders from the current drop window (since last Sunday 8pm CT)
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+    const windowStart = new Date(now);
+    const day = windowStart.getDay(); // 0=Sun
+    const daysBackToSun = day === 0 ? 0 : day;
+    windowStart.setDate(windowStart.getDate() - daysBackToSun);
+    windowStart.setHours(20, 0, 0, 0);
+    const windowStartTs = Math.floor(windowStart.getTime() / 1000);
+
     // Count per slot and total
     const counts = {};
     SLOTS.forEach(s => counts[s] = 0);
@@ -29,6 +38,7 @@ module.exports = async (req, res) => {
 
     intents.data
       .filter(pi => ['succeeded', 'processing', 'requires_capture'].includes(pi.status))
+      .filter(pi => pi.created >= windowStartTs)
       .forEach(pi => {
         const slot = pi.metadata?.pickupTime;
         if (slot && counts[slot] !== undefined) {

@@ -481,11 +481,11 @@ async function loadBoxCounter() {
       ctaEl.textContent = 'Join the notify list →';
       ctaEl.closest('a').href = '#notify';
     } else if (totalRemaining <= 3) {
-      numEl.textContent = `Only ${totalRemaining} left`;
+      numEl.textContent = `Only ${totalRemaining} box${totalRemaining === 1 ? '' : 'es'} left`;
       numEl.style.color = '#c0392b';
       ctaEl.textContent = 'Order now →';
     } else {
-      numEl.textContent = `${totalCap} boxes this week`;
+      numEl.textContent = `${totalRemaining} available this week`;
       ctaEl.textContent = 'Order now →';
     }
   } catch {}
