@@ -218,12 +218,10 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
     const hour = now.getHours();
     const min  = now.getMinutes();
 
-    // OPEN: Sunday 8pm → Wednesday 11:59pm (extended through Friday for this week)
-    const sunAfter8  = day === 0 && (hour >= 20);
-    const monToFri   = day >= 1 && day <= 5;
-    const friClosed  = day === 5 && hour === 23 && min >= 59;
+    // OPEN: Sunday 8pm → Wednesday 11:59pm (temporarily closed for this week)
+    const sunAfter8  = false; // orders closed manually
+    const monToFri   = false; // orders closed manually
 
-    if (friClosed) return 'closed';
     if (sunAfter8 || monToFri) return 'open';
 
     // CLOSED: Friday & Saturday (prepping)
