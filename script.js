@@ -605,10 +605,9 @@ async function goToPayment() {
 
   // Show order summary (pickup shown after slot is chosen)
   const dipChoice   = document.querySelector('input[name="waffleDip"]:checked')?.value || '';
-  const sauceChoice = document.querySelector('input[name="includedSauce"]:checked')?.value || '';
   const hasBox      = cartData.items.find(i => i.name === 'The LIÈGUER Box');
   const dipNote     = hasBox && dipChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Waffle style: ${dipChoice}</em>` : '';
-  const sauceNote   = hasBox && sauceChoice ? `<br><em style="font-size:0.75rem;color:var(--caramel)">Included sauce: ${sauceChoice}</em>` : '';
+  const sauceNote   = '';
 
   // Per-drink espresso prefs
   const espPrefs = collectEspressoPrefs();
